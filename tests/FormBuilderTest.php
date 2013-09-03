@@ -9,6 +9,11 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form = new FormBuilder;
 	}
 
+	public function tearDown()
+	{
+		Mockery::close();
+	}
+
 	public function testFormBuilderCanBeCreated()
 	{
 		$formBuilder = new FormBuilder;
@@ -115,4 +120,30 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$result = (string)$this->form->label('First Name');
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testRenderTextWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
+		$oldInput->shouldReceive('hasOld')->with('email')->andReturn(true);
+		$oldInput->shouldReceive('getOld')->with('email')->andReturn('example@example.com');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="text" name="email" value="example@example.com">';
+		$result = (string)$this->form->text('email');
+		$this->assertEquals($expected, $result);
+	}
+
+	// public function testRenderCheckboxWithOldInput()
+	// {
+	// 	$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
+	// 	$oldInput->shouldReceive('hasOld')->with('email')->andReturn(true);
+	// 	$oldInput->shouldReceive('getOld')->with('email')->andReturn('example@example.com');
+
+	// 	$this->form->setOldInputProvider($oldInput);
+
+	// 	$expected = '<input type="text" name="email" value="example@example.com">';
+	// 	$result = (string)$this->form->text('email');
+	// 	$this->assertEquals($expected, $result);
+	// }
 }
