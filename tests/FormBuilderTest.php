@@ -134,16 +134,55 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
-	// public function testRenderCheckboxWithOldInput()
-	// {
-	// 	$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
-	// 	$oldInput->shouldReceive('hasOld')->with('email')->andReturn(true);
-	// 	$oldInput->shouldReceive('getOld')->with('email')->andReturn('example@example.com');
+	public function testRenderCheckboxWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
+		$oldInput->shouldReceive('hasOld')->with('terms')->andReturn(true);
+		$oldInput->shouldReceive('getOld')->with('terms')->andReturn('agree');
 
-	// 	$this->form->setOldInputProvider($oldInput);
+		$this->form->setOldInputProvider($oldInput);
 
-	// 	$expected = '<input type="text" name="email" value="example@example.com">';
-	// 	$result = (string)$this->form->text('email');
-	// 	$this->assertEquals($expected, $result);
-	// }
+		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
+		$result = (string)$this->form->checkbox('terms', 'agree');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderRadioWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
+		$oldInput->shouldReceive('hasOld')->with('color')->andReturn(true);
+		$oldInput->shouldReceive('getOld')->with('color')->andReturn('green');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="radio" name="color" value="green" checked="checked">';
+		$result = (string)$this->form->radio('color', 'green');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderSelectWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
+		$oldInput->shouldReceive('hasOld')->with('color')->andReturn(true);
+		$oldInput->shouldReceive('getOld')->with('color')->andReturn('blue');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<select name="color" id="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
+		$result = (string)$this->form->select('color', array('red' => 'Red', 'blue' => 'Blue'));
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderTextAreaWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
+		$oldInput->shouldReceive('hasOld')->with('bio')->andReturn(true);
+		$oldInput->shouldReceive('getOld')->with('bio')->andReturn('This is my bio');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<textarea name="bio" rows="10" cols="50">This is my bio</textarea>';
+		$result = (string)$this->form->textarea('bio');
+		$this->assertEquals($expected, $result);
+	}
 }

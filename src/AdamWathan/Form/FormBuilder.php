@@ -33,18 +33,13 @@ class FormBuilder
 	{
 		$text = new Text($name);
 		
-		$this->restoreElementValue($text, $name);
-
-		return $text;
-	}
-
-	protected function restoreElementValue($element, $name)
-	{
 		$value = $this->getValueFor($name);
 
 		if ($value) {
-			$element->value($value);
+			$text->value($value);
 		}
+
+		return $text;
 	}
 
 	protected function getValueFor($name)
@@ -77,12 +72,30 @@ class FormBuilder
 	
 	public function checkbox($name, $value = 1)
 	{
-		return new Checkbox($name, $value);
+		$checkbox = new Checkbox($name, $value);
+
+		$oldValue = $this->getValueFor($name);
+
+		if ($value == $oldValue) {
+			$checkbox->check();
+		}
+
+		return $checkbox;
 	}
 	
 	public function radio($name, $value = null)
 	{
-		return new RadioButton($name, $value);
+		$value = is_null($value) ? $name : $value;
+
+		$radio = new RadioButton($name, $value);
+
+		$oldValue = $this->getValueFor($name);
+
+		if ($value == $oldValue) {
+			$radio->check();
+		}
+
+		return $radio;
 	}
 	
 	public function submit($value = 'Submit')
@@ -92,12 +105,25 @@ class FormBuilder
 
 	public function select($name, $options = array())
 	{
-		return new Select($name, $options);
+		$select = new Select($name, $options);
+
+		$selected = $this->getValueFor($name);
+		$select->select($selected);
+
+		return $select;
 	}
 
 	public function textarea($name)
 	{
-		return new TextArea($name);
+		$textarea = new TextArea($name);
+		
+		$value = $this->getValueFor($name);
+
+		if ($value) {
+			$textarea->value($value);
+		}
+
+		return $textarea;
 	}
 
 	public function label($label)

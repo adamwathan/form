@@ -3,12 +3,18 @@
 class Select extends FormControl
 {
 	private $options;
+	private $selected;
 
 	public function __construct($name, $options = array())
 	{
 		$this->setName($name);
 		$this->setId($name);
 		$this->setOptions($options);
+	}
+
+	public function select($option)
+	{
+		$this->selected = $option;
 	}
 
 	protected function setOptions($options)
@@ -40,7 +46,9 @@ class Select extends FormControl
 		foreach ($this->options as $value => $label) {
 			$value = $count === $value ? $label : $value;
 			$option = '<option ';
-			$option .= 'value="' . $value . '">';
+			$option .= 'value="' . $value . '"';
+			$option .= $this->selected == $value ? ' selected' : '';
+			$option .= '>';
 			$option .= $label;
 			$option .= '</option>';
 			$result .= $option;
