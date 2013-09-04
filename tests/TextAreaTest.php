@@ -83,4 +83,43 @@ class TextAreaTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testDefaultValue()
+	{
+		$textarea = new TextArea('bio');
+		$expected = '<textarea name="bio" rows="10" cols="50">My information</textarea>';
+		$result = $textarea->defaultValue('My information')->render();
+
+		$this->assertEquals($expected, $result);
+
+		$textarea = new TextArea('description');
+		$expected = '<textarea name="description" rows="10" cols="50">Your information</textarea>';
+		$result = $textarea->defaultValue('Your information')->render();
+
+		$this->assertEquals($expected, $result);
+
+		$textarea = new TextArea('bio');
+		$expected = '<textarea name="bio" rows="10" cols="50">Testing</textarea>';
+		$result = $textarea->value('Testing')->defaultValue('My information')->render();
+
+		$this->assertEquals($expected, $result);
+
+		$textarea = new TextArea('description');
+		$expected = '<textarea name="description" rows="10" cols="50">Testing</textarea>';
+		$result = $textarea->value('Testing')->defaultValue('Your information')->render();
+
+		$this->assertEquals($expected, $result);
+
+		$textarea = new TextArea('bio');
+		$expected = '<textarea name="bio" rows="10" cols="50">Testing</textarea>';
+		$result = $textarea->defaultValue('My information')->value('Testing')->render();
+
+		$this->assertEquals($expected, $result);
+
+		$textarea = new TextArea('description');
+		$expected = '<textarea name="description" rows="10" cols="50">Testing</textarea>';
+		$result = $textarea->defaultValue('Your information')->value('Testing')->render();
+
+		$this->assertEquals($expected, $result);
+	}
 }

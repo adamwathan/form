@@ -44,4 +44,18 @@ class TextArea extends FormControl
 		$this->setAttribute('placeholder', $placeholder);
 		return $this;
 	}
+
+	public function defaultValue($value)
+	{
+		if ( ! $this->hasValue()) {
+			$this->value($value);
+		}
+
+		return $this;
+	}
+
+	protected function hasValue()
+	{
+		return isset($this->value);
+	}
 }
