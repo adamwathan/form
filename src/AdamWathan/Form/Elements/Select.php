@@ -15,6 +15,7 @@ class Select extends FormControl
 	public function select($option)
 	{
 		$this->selected = $option;
+		return $this;
 	}
 
 	protected function setOptions($options)
@@ -25,6 +26,7 @@ class Select extends FormControl
 	public function options($options)
 	{
 		$this->setOptions($options);
+		return $this;
 	}
 
 	public function render()
@@ -61,5 +63,16 @@ class Select extends FormControl
 	public function addOption($value, $label)
 	{
 		$this->options[$value] = $label;
+		return $this;
+	}
+
+	public function defaultValue($value)
+	{
+		if (isset($this->selected)) {
+			return $this;
+		}
+
+		$this->select($value);
+		return $this;
 	}
 }

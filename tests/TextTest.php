@@ -148,4 +148,25 @@ class TextTest extends PHPUnit_Framework_TestCase
 		$result = $text->disable()->enable()->render();
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testDefaultValue()
+	{
+		$text = new Text('email');
+
+		$expected = '<input type="text" name="email" value="example@example.com">';
+		$result = $text->defaultValue('example@example.com')->render();
+		$this->assertEquals($expected, $result);
+
+		$text = new Text('email');
+
+		$expected = '<input type="text" name="email" value="test@test.com">';
+		$result = $text->value('test@test.com')->defaultValue('example@example.com')->render();
+		$this->assertEquals($expected, $result);
+
+		$text = new Text('email');
+
+		$expected = '<input type="text" name="email" value="test@test.com">';
+		$result = $text->defaultValue('example@example.com')->value('test@test.com')->render();
+		$this->assertEquals($expected, $result);
+	}
 }

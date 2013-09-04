@@ -11,4 +11,18 @@ class Text extends Input
 		$this->setAttribute('placeholder', $placeholder);
 		return $this;
 	}
+
+	public function defaultValue($value)
+	{
+		if ( ! $this->hasValue()) {
+			$this->setValue($value);
+		}
+
+		return $this;
+	}
+
+	protected function hasValue()
+	{
+		return isset($this->attributes['value']);
+	}
 }

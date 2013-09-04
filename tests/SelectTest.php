@@ -90,17 +90,42 @@ class SelectTest extends PHPUnit_Framework_TestCase
 	{
 		$select = new Select('color');
 		$select->options(array('red' => 'Red', 'blue' => 'Blue'));
-		$select->select('blue');
 		$expected = '<select name="color" id="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
-		$result = $select->render();
+		$result = $select->select('blue')->render();
 
 		$this->assertEquals($expected, $result);	
 		
 		$select = new Select('fruit');
 		$select->options(array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
-		$select->select('apple');
 		$expected = '<select name="fruit" id="fruit"><option value="apple" selected>Granny Smith</option><option value="berry">Blueberry</option></select>';
-		$result = $select->render();
+		$result = $select->select('apple')->render();
+
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testCanSetDefaultOption()
+	{
+		$select = new Select('color', array('red' => 'Red', 'blue' => 'Blue'));
+		$expected = '<select name="color" id="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
+		$result = $select->defaultValue('blue')->render();
+
+		$this->assertEquals($expected, $result);
+		
+		$select = new Select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
+		$expected = '<select name="fruit" id="fruit"><option value="apple" selected>Granny Smith</option><option value="berry">Blueberry</option></select>';
+		$result = $select->defaultValue('apple')->render();
+
+		$this->assertEquals($expected, $result);
+		
+		$select = new Select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
+		$expected = '<select name="fruit" id="fruit"><option value="apple">Granny Smith</option><option value="berry" selected>Blueberry</option></select>';
+		$result = $select->select('berry')->defaultValue('apple')->render();
+
+		$this->assertEquals($expected, $result);
+		
+		$select = new Select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
+		$expected = '<select name="fruit" id="fruit"><option value="apple">Granny Smith</option><option value="berry" selected>Blueberry</option></select>';
+		$result = $select->defaultValue('apple')->select('berry')->render();
 
 		$this->assertEquals($expected, $result);
 	}
