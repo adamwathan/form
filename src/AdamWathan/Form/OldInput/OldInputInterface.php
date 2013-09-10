@@ -1,4 +1,4 @@
-<?php namespace AdamWathan\Form;
+<?php namespace AdamWathan\Form\OldInput;
 
 interface OldInputInterface
 {

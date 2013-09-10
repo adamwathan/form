@@ -123,7 +123,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function testRenderTextWithOldInput()
 	{
-		$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
 		$oldInput->shouldReceive('hasOld')->with('email')->andReturn(true);
 		$oldInput->shouldReceive('getOld')->with('email')->andReturn('example@example.com');
 
@@ -136,7 +136,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function testRenderCheckboxWithOldInput()
 	{
-		$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
 		$oldInput->shouldReceive('hasOld')->with('terms')->andReturn(true);
 		$oldInput->shouldReceive('getOld')->with('terms')->andReturn('agree');
 
@@ -149,7 +149,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function testRenderRadioWithOldInput()
 	{
-		$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
 		$oldInput->shouldReceive('hasOld')->with('color')->andReturn(true);
 		$oldInput->shouldReceive('getOld')->with('color')->andReturn('green');
 
@@ -162,7 +162,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function testRenderSelectWithOldInput()
 	{
-		$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
 		$oldInput->shouldReceive('hasOld')->with('color')->andReturn(true);
 		$oldInput->shouldReceive('getOld')->with('color')->andReturn('blue');
 
@@ -175,7 +175,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function testRenderTextAreaWithOldInput()
 	{
-		$oldInput = Mockery::mock('AdamWathan\Form\OldInputInterface');
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
 		$oldInput->shouldReceive('hasOld')->with('bio')->andReturn(true);
 		$oldInput->shouldReceive('getOld')->with('bio')->andReturn('This is my bio');
 

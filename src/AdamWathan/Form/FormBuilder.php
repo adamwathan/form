@@ -9,6 +9,7 @@ use AdamWathan\Form\Elements\Select;
 use AdamWathan\Form\Elements\TextArea;
 use AdamWathan\Form\Elements\Label;
 use AdamWathan\Form\Elements\FormOpen;
+use AdamWathan\Form\OldInput\OldInputInterface;
 
 class FormBuilder
 {
