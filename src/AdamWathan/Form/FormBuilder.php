@@ -14,9 +14,9 @@ class FormBuilder
 {
 	private $oldInput;
 
-	public function setOldInputProvider(OldInputInterface $provider)
+	public function setOldInputProvider(OldInputInterface $oldInputProvider)
 	{
-		$this->oldInput = $provider;
+		$this->oldInput = $oldInputProvider;
 	}
 
 	public function open()
