@@ -7,7 +7,7 @@ abstract class Element
 	protected function setAttribute($attribute, $value = null)
 	{
 		if (is_null($value)) {
-			$value = $attribute;
+			return;
 		}
 		
 		$this->attributes[$attribute] = $value;

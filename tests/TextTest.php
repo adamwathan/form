@@ -56,6 +56,13 @@ class TextTest extends PHPUnit_Framework_TestCase
 		$expected = '<input type="text" name="first_name" value="test@test.com">';
 		$result = $text->render();
 		$this->assertEquals($expected, $result);
+
+		$text = new Text('first_name');
+		$text = $text->value(null);
+
+		$expected = '<input type="text" name="first_name">';
+		$result = $text->render();
+		$this->assertEquals($expected, $result);
 	}
 
 	public function testCanRenderWithClass()

@@ -14,7 +14,7 @@ abstract class FormControl extends Element
 
 	public function required()
 	{
-		$this->setAttribute('required');
+		$this->setAttribute('required', 'required');
 		return $this;
 	}
 
@@ -26,7 +26,7 @@ abstract class FormControl extends Element
 
 	public function disable()
 	{
-		$this->setAttribute('disabled');
+		$this->setAttribute('disabled', 'disabled');
 		return $this;
 	}
 
