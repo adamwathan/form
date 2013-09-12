@@ -10,14 +10,21 @@ use AdamWathan\Form\Elements\TextArea;
 use AdamWathan\Form\Elements\Label;
 use AdamWathan\Form\Elements\FormOpen;
 use AdamWathan\Form\OldInput\OldInputInterface;
+use AdamWathan\Form\ErrorStore\ErrorStoreInterface;
 
 class FormBuilder
 {
 	private $oldInput;
+	private $errorStore;
 
 	public function setOldInputProvider(OldInputInterface $oldInputProvider)
 	{
 		$this->oldInput = $oldInputProvider;
+	}
+
+	public function setErrorStore(ErrorStoreInterface $errorStore)
+	{
+		$this->errorStore = $errorStore;
 	}
 
 	public function open()
@@ -54,16 +61,40 @@ class FormBuilder
 
 	protected function hasOldInput($name)
 	{
-		if (isset($this->oldInput) and $this->oldInput->hasOld($name)) {
-			return true;
+		if ( ! isset($this->oldInput)) {
+			return false;
 		}
 
-		return false;
+		return $this->oldInput->hasOld($name);
 	}
 
 	protected function getOldInput($name)
 	{
 		return $this->oldInput->getOld($name);
+	}
+
+	public function hasError($name)
+	{
+		if ( ! isset($this->errorStore)) {
+			return false;
+		}
+
+		return $this->errorStore->hasError($name);
+	}
+
+	public function getError($name, $format = null)
+	{
+		if ( ! isset($this->errorStore)) {
+			return null;
+		}
+
+		$message = $this->errorStore->getError($name);
+
+		if ($format) {
+			$message = str_replace(':message', $message, $format);
+		}
+
+		return $message;
 	}
 	
 	public function password($name)

@@ -185,4 +185,46 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$result = (string)$this->form->textarea('bio');
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testNoErrorStoreReturnsNull()
+	{
+		$expected = null;
+		$result = $this->form->getError('email');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testCanCheckForErrorMessage()
+	{
+		$errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+		$errorStore->shouldReceive('hasError')->with('email')->andReturn(true);
+
+		$this->form->setErrorStore($errorStore);
+
+		$result = $this->form->hasError('email');
+		$this->assertTrue($result);
+	}
+
+	public function testCanRetrieveErrorMessage()
+	{
+		$errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+		$errorStore->shouldReceive('getError')->with('email')->andReturn('The e-mail address is invalid.');
+
+		$this->form->setErrorStore($errorStore);
+
+		$expected = 'The e-mail address is invalid.';
+		$result = $this->form->getError('email');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testCanRetrieveFormattedErrorMessage()
+	{
+		$errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+		$errorStore->shouldReceive('getError')->with('email')->andReturn('The e-mail address is invalid.');
+
+		$this->form->setErrorStore($errorStore);
+
+		$expected = '<span class="error">The e-mail address is invalid.</span>';
+		$result = $this->form->getError('email', '<span class="error">:message</span>');
+		$this->assertEquals($expected, $result);
+	}
 }
