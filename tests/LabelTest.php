@@ -67,4 +67,12 @@ class LabelTest extends PHPUnit_Framework_TestCase
 		$result = $label->after($element)->render();
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testCanRetrieveElement()
+	{
+		$element = Mockery::mock('AdamWathan\Form\Elements\Element');
+		$label = new Label('Email');
+		$result = $label->after($element)->getControl();
+		$this->assertEquals($element, $result);
+	}
 }

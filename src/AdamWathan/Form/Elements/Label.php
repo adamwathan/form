@@ -59,4 +59,9 @@ class Label extends Element
 
 		return $this->element->render();
 	}
+
+	public function getControl()
+	{
+		return $this->element;
+	}
 }
