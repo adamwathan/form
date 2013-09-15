@@ -202,6 +202,14 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 		$result = $this->form->hasError('email');
 		$this->assertTrue($result);
+
+		$errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+		$errorStore->shouldReceive('hasError')->with('email')->andReturn(false);
+
+		$this->form->setErrorStore($errorStore);
+
+		$result = $this->form->hasError('email');
+		$this->assertFalse($result);
 	}
 
 	public function testCanRetrieveErrorMessage()
