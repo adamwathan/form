@@ -124,8 +124,8 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderTextWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOld')->with('email')->andReturn(true);
-		$oldInput->shouldReceive('getOld')->with('email')->andReturn('example@example.com');
+		$oldInput->shouldReceive('hasOldInput')->with('email')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('email')->andReturn('example@example.com');
 
 		$this->form->setOldInputProvider($oldInput);
 
@@ -137,8 +137,8 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderCheckboxWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOld')->with('terms')->andReturn(true);
-		$oldInput->shouldReceive('getOld')->with('terms')->andReturn('agree');
+		$oldInput->shouldReceive('hasOldInput')->with('terms')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('terms')->andReturn('agree');
 
 		$this->form->setOldInputProvider($oldInput);
 
@@ -150,8 +150,8 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderRadioWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOld')->with('color')->andReturn(true);
-		$oldInput->shouldReceive('getOld')->with('color')->andReturn('green');
+		$oldInput->shouldReceive('hasOldInput')->with('color')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('color')->andReturn('green');
 
 		$this->form->setOldInputProvider($oldInput);
 
@@ -163,8 +163,8 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderSelectWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOld')->with('color')->andReturn(true);
-		$oldInput->shouldReceive('getOld')->with('color')->andReturn('blue');
+		$oldInput->shouldReceive('hasOldInput')->with('color')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('color')->andReturn('blue');
 
 		$this->form->setOldInputProvider($oldInput);
 
@@ -176,8 +176,8 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderTextAreaWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOld')->with('bio')->andReturn(true);
-		$oldInput->shouldReceive('getOld')->with('bio')->andReturn('This is my bio');
+		$oldInput->shouldReceive('hasOldInput')->with('bio')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('bio')->andReturn('This is my bio');
 
 		$this->form->setOldInputProvider($oldInput);
 

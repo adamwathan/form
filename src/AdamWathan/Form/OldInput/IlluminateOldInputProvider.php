@@ -8,7 +8,7 @@ class IlluminateOldInputProvider implements OldInputInterface
 
 	public function __construct(Session $session)
 	{
-
+		$this->session = $session;
 	}
 
 	public function hasOldInput($key)

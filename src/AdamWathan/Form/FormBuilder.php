@@ -65,12 +65,12 @@ class FormBuilder
 			return false;
 		}
 
-		return $this->oldInput->hasOld($name);
+		return $this->oldInput->hasOldInput($name);
 	}
 
 	protected function getOldInput($name)
 	{
-		return $this->oldInput->getOld($name);
+		return $this->oldInput->getOldInput($name);
 	}
 
 	public function hasError($name)
