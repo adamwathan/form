@@ -27,14 +27,14 @@ class CheckboxTest extends PHPUnit_Framework_TestCase
 	public function testRenderBasicCheckboxWithValue()
 	{
 		$checkbox = new Checkbox('terms');
-		$expected = '<input type="checkbox" name="terms" value="1">';
-		$result = $checkbox->render();
+		$expected = '<input type="checkbox" name="terms" value="agree">';
+		$result = $checkbox->value('agree')->render();
 
 		$this->assertEquals($expected, $result);
 
 		$checkbox = new Checkbox('above_18');
-		$expected = '<input type="checkbox" name="above_18" value="1">';
-		$result = $checkbox->render();
+		$expected = '<input type="checkbox" name="above_18" value="true">';
+		$result = $checkbox->value('true')->render();
 
 		$this->assertEquals($expected, $result);
 	}

@@ -8,7 +8,6 @@ class Select extends FormControl
 	public function __construct($name, $options = array())
 	{
 		$this->setName($name);
-		$this->setId($name);
 		$this->setOptions($options);
 	}
 

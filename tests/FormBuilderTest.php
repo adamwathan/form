@@ -90,11 +90,11 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function testSelect()
 	{
-		$expected = '<select name="color" id="color"><option value="red">Red</option><option value="blue">Blue</option></select>';
+		$expected = '<select name="color"><option value="red">Red</option><option value="blue">Blue</option></select>';
 		$result = (string)$this->form->select('color', array('red' => 'Red', 'blue' => 'Blue'));
 		$this->assertEquals($expected, $result);
 
-		$expected = '<select name="fruit" id="fruit"><option value="apple">Granny Smith</option><option value="berry">Blueberry</option></select>';
+		$expected = '<select name="fruit"><option value="apple">Granny Smith</option><option value="berry">Blueberry</option></select>';
 		$result = (string)$this->form->select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
 		$this->assertEquals($expected, $result);
 	}
@@ -168,7 +168,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 		$this->form->setOldInputProvider($oldInput);
 
-		$expected = '<select name="color" id="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
+		$expected = '<select name="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
 		$result = (string)$this->form->select('color', array('red' => 'Red', 'blue' => 'Blue'));
 		$this->assertEquals($expected, $result);
 	}
