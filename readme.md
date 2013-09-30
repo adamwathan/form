@@ -1,4 +1,6 @@
-# Form
+Form
+========
+
 Boring name for a boring package. Builds form HTML with a fluent-ish, hopefully intuitive syntax.
 
 - [Installation](#installation)
