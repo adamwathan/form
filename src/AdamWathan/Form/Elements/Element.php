@@ -4,7 +4,7 @@ abstract class Element
 {
 	protected $attributes = array();
 
-	protected function setAttribute($attribute, $value = null)
+	public function setAttribute($attribute, $value = null)
 	{
 		if (is_null($value)) {
 			return;
@@ -13,7 +13,7 @@ abstract class Element
 		$this->attributes[$attribute] = $value;
 	}
 
-	protected function removeAttribute($attribute) {
+	public function removeAttribute($attribute) {
 		unset($this->attributes[$attribute]);
 	}
 
