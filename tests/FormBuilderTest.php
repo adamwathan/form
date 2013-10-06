@@ -235,4 +235,29 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$result = $this->form->getError('email', '<span class="error">:message</span>');
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testHidden()
+	{
+		$expected = '<input type="hidden" name="secret">';
+		$result = (string)$this->form->hidden('secret');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="hidden" name="token">';
+		$result = (string)$this->form->hidden('token');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testCanSetCsrfToken()
+	{
+		$this->form->setToken('12345');
+	}
+
+	public function testCanRenderCsrfToken()
+	{
+		$this->form->setToken('12345');
+
+		$expected = '<input type="hidden" name="_token" value="12345">';
+		$result = (string)$this->form->token();
+		$this->assertEquals($expected, $result);
+	}
 }

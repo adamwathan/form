@@ -9,6 +9,7 @@ use AdamWathan\Form\Elements\Select;
 use AdamWathan\Form\Elements\TextArea;
 use AdamWathan\Form\Elements\Label;
 use AdamWathan\Form\Elements\FormOpen;
+use AdamWathan\Form\Elements\Hidden;
 use AdamWathan\Form\OldInput\OldInputInterface;
 use AdamWathan\Form\ErrorStore\ErrorStoreInterface;
 
@@ -16,6 +17,7 @@ class FormBuilder
 {
 	private $oldInput;
 	private $errorStore;
+	private $csrfToken;
 
 	public function setOldInputProvider(OldInputInterface $oldInputProvider)
 	{
@@ -25,6 +27,10 @@ class FormBuilder
 	public function setErrorStore(ErrorStoreInterface $errorStore)
 	{
 		$this->errorStore = $errorStore;
+	}
+
+	public function setToken($token) {
+		$this->csrfToken = $token;
 	}
 
 	public function open()
@@ -161,5 +167,21 @@ class FormBuilder
 	public function label($label)
 	{
 		return new Label($label);
+	}
+
+	public function hidden($name)
+	{
+		return new Hidden($name);
+	}
+
+	public function token()
+	{
+		$token = $this->hidden('_token');
+
+		if (isset($this->csrfToken)) {
+			$token->value($this->csrfToken);
+		}
+
+		return $token;
 	}
 }
