@@ -5,6 +5,7 @@ class FormOpen extends Element
 	protected $attributes = array(
 		'method' => 'POST'
 		);
+	protected $method;
 
 	public function render()
 	{
@@ -13,6 +14,10 @@ class FormOpen extends Element
 		$result .= $this->renderAttributes();
 
 		$result .= '>';
+
+		if (isset($this->method)) {
+			$result .= $this->method->render();
+		}
 
 		return $result;
 	}
@@ -26,6 +31,26 @@ class FormOpen extends Element
 	public function get()
 	{
 		$this->setMethod('GET');
+		return $this;
+	}
+
+	public function put()
+	{
+		$this->setMethod('POST');
+
+		$this->method = new Hidden('_method');
+		$this->method->value('PUT');
+
+		return $this;
+	}
+
+	public function delete()
+	{
+		$this->setMethod('POST');
+
+		$this->method = new Hidden('_method');
+		$this->method->value('DELETE');
+
 		return $this;
 	}
 
