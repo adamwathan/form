@@ -7,6 +7,7 @@ Boring name for a boring package. Builds form HTML with a fluent-ish, hopefully 
 - [Basic Usage](#basic-usage)
 - [Remembering Old Input](#remembering-old-input)
 - [Error Messages](#error-messages)
+- [CSRF Protection](#csrf-tokens)
 
 <a href="#installation"></a>
 ## Installation
@@ -50,6 +51,7 @@ To do so, just update the `providers` array in your `app/config/app.php`:
 - [Checkboxes and Radio Buttons](#checkboxes-and-radio-buttons)
 - [Selects](#selects)
 - [Submit Buttons](#submit-buttons)
+- [Hidden Inputs](#hidden-inputs)
 - [Labels](#labels)
 
 <a href="#getting-started"></a>
@@ -79,6 +81,14 @@ $builder->open();
 
 // <form method="GET">
 $builder->open()->get();
+
+// <form method="POST">
+// <input type="hidden" name="_method" value="PUT">
+$builder->open()->put();
+
+// <form method="POST">
+// <input type="hidden" name="_method" value="DELETE">
+$builder->open()->delete();
 
 // <form method="POST" action="/test">
 $builder->open()->action('/test')->render();
@@ -194,6 +204,14 @@ $builder->submit('Sign Up');
 $builder->submit('Sign Up')->addClass('js-submit');
 ```
 
+<a href="#hidden-inputs"></a>
+### Hidden Inputs
+
+```php
+// <input type="hidden" name="secret" value="my-secret-value">
+$builder->hidden('secret')->value('my-secret-value');
+```
+
 <a href="#labels"></a>
 ### Labels
 
@@ -249,4 +267,13 @@ $builder->hasError('email');
 
 // Retrieve the error message for an element
 $builder->getError('email');
+```
+
+<a href="#csrf-tokens"></a>
+## CSRF Protection
+
+Assuming you set a CSRF token when instantiating the Formbuilder (or you are using Laravel 4), add a CSRF token to your form easily like so:
+
+```php
+$builder->token();
 ```
