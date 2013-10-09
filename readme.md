@@ -12,18 +12,12 @@ Boring name for a boring package. Builds form HTML with a fluent-ish, hopefully 
 <a href="#installation"></a>
 ## Installation
 
-This package will be available via Packagist once it stabilizes a bit more, but for now you can install it by including the following in your `composer.json`:
+You can install this package via Composer by including the following in your `composer.json`:
 
 ```json
 {
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/adamwathan/form"
-        }
-    ],
     "require": {
-        "adam-wathan/boot-forms": "dev-master"
+        "adamwathan/form": "dev-master"
     }
 }
 ```
@@ -37,7 +31,7 @@ To do so, just update the `providers` array in your `app/config/app.php`:
 ```php
 'providers' => array(
         //...
-        'AdamWathan\BootForms\FormServiceProvider'
+        'AdamWathan\Form\FormServiceProvider'
     ),
 ```
 
