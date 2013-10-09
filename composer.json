@@ -1,6 +1,6 @@
 {
     "name": "adamwathan/form",
-    "description": "",
+    "description": "A basic framework agnostic form building package with a few extra niceties like remembering old input and retrieving error messages.",
     "authors": [
         {
             "name": "Adam Wathan",
