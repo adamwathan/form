@@ -176,4 +176,32 @@ class TextTest extends PHPUnit_Framework_TestCase
 		$result = $text->defaultValue('example@example.com')->value('test@test.com')->render();
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testCustomAttribute()
+	{
+		$text = new Text('email');
+
+		$expected = '<input type="text" name="email" data-sample="test-value">';
+		$result = $text->attribute('data-sample', 'test-value')->render();
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="text" name="email">';
+		$result = $text->clear('data-sample')->render();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testDataAttribute()
+	{
+		$text = new Text('email');
+
+		$expected = '<input type="text" name="email" data-sample="test-value">';
+		$result = $text->data('sample', 'test-value')->render();
+		$this->assertEquals($expected, $result);
+
+		$text = new Text('email');
+
+		$expected = '<input type="text" name="email" data-custom="another-value">';
+		$result = $text->data('custom', 'another-value')->render();
+		$this->assertEquals($expected, $result);
+	}
 }
