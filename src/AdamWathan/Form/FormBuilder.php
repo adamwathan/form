@@ -10,6 +10,7 @@ use AdamWathan\Form\Elements\TextArea;
 use AdamWathan\Form\Elements\Label;
 use AdamWathan\Form\Elements\FormOpen;
 use AdamWathan\Form\Elements\Hidden;
+use AdamWathan\Form\Elements\File;
 use AdamWathan\Form\OldInput\OldInputInterface;
 use AdamWathan\Form\ErrorStore\ErrorStoreInterface;
 
@@ -172,6 +173,11 @@ class FormBuilder
 	public function hidden($name)
 	{
 		return new Hidden($name);
+	}
+
+	public function file($name)
+	{
+		return new File($name);
 	}
 
 	public function token()

@@ -247,6 +247,17 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testFile()
+	{
+		$expected = '<input type="file" name="photo">';
+		$result = (string)$this->form->file('photo');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="file" name="document">';
+		$result = (string)$this->form->file('document');
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testCanSetCsrfToken()
 	{
 		$this->form->setToken('12345');
