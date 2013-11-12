@@ -42,10 +42,12 @@ class Select extends FormControl
 	protected function renderOptions()
 	{
 		$result = '';
-		$count = 0;
+
+		if (! $this->optionValuesAreSet()) {
+			return $this->renderOptionsWithoutValues();
+		}
 		
 		foreach ($this->options as $value => $label) {
-			$value = $count === $value ? $label : $value;
 			$option = '<option ';
 			$option .= 'value="' . $value . '"';
 			$option .= $this->selected == $value ? ' selected' : '';
@@ -53,7 +55,38 @@ class Select extends FormControl
 			$option .= $label;
 			$option .= '</option>';
 			$result .= $option;
+		}
+
+		return $result;
+	}
+
+	protected function optionValuesAreSet()
+	{
+		$count = 0;
+		$keysSet = false;
+		foreach ($this->options as $value => $label) {
+			if ($value !== $count) {
+				$keysSet = true;
+			}
 			$count++;
+		}
+
+		return $keysSet;
+	}
+
+	protected function renderOptionsWithoutValues()
+	{
+		$result = '';
+
+		foreach ($this->options as $label) {
+			$value = $label;
+			$option = '<option ';
+			$option .= 'value="' . $value . '"';
+			$option .= $this->selected == $value ? ' selected' : '';
+			$option .= '>';
+			$option .= $label;
+			$option .= '</option>';
+			$result .= $option;
 		}
 
 		return $result;
