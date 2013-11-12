@@ -70,4 +70,9 @@ class FormOpen extends Element
 	{
 		$this->setAttribute('enctype', $type);
 	}
+
+	public function multipart()
+	{
+		$this->setAttribute('enctype', 'multipart/form-data');
+	}
 }
