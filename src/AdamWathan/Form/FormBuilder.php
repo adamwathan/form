@@ -12,6 +12,7 @@ use AdamWathan\Form\Elements\FormOpen;
 use AdamWathan\Form\Elements\Hidden;
 use AdamWathan\Form\Elements\File;
 use AdamWathan\Form\Elements\Date;
+use AdamWathan\Form\Elements\Email;
 use AdamWathan\Form\OldInput\OldInputInterface;
 use AdamWathan\Form\ErrorStore\ErrorStoreInterface;
 
@@ -184,6 +185,11 @@ class FormBuilder
 	public function date($name)
 	{
 		return new Date($name);
+	}
+
+	public function email($name)
+	{
+		return new Email($name);
 	}
 
 	public function token()

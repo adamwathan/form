@@ -269,6 +269,17 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testEmail()
+	{
+		$expected = '<input type="email" name="email">';
+		$result = (string)$this->form->email('email');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="email" name="alternate_email">';
+		$result = (string)$this->form->email('alternate_email');
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testCanSetCsrfToken()
 	{
 		$this->form->setToken('12345');
