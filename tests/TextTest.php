@@ -204,4 +204,26 @@ class TextTest extends PHPUnit_Framework_TestCase
 		$result = $text->data('custom', 'another-value')->render();
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testCanRemoveClass()
+	{
+		$text = new Text('email');
+		$text = $text->addClass('error');
+
+		$expected = '<input type="text" name="email" class="error">';
+		$result = $text->render();
+		$this->assertEquals($expected, $result);
+
+		$text = $text->addClass('large');
+
+		$expected = '<input type="text" name="email" class="error large">';
+		$result = $text->render();
+		$this->assertEquals($expected, $result);
+
+		$text = $text->removeClass('error');
+
+		$expected = '<input type="text" name="email" class="large">';
+		$result = $text->render();
+		$this->assertEquals($expected, $result);
+	}
 }

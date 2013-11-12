@@ -49,6 +49,16 @@ abstract class Element
 		return $this;
 	}
 
+	public function removeClass($class)
+	{
+		if (! isset($this->attributes['class'])) {
+			return $this;
+		}
+		$class = trim(str_replace($class, '', $this->attributes['class']));
+		$this->setAttribute('class', $class);
+		return $this;
+	}
+
 	public function id($id)
 	{
 		$this->setId($id);
