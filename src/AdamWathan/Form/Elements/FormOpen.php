@@ -65,4 +65,9 @@ class FormOpen extends Element
 		$this->setAttribute('action', $action);
 		return $this;
 	}
+
+	public function encodingType($type)
+	{
+		$this->setAttribute('enctype', $type);
+	}
 }
