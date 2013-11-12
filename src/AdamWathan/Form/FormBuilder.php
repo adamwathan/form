@@ -11,6 +11,7 @@ use AdamWathan\Form\Elements\Label;
 use AdamWathan\Form\Elements\FormOpen;
 use AdamWathan\Form\Elements\Hidden;
 use AdamWathan\Form\Elements\File;
+use AdamWathan\Form\Elements\Date;
 use AdamWathan\Form\OldInput\OldInputInterface;
 use AdamWathan\Form\ErrorStore\ErrorStoreInterface;
 
@@ -178,6 +179,11 @@ class FormBuilder
 	public function file($name)
 	{
 		return new File($name);
+	}
+
+	public function date($name)
+	{
+		return new Date($name);
 	}
 
 	public function token()

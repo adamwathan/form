@@ -258,6 +258,17 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testDate()
+	{
+		$expected = '<input type="date" name="date_of_birth">';
+		$result = (string)$this->form->date('date_of_birth');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="date" name="start_date">';
+		$result = (string)$this->form->date('start_date');
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testCanSetCsrfToken()
 	{
 		$this->form->setToken('12345');
