@@ -69,10 +69,11 @@ class FormOpen extends Element
 	public function encodingType($type)
 	{
 		$this->setAttribute('enctype', $type);
+		return $this;
 	}
 
 	public function multipart()
 	{
-		$this->setAttribute('enctype', 'multipart/form-data');
+		return $this->encodingType('multipart/form-data');
 	}
 }
