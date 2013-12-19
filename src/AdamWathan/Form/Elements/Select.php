@@ -48,25 +48,55 @@ class Select extends FormControl
 		}
 		
 		foreach ($this->options as $value => $label) {
-			$option = '<option ';
-			$option .= 'value="' . $value . '"';
-			$option .= $this->selected == $value ? ' selected' : '';
-			$option .= '>';
-			$option .= $label;
-			$option .= '</option>';
-			$result .= $option;
+			if (is_array($label)) {
+				$result .= $this->renderOptGroup($value, $label);
+				continue;
+			}
+			$result .= $this->renderOption($value, $label);
 		}
 
 		return $result;
 	}
 
-	protected function optionValuesAreSet()
+	protected function renderOptGroup($label, $options)
 	{
+		$result = "<optgroup label=\"{$label}\">";
+		foreach ($options as $value => $label) {
+			$result .= $this->renderOption($value, $label);
+		}
+		$result .= "</optgroup>";
+		return $result;
+	}
+
+	protected function renderOption($value, $label)
+	{
+		$option = '<option ';
+		$option .= 'value="' . $value . '"';
+		$option .= $this->isSelected($value) ? ' selected' : '';
+		$option .= '>';
+		$option .= $label;
+		$option .= '</option>';
+		return $option;
+	}
+
+	protected function isSelected($value)
+	{
+		return isset($this->selected) ? $this->selected === $value : false;
+	}
+
+	protected function optionValuesAreSet($options = null)
+	{
+		if (! $options) {
+			$options = $this->options;
+		}
 		$count = 0;
 		$keysSet = false;
-		foreach ($this->options as $value => $label) {
-			if ($value !== $count) {
+		foreach ($options as $value => $label) {
+			if (is_array($suboptions = $label)) {
+				$keysSet = $this->optionValuesAreSet($suboptions) ? true : $keysSet;
+			} elseif ($value !== $count) {
 				$keysSet = true;
+				break;
 			}
 			$count++;
 		}
@@ -78,18 +108,21 @@ class Select extends FormControl
 	{
 		$result = '';
 
-		foreach ($this->options as $label) {
-			$value = $label;
-			$option = '<option ';
-			$option .= 'value="' . $value . '"';
-			$option .= $this->selected == $value ? ' selected' : '';
-			$option .= '>';
-			$option .= $label;
-			$option .= '</option>';
-			$result .= $option;
+		foreach ($this->options as $value => $label) {
+			if (is_array($label)) {
+				$result .= $this->renderOptGroupWithoutValues($value, $label);
+				continue;
+			}
+			$result .= $this->renderOption($label, $label);
 		}
 
 		return $result;
+	}
+
+	protected function renderOptGroupWithoutValues($label, $options)
+	{
+		$options = array_combine($options, $options);
+		return $this->renderOptGroup($label, $options);
 	}
 
 	public function addOption($value, $label)

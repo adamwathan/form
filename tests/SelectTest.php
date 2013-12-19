@@ -129,4 +129,59 @@ class SelectTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testCanUseNestedOptions()
+	{
+		$options = array(
+			'Ontario' => array(
+				'toronto' => 'Toronto',
+				'london' => 'London',
+				),
+			'Quebec' => array(
+				'montreal' => 'Montreal',
+				'quebec-city' => 'Quebec City',
+				),
+			);
+		$select = new Select('color', $options);
+		$expected = '<select name="color"><optgroup label="Ontario"><option value="toronto">Toronto</option><option value="london">London</option></optgroup><optgroup label="Quebec"><option value="montreal">Montreal</option><option value="quebec-city">Quebec City</option></optgroup></select>';
+		$result = $select->render();
+
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testCanUseNestedOptionsWithoutKeys()
+	{
+		$options = array(
+			'Ontario' => array(
+				'Toronto',
+				'London',
+				),
+			'Quebec' => array(
+				'Montreal',
+				'Quebec City',
+				),
+			);
+		$select = new Select('color', $options);
+		$expected = '<select name="color"><optgroup label="Ontario"><option value="Toronto">Toronto</option><option value="London">London</option></optgroup><optgroup label="Quebec"><option value="Montreal">Montreal</option><option value="Quebec City">Quebec City</option></optgroup></select>';
+		$result = $select->render();
+
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testCanMixNestedAndUnnestedOptions()
+	{
+		$options = array(
+			'toronto' => 'Toronto',
+			'london' => 'London',
+			'Quebec' => array(
+				'montreal' => 'Montreal',
+				'quebec-city' => 'Quebec City',
+				),
+			);
+		$select = new Select('color', $options);
+		$expected = '<select name="color"><option value="toronto">Toronto</option><option value="london">London</option><optgroup label="Quebec"><option value="montreal">Montreal</option><option value="quebec-city">Quebec City</option></optgroup></select>';
+		$result = $select->render();
+
+		$this->assertEquals($expected, $result);
+	}
 }
