@@ -21,6 +21,7 @@ class FormBuilder
 	private $oldInput;
 	private $errorStore;
 	private $csrfToken;
+	private $model;
 
 	public function setOldInputProvider(OldInputInterface $oldInputProvider)
 	{
@@ -45,6 +46,11 @@ class FormBuilder
 	{
 		return '</form>';
 	}
+
+	public function bind($model)
+	{
+		$this->model = $model;
+	}
 	
 	public function text($name)
 	{
@@ -65,6 +71,10 @@ class FormBuilder
 			return $this->getOldInput($name);
 		}
 
+		if ($this->hasModelValue($name)) {
+			return $this->getModelValue($name);
+		}
+
 		return '';
 	}
 
@@ -80,6 +90,19 @@ class FormBuilder
 	protected function getOldInput($name)
 	{
 		return $this->oldInput->getOldInput($name);
+	}
+
+	protected function hasModelValue($name)
+	{
+		if (! isset($this->model)) {
+			return false;
+		}
+		return isset($this->model->{$name});
+	}
+
+	protected function getModelValue($name)
+	{
+		return $this->model->{$name};
 	}
 
 	public function hasError($name)
@@ -174,7 +197,11 @@ class FormBuilder
 
 	public function hidden($name)
 	{
-		return new Hidden($name);
+		$hidden = new Hidden($name);
+		if ($value = $this->getValueFor($name)) {
+			$hidden->value($value);
+		}	
+		return $hidden;
 	}
 
 	public function file($name)
@@ -184,12 +211,20 @@ class FormBuilder
 
 	public function date($name)
 	{
-		return new Date($name);
+		$date = new Date($name);
+		if ($value = $this->getValueFor($name)) {
+			$date->value($value);
+		}	
+		return $date;
 	}
 
 	public function email($name)
 	{
-		return new Email($name);
+		$email = new Email($name);
+		if ($value = $this->getValueFor($name)) {
+			$email->value($value);
+		}	
+		return $email;
 	}
 
 	public function token()
@@ -218,7 +253,7 @@ class FormBuilder
 			"10" => "October",
 			"11" => "November",
 			"12" => "December",
-		);
+			);
 		
 		return $this->select($name, $options);	
 	}

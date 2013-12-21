@@ -175,6 +175,28 @@ $builder->select('birth_year', [1990, 1991, 1992]);
 $builder->select('birth_year', ['1' => 1990, '2' => 1991, '3' => 1992]);
 
 // <select name="birth_year">
+//   <optgroup label="Ontario">
+//     <option value="toronto">Toronto</option>
+//     <option value="ottawa">Ottawa</option>
+//   </optgroup>
+//   <optgroup label="Quebec">
+//     <option value="montreal">Montreal</option>
+//     <option value="quebec_city">Quebec City</option>
+//   </optgroup>
+// </select>
+$options = [
+	'Ontario' => [
+		'toronto' => 'Toronto',
+		'ottawa' => 'Ottawa',
+	],
+	'Quebec' => [
+		'montreal' => 'Montreal',
+		'quebec_city' => 'Quebec City',
+	]
+];
+$builder->select('birth_year', $options);
+
+// <select name="birth_year">
 //   <option value="1">1990</option>
 // </select>
 $builder->select('birth_year')->addOption('1', 1990);
@@ -263,6 +285,19 @@ $builder->hasError('email');
 $builder->getError('email');
 ```
 
+You can also supply a `format` parameter to `getError()` to cleanup your markup. Instead of doing this:
+
+```php
+<?php if ($builder->hasError('email')): ?>
+	<span class="error"><?= $builder->getError('email'); ?></span>
+<?php endif; ?>
+```
+
+...you can simply do this, which will display the formatted message if it exists, or nothing otherwise.
+```php
+<?= $builder->getError('email', '<span class="error">:message</span'); ?>
+```
+
 <a href="#csrf-tokens"></a>
 ## CSRF Protection
 
@@ -271,3 +306,27 @@ Assuming you set a CSRF token when instantiating the Formbuilder (or you are usi
 ```php
 $builder->token();
 ```
+
+<a href="#model-binding"></a>
+## Model Binding
+
+Sometimes you might have a form where all of the fields match properties on some sort of object in your system, and you want the user to be able to edit those properties. Model binding makes this really easy by allowing you to bind a model to your form that will be used to automatically provide all of the default values for your fields.
+
+```php
+$model->first_name = "John";
+$model->last_name = "Doe";
+$model->email = "john@example.com";
+$model->date_of_birth = new DateTime('1985-05-06');
+
+$builder->open();
+$builder->bind($model);
+$builder->text('first_name');
+$builder->text('last_name');
+$builder->email('email');
+$builder->date_of_birth('date_of_birth');
+$builder->close();
+```
+
+> This will work out of the box with Laravel's Eloquent models.
+
+When using model binding, old input will still take priority over any values on your model, so you can still easily redirect the user back to the form with any validation errors without losing any of the data they entered.

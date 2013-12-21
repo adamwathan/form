@@ -188,8 +188,8 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function testNoErrorStoreReturnsNull()
 	{
-		$expected = null;
-		$result = $this->form->getError('email');
+		$expected = '';
+		$result = (string)$this->form->getError('email');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -280,6 +280,45 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testRenderDateWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->with('date_of_birth')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('date_of_birth')->andReturn('1999-04-06');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="date" name="date_of_birth" value="1999-04-06">';
+		$result = (string)$this->form->date('date_of_birth');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderEmailWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->with('email')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('email')->andReturn('example@example.com');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="email" name="email" value="example@example.com">';
+		$result = (string)$this->form->email('email');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderHiddenWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->with('secret')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('secret')->andReturn('my-secret-string');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="hidden" name="secret" value="my-secret-string">';
+		$result = (string)$this->form->hidden('secret');
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testCanSetCsrfToken()
 	{
 		$this->form->setToken('12345');
@@ -299,5 +338,99 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$expected = '<select name="month"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>';
 		$result = (string)$this->form->selectMonth('month');
 		$this->assertEquals($expected, $result);
+	}
+
+	public function testCanBindObject()
+	{
+		$this->assertTrue(method_exists($this->form, 'bind'));
+	}
+
+	public function testBindEmail()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="email" name="email" value="johndoe@example.com">';
+		$result = (string)$this->form->email('email');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testBindText()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="text" name="first_name" value="John">';
+		$result = (string)$this->form->text('first_name');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testBindDate()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="date" name="date_of_birth" value="1985-05-06">';
+		$result = (string)$this->form->date('date_of_birth');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testBindSelect()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<select name="gender"><option value="male" selected>Male</option><option value="female">Female</option></select>';
+		$result = (string)$this->form->select('gender', array('male' => 'Male', 'female' => 'Female'));
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testBindHidden()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="hidden" name="last_name" value="Doe">';
+		$result = (string)$this->form->hidden('last_name');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testOldInputTakesPrecedenceOverBinding()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->with('first_name')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('first_name')->andReturn('Steve');
+		$this->form->setOldInputProvider($oldInput);
+
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="text" name="first_name" value="Steve">';
+		$result = (string)$this->form->text('first_name');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testBindCheckbox()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
+		$result = (string)$this->form->checkbox('terms', 'agree');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testValueTakesPrecedenceOverBinding()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="text" name="first_name" value="Mike">';
+		$result = (string)$this->form->text('first_name')->value('Mike');
+		$this->assertEquals($expected, $result);
+	}
+
+	private function getStubObject()
+	{
+		$obj = new stdClass;
+		$obj->email = 'johndoe@example.com';
+		$obj->first_name = 'John';
+		$obj->last_name = 'Doe';
+		$obj->date_of_birth = new \DateTime('1985-05-06');
+		$obj->gender = 'male';
+		$obj->terms = 'agree';
+		return $obj;
 	}
 }
