@@ -81,7 +81,7 @@ class Select extends FormControl
 
 	protected function isSelected($value)
 	{
-		return isset($this->selected) ? $this->selected === $value : false;
+		return isset($this->selected) ? $this->selected == $value : false;
 	}
 
 	protected function optionValuesAreSet($options = null)
