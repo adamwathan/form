@@ -324,7 +324,7 @@ $builder->bind($model);
 $builder->text('first_name');
 $builder->text('last_name');
 $builder->email('email');
-$builder->date_of_birth('date_of_birth');
+$builder->date('date_of_birth');
 $builder->close();
 ```
 
