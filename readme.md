@@ -8,6 +8,7 @@ Boring name for a boring package. Builds form HTML with a fluent-ish, hopefully 
 - [Remembering Old Input](#remembering-old-input)
 - [Error Messages](#error-messages)
 - [CSRF Protection](#csrf-tokens)
+- [Model Binding](#model-binding)
 
 <a href="#installation"></a>
 ## Installation
