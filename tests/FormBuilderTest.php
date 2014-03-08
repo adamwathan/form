@@ -21,7 +21,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function testFormOpen()
 	{
-		$expected = '<form method="POST">';
+		$expected = '<form method="POST" action="">';
 		$result = $this->form->open();
 		$this->assertEquals($expected, $result);
 	}
@@ -111,7 +111,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testLabel()
-	{		
+	{
 		$expected = '<label>Email</label>';
 		$result = (string)$this->form->label('Email');
 		$this->assertEquals($expected, $result);

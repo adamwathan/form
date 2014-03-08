@@ -3,7 +3,8 @@
 class FormOpen extends Element
 {
 	protected $attributes = array(
-		'method' => 'POST'
+		'method' => 'POST',
+		'action' => '',
 		);
 	protected $method;
 
