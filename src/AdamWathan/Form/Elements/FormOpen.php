@@ -6,21 +6,22 @@ class FormOpen extends Element
 		'method' => 'POST',
 		'action' => '',
 		);
-	protected $method;
+	protected $hiddenMethod;
 
 	public function render()
 	{
 		$result  = '<form';
-
 		$result .= $this->renderAttributes();
-
 		$result .= '>';
-
-		if (isset($this->method)) {
-			$result .= $this->method->render();
+		if ($this->hasHiddenMethod()) {
+			$result .= $this->hiddenMethod->render();
 		}
-
 		return $result;
+	}
+
+	protected function hasHiddenMethod()
+	{
+		return isset($this->hiddenMethod);
 	}
 
 	public function post()
@@ -37,21 +38,19 @@ class FormOpen extends Element
 
 	public function put()
 	{
-		$this->setMethod('POST');
-
-		$this->method = new Hidden('_method');
-		$this->method->value('PUT');
-
-		return $this;
+		return $this->setHiddenMethod('PUT');
 	}
 
 	public function delete()
 	{
+		return $this->setHiddenMethod('DELETE');
+	}
+
+	protected function setHiddenMethod($method)
+	{
 		$this->setMethod('POST');
-
-		$this->method = new Hidden('_method');
-		$this->method->value('DELETE');
-
+		$this->hiddenMethod = new Hidden('_method');
+		$this->hiddenMethod->value($method);
 		return $this;
 	}
 
