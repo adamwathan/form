@@ -18,10 +18,11 @@ You can install this package via Composer by including the following in your `co
 ```json
 {
     "require": {
-        "adamwathan/form": "dev-master"
+        "adamwathan/form": "v0.2"
     }
 }
 ```
+*Note: you could also require `dev-master` to test the latest version, but make sure you drop your `minimum-stability` to `dev`.*
 
 ### Laravel 4
 
@@ -63,7 +64,7 @@ Next, use the FormBuilder to build an element. For example:
 $builder->text('email')->value('example@example.com')->required();
 ```
 
-- All elements support method chaining, so you can add as many options to an element as you need. 
+- All elements support method chaining, so you can add as many options to an element as you need.
 - All elements implement `__toString()` so there is no need to manually render.
 
 
