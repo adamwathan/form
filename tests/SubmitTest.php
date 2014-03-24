@@ -12,13 +12,13 @@ class SubmitTest extends PHPUnit_Framework_TestCase
 	public function testRenderBasicSubmit()
 	{
 		$submit = new Submit('Sign Up');
-		$expected = '<input type="submit" value="Sign Up">';
+		$expected = '<button type="submit">Sign Up</button>';
 		$result = $submit->render();
 
 		$this->assertEquals($expected, $result);
 
 		$submit = new Submit('Log In');
-		$expected = '<input type="submit" value="Log In">';
+		$expected = '<button type="submit">Log In</button>';
 		$result = $submit->render();
 
 		$this->assertEquals($expected, $result);
