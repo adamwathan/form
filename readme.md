@@ -215,10 +215,10 @@ $builder->select('birth_year', ['1' => 1990, '2' => 1991, '3' => 1992])->select(
 ### Submit Buttons
 
 ```php
-// <input type="submit" value="Sign Up">
+// <button type="submit">Sign Up</button>
 $builder->submit('Sign Up');
 
-// <input type="submit" value="Sign Up" class="js-submit">
+// <button type="submit" class="js-submit">Sign Up</button>
 $builder->submit('Sign Up')->addClass('js-submit');
 ```
 
