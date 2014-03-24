@@ -23,4 +23,14 @@ class SubmitTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testCanChangeValue()
+	{
+		$submit = new Submit('Sign Up');
+		$submit->value('Sign Out');
+		$expected = '<button type="submit">Sign Out</button>';
+		$result = $submit->render();
+
+		$this->assertEquals($expected, $result);
+	}
 }

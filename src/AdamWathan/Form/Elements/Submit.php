@@ -23,4 +23,9 @@ class Submit extends FormControl
 
 		return $result;
 	}
+
+	public function value($value)
+	{
+		$this->value = $value;
+	}
 }
