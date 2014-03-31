@@ -79,11 +79,11 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function testSubmit()
 	{
-		$expected = '<input type="submit" value="Sign In">';
+		$expected = '<button type="submit">Sign In</button>';
 		$result = (string)$this->form->submit('Sign In');
 		$this->assertEquals($expected, $result);
 
-		$expected = '<input type="submit" value="Log In">';
+		$expected = '<button type="submit">Log In</button>';
 		$result = (string)$this->form->submit('Log In');
 		$this->assertEquals($expected, $result);
 	}

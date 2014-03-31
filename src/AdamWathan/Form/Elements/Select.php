@@ -113,7 +113,7 @@ class Select extends FormControl
 				$result .= $this->renderOptGroupWithoutValues($value, $label);
 				continue;
 			}
-			$result .= $this->renderOption($label, $label);
+			$result .= $this->renderOption($value, $label);
 		}
 
 		return $result;
