@@ -32,6 +32,12 @@ class Checkbox extends Input
 		return $this;
 	}
 
+	public function defaultCheckedState($state)
+	{
+		$state ? $this->defaultToChecked() : $this->defaultToUnchecked();
+		return $this;
+	}
+
 	public function check()
 	{
 		$this->setChecked(true);
@@ -50,7 +56,7 @@ class Checkbox extends Input
 		$this->removeAttribute('checked');
 
 		if ($checked) {
-			$this->setAttribute('checked', 'checked');			
+			$this->setAttribute('checked', 'checked');
 		}
 	}
 }
