@@ -92,8 +92,7 @@ abstract class Element
     public function __call($method, $params)
     {
         $params = array_merge(array($method), $params);
-        $method = 'attribute';
-        call_user_func_array(array($this, $method), $params);
+        call_user_func_array(array($this, 'attribute'), $params);
         return $this;
     }
 }
