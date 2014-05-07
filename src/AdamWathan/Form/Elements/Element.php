@@ -2,89 +2,90 @@
 
 abstract class Element
 {
-	protected $attributes = array();
+    protected $attributes = array();
 
-	protected function setAttribute($attribute, $value = null)
-	{
-		if (is_null($value)) {
-			return;
-		}
-		
-		$this->attributes[$attribute] = $value;
-	}
+    protected function setAttribute($attribute, $value = null)
+    {
+        if (is_null($value)) {
+            return;
+        }
 
-	protected function removeAttribute($attribute) {
-		unset($this->attributes[$attribute]);
-	}
+        $this->attributes[$attribute] = $value;
+    }
 
-	public function data($attribute, $value)
-	{
-		$this->setAttribute('data-'.$attribute, $value);
-		return $this;
-	}
+    protected function removeAttribute($attribute)
+    {
+        unset($this->attributes[$attribute]);
+    }
 
-	public function attribute($attribute, $value)
-	{
-		$this->setAttribute($attribute, $value);
-		return $this;
-	}
+    public function data($attribute, $value)
+    {
+        $this->setAttribute('data-'.$attribute, $value);
+        return $this;
+    }
 
-	public function clear($attribute)
-	{
-		if (! isset($this->attributes[$attribute])) {
-			return $this;
-		}
+    public function attribute($attribute, $value)
+    {
+        $this->setAttribute($attribute, $value);
+        return $this;
+    }
 
-		$this->removeAttribute($attribute);
-		return $this;
-	}
+    public function clear($attribute)
+    {
+        if (! isset($this->attributes[$attribute])) {
+            return $this;
+        }
 
-	public function addClass($class)
-	{
-		if (isset($this->attributes['class'])) {
-			$class = $this->attributes['class'] . ' ' . $class;
-		}
+        $this->removeAttribute($attribute);
+        return $this;
+    }
 
-		$this->setAttribute('class', $class);
-		return $this;
-	}
+    public function addClass($class)
+    {
+        if (isset($this->attributes['class'])) {
+            $class = $this->attributes['class'] . ' ' . $class;
+        }
 
-	public function removeClass($class)
-	{
-		if (! isset($this->attributes['class'])) {
-			return $this;
-		}
-		$class = trim(str_replace($class, '', $this->attributes['class']));
-		$this->setAttribute('class', $class);
-		return $this;
-	}
+        $this->setAttribute('class', $class);
+        return $this;
+    }
 
-	public function id($id)
-	{
-		$this->setId($id);
-		return $this;
-	}
+    public function removeClass($class)
+    {
+        if (! isset($this->attributes['class'])) {
+            return $this;
+        }
+        $class = trim(str_replace($class, '', $this->attributes['class']));
+        $this->setAttribute('class', $class);
+        return $this;
+    }
 
-	protected function setId($id)
-	{
-		$this->setAttribute('id', $id);
-	}	
+    public function id($id)
+    {
+        $this->setId($id);
+        return $this;
+    }
 
-	public abstract function render();
+    protected function setId($id)
+    {
+        $this->setAttribute('id', $id);
+    }
 
-	public function __toString()
-	{
-		return $this->render();
-	}
+    abstract public function render();
 
-	protected function renderAttributes()
-	{
-		$result = '';
+    public function __toString()
+    {
+        return $this->render();
+    }
 
-		foreach ($this->attributes as $attribute => $value) {
-			$result .= " {$attribute}=\"$value\"";
-		}
+    protected function renderAttributes()
+    {
+        $result = '';
 
-		return $result;
-	}
+        foreach ($this->attributes as $attribute => $value) {
+            $result .= " {$attribute}=\"$value\"";
+        }
+
+        return $result;
+    }
 }

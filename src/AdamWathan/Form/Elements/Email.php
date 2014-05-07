@@ -2,7 +2,7 @@
 
 class Email extends Text
 {
-	protected $attributes = array(
-		'type' => 'email',
-	);
+    protected $attributes = array(
+        'type' => 'email',
+    );
 }
