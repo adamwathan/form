@@ -236,4 +236,15 @@ class TextTest extends PHPUnit_Framework_TestCase
 		$result = $text->render();
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testMagicClassMethodCallsAddClass()
+	{
+		$text = new Text('email');
+		$text = $text->addClass('error');
+		$text = $text->class('test');
+
+		$expected = '<input type="text" name="email" class="error test">';
+		$result = $text->render();
+		$this->assertEquals($expected, $result);
+	}
 }

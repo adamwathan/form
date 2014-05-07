@@ -91,8 +91,13 @@ abstract class Element
 
     public function __call($method, $params)
     {
-        $params = array_merge(array($method), $params);
-        call_user_func_array(array($this, 'attribute'), $params);
+        if ($method === 'class') {
+            $method = 'addClass';
+        } else {
+            $params = array_merge(array($method), $params);
+            $method = 'attribute';
+        }
+        call_user_func_array(array($this, $method), $params);
         return $this;
     }
 }
