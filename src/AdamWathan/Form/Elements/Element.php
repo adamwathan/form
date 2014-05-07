@@ -88,4 +88,11 @@ abstract class Element
 
         return $result;
     }
+
+    public function __call($method, $params)
+    {
+        $params = array_merge(array($method), $params);
+        call_user_func_array(array($this, 'attribute'), $params);
+        return $this;
+    }
 }

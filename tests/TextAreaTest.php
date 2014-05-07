@@ -122,4 +122,14 @@ class TextAreaTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testCanAddAttributesThroughMagicMethods()
+	{
+		$text = new TextArea('bio');
+		$text = $text->maxlength('5');
+
+		$expected = '<textarea name="bio" rows="10" cols="50" maxlength="5"></textarea>';
+		$result = $text->render();
+		$this->assertEquals($expected, $result);
+	}
 }

@@ -226,4 +226,14 @@ class TextTest extends PHPUnit_Framework_TestCase
 		$result = $text->render();
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testCanAddAttributesThroughMagicMethods()
+	{
+		$text = new Text('email');
+		$text = $text->maxlength('5');
+
+		$expected = '<input type="text" name="email" maxlength="5">';
+		$result = $text->render();
+		$this->assertEquals($expected, $result);
+	}
 }
