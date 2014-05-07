@@ -83,7 +83,7 @@ abstract class Element
         $result = '';
 
         foreach ($this->attributes as $attribute => $value) {
-            $result .= " {$attribute}=\"$value\"";
+            $result .= " {$attribute}=\"{$value}\"";
         }
 
         return $result;
