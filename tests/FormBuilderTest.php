@@ -422,6 +422,24 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testBindUnsetProperty()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="text" name="not_set">';
+		$result = (string)$this->form->text('not_set');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testBindMagicProperty()
+	{
+		$object = new MagicGetter;
+		$this->form->bind($object);
+		$expected = '<input type="text" name="not_set" value="foo">';
+		$result = (string)$this->form->text('not_set');
+		$this->assertEquals($expected, $result);
+	}
+
 	private function getStubObject()
 	{
 		$obj = new stdClass;
@@ -432,5 +450,13 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$obj->gender = 'male';
 		$obj->terms = 'agree';
 		return $obj;
+	}
+}
+
+class MagicGetter
+{
+	public function __get($key)
+	{
+		return 'foo';
 	}
 }

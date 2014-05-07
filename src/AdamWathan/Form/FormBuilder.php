@@ -98,7 +98,7 @@ class FormBuilder
         if (! isset($this->model)) {
             return false;
         }
-        return isset($this->model->{$name});
+        return isset($this->model->{$name}) || method_exists($this->model, '__get');
     }
 
     protected function getModelValue($name)
