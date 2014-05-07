@@ -2,7 +2,7 @@
 
 class File extends Input
 {
-	protected $attributes = array(
-			'type' => 'file',
-		);
+    protected $attributes = array(
+            'type' => 'file',
+        );
 }

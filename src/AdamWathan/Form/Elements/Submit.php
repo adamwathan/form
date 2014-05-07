@@ -2,30 +2,30 @@
 
 class Submit extends FormControl
 {
-	protected $attributes = array(
-			'type' => 'submit',
-		);
+    protected $attributes = array(
+            'type' => 'submit',
+        );
 
-	protected $value;
+    protected $value;
 
-	public function __construct($value)
-	{
-		$this->value = $value;
-	}
+    public function __construct($value)
+    {
+        $this->value = $value;
+    }
 
-	public function render()
-	{
-		$result = '<button';
-		$result .= $this->renderAttributes();
-		$result .= '>';
-		$result .= $this->value;
-		$result .= '</button>';
+    public function render()
+    {
+        $result = '<button';
+        $result .= $this->renderAttributes();
+        $result .= '>';
+        $result .= $this->value;
+        $result .= '</button>';
 
-		return $result;
-	}
+        return $result;
+    }
 
-	public function value($value)
-	{
-		$this->value = $value;
-	}
+    public function value($value)
+    {
+        $this->value = $value;
+    }
 }
