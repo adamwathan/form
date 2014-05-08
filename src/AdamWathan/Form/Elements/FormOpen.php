@@ -5,7 +5,8 @@ class FormOpen extends Element
     protected $attributes = array(
         'method' => 'POST',
         'action' => '',
-        );
+    );
+
     protected $hiddenMethod;
 
     public function render()

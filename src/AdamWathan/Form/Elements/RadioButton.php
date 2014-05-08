@@ -3,8 +3,8 @@
 class RadioButton extends Checkbox
 {
     protected $attributes = array(
-            'type' => 'radio',
-        );
+        'type' => 'radio',
+    );
 
     public function __construct($name, $value = null)
     {

@@ -3,6 +3,6 @@
 class File extends Input
 {
     protected $attributes = array(
-            'type' => 'file',
-        );
+        'type' => 'file',
+    );
 }

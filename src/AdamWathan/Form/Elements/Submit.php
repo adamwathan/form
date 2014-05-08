@@ -3,8 +3,8 @@
 class Submit extends FormControl
 {
     protected $attributes = array(
-            'type' => 'submit',
-        );
+        'type' => 'submit',
+    );
 
     protected $value;
 
