@@ -121,6 +121,10 @@ class FormBuilder
             return null;
         }
 
+        if (! $this->hasError($name)) {
+            return '';
+        }
+
         $message = $this->errorStore->getError($name);
 
         if ($format) {

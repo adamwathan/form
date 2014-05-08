@@ -215,6 +215,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testCanRetrieveErrorMessage()
 	{
 		$errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+		$errorStore->shouldReceive('hasError')->andReturn(true);
 		$errorStore->shouldReceive('getError')->with('email')->andReturn('The e-mail address is invalid.');
 
 		$this->form->setErrorStore($errorStore);
@@ -227,11 +228,24 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testCanRetrieveFormattedErrorMessage()
 	{
 		$errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+		$errorStore->shouldReceive('hasError')->andReturn(true);
 		$errorStore->shouldReceive('getError')->with('email')->andReturn('The e-mail address is invalid.');
 
 		$this->form->setErrorStore($errorStore);
 
 		$expected = '<span class="error">The e-mail address is invalid.</span>';
+		$result = $this->form->getError('email', '<span class="error">:message</span>');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testFormattedErrorMessageReturnsNothingIfNoError()
+	{
+		$errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+		$errorStore->shouldReceive('hasError')->with('email')->andReturn(false);
+
+		$this->form->setErrorStore($errorStore);
+
+		$expected = '';
 		$result = $this->form->getError('email', '<span class="error">:message</span>');
 		$this->assertEquals($expected, $result);
 	}
