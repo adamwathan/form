@@ -3,8 +3,8 @@
 class Text extends Input
 {
     protected $attributes = array(
-            'type' => 'text',
-        );
+        'type' => 'text',
+    );
 
     public function placeholder($placeholder)
     {

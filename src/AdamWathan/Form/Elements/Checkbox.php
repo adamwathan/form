@@ -3,8 +3,8 @@
 class Checkbox extends Input
 {
     protected $attributes = array(
-            'type' => 'checkbox',
-        );
+        'type' => 'checkbox',
+    );
 
     private $checked;
 
