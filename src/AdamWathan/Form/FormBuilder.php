@@ -48,90 +48,59 @@ class FormBuilder
         return '</form>';
     }
 
-    public function bind($model)
-    {
-        $this->model = $model;
-    }
-
     public function text($name)
     {
         $text = new Text($name);
 
-        $value = $this->getValueFor($name);
-
-        if ($value) {
+        if ($value = $this->getValueFor($name)) {
             $text->value($value);
         }
 
         return $text;
     }
 
-    protected function getValueFor($name)
+    public function date($name)
     {
-        if ($this->hasOldInput($name)) {
-            return $this->getOldInput($name);
+        $date = new Date($name);
+
+        if ($value = $this->getValueFor($name)) {
+            $date->value($value);
         }
 
-        if ($this->hasModelValue($name)) {
-            return $this->getModelValue($name);
-        }
-
-        return '';
+        return $date;
     }
 
-    protected function hasOldInput($name)
+    public function email($name)
     {
-        if (! isset($this->oldInput)) {
-            return false;
+        $email = new Email($name);
+
+        if ($value = $this->getValueFor($name)) {
+            $email->value($value);
         }
 
-        return $this->oldInput->hasOldInput($name);
+        return $email;
     }
 
-    protected function getOldInput($name)
+    public function hidden($name)
     {
-        return $this->oldInput->getOldInput($name);
+        $hidden = new Hidden($name);
+
+        if ($value = $this->getValueFor($name)) {
+            $hidden->value($value);
+        }
+
+        return $hidden;
     }
 
-    protected function hasModelValue($name)
+    public function textarea($name)
     {
-        if (! isset($this->model)) {
-            return false;
-        }
-        return isset($this->model->{$name}) || method_exists($this->model, '__get');
-    }
+        $textarea = new TextArea($name);
 
-    protected function getModelValue($name)
-    {
-        return $this->model->{$name};
-    }
-
-    public function hasError($name)
-    {
-        if (! isset($this->errorStore)) {
-            return false;
+        if ($value = $this->getValueFor($name)) {
+            $textarea->value($value);
         }
 
-        return $this->errorStore->hasError($name);
-    }
-
-    public function getError($name, $format = null)
-    {
-        if (! isset($this->errorStore)) {
-            return null;
-        }
-
-        if (! $this->hasError($name)) {
-            return '';
-        }
-
-        $message = $this->errorStore->getError($name);
-
-        if ($format) {
-            $message = str_replace(':message', $message, $format);
-        }
-
-        return $message;
+        return $textarea;
     }
 
     public function password($name)
@@ -182,54 +151,14 @@ class FormBuilder
         return $select;
     }
 
-    public function textarea($name)
-    {
-        $textarea = new TextArea($name);
-
-        $value = $this->getValueFor($name);
-
-        if ($value) {
-            $textarea->value($value);
-        }
-
-        return $textarea;
-    }
-
     public function label($label)
     {
         return new Label($label);
     }
 
-    public function hidden($name)
-    {
-        $hidden = new Hidden($name);
-        if ($value = $this->getValueFor($name)) {
-            $hidden->value($value);
-        }
-        return $hidden;
-    }
-
     public function file($name)
     {
         return new File($name);
-    }
-
-    public function date($name)
-    {
-        $date = new Date($name);
-        if ($value = $this->getValueFor($name)) {
-            $date->value($value);
-        }
-        return $date;
-    }
-
-    public function email($name)
-    {
-        $email = new Email($name);
-        if ($value = $this->getValueFor($name)) {
-            $email->value($value);
-        }
-        return $email;
     }
 
     public function token()
@@ -241,6 +170,79 @@ class FormBuilder
         }
 
         return $token;
+    }
+
+    public function hasError($name)
+    {
+        if (! isset($this->errorStore)) {
+            return false;
+        }
+
+        return $this->errorStore->hasError($name);
+    }
+
+    public function getError($name, $format = null)
+    {
+        if (! isset($this->errorStore)) {
+            return null;
+        }
+
+        if (! $this->hasError($name)) {
+            return '';
+        }
+
+        $message = $this->errorStore->getError($name);
+
+        if ($format) {
+            $message = str_replace(':message', $message, $format);
+        }
+
+        return $message;
+    }
+
+    public function bind($model)
+    {
+        $this->model = $model;
+    }
+
+    protected function getValueFor($name)
+    {
+        if ($this->hasOldInput($name)) {
+            return $this->getOldInput($name);
+        }
+
+        if ($this->hasModelValue($name)) {
+            return $this->getModelValue($name);
+        }
+
+        return '';
+    }
+
+    protected function hasOldInput($name)
+    {
+        if (! isset($this->oldInput)) {
+            return false;
+        }
+
+        return $this->oldInput->hasOldInput($name);
+    }
+
+    protected function getOldInput($name)
+    {
+        return $this->oldInput->getOldInput($name);
+    }
+
+    protected function hasModelValue($name)
+    {
+        if (! isset($this->model)) {
+            return false;
+        }
+        return isset($this->model->{$name}) || method_exists($this->model, '__get');
+    }
+
+    protected function getModelValue($name)
+    {
+        return $this->model->{$name};
     }
 
     public function selectMonth($name)
@@ -258,7 +260,7 @@ class FormBuilder
             "10" => "October",
             "11" => "November",
             "12" => "December",
-            );
+        );
 
         return $this->select($name, $options);
     }
