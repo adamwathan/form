@@ -4,6 +4,7 @@ class Label extends Element
 {
     private $element;
     private $labelBefore;
+    private $label;
 
     public function __construct($label)
     {
