@@ -4,6 +4,7 @@ use AdamWathan\Form\Elements\Text;
 use AdamWathan\Form\Elements\Password;
 use AdamWathan\Form\Elements\Checkbox;
 use AdamWathan\Form\Elements\RadioButton;
+use AdamWathan\Form\Elements\Button;
 use AdamWathan\Form\Elements\Submit;
 use AdamWathan\Form\Elements\Select;
 use AdamWathan\Form\Elements\TextArea;
@@ -134,6 +135,11 @@ class FormBuilder
         }
 
         return $radio;
+    }
+
+    public function button($value, $name)
+    {
+        return new Button($value, $name);
     }
 
     public function submit($value = 'Submit')
