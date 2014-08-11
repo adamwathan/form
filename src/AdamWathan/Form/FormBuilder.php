@@ -5,7 +5,6 @@ use AdamWathan\Form\Elements\Password;
 use AdamWathan\Form\Elements\Checkbox;
 use AdamWathan\Form\Elements\RadioButton;
 use AdamWathan\Form\Elements\Button;
-use AdamWathan\Form\Elements\Submit;
 use AdamWathan\Form\Elements\Select;
 use AdamWathan\Form\Elements\TextArea;
 use AdamWathan\Form\Elements\Label;
@@ -144,7 +143,10 @@ class FormBuilder
 
     public function submit($value = 'Submit')
     {
-        return new Submit($value);
+        $submit = new Button($value);
+        $submit->attribute('type', 'submit');
+
+        return $submit;
     }
 
     public function select($name, $options = array())
