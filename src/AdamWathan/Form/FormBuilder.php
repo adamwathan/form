@@ -136,7 +136,7 @@ class FormBuilder
         return $radio;
     }
 
-    public function button($value, $name)
+    public function button($value, $name = null)
     {
         return new Button($value, $name);
     }
