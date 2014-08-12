@@ -18,7 +18,7 @@ You can install this package via Composer by including the following in your `co
 ```json
 {
     "require": {
-        "adamwathan/form": "0.2"
+        "adamwathan/form": "~0.3"
     }
 }
 ```
