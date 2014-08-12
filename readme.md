@@ -46,9 +46,10 @@ To do so, just update the `providers` array in your `app/config/app.php`:
 - [Textareas](#textareas)
 - [Checkboxes and Radio Buttons](#checkboxes-and-radio-buttons)
 - [Selects](#selects)
-- [Submit Buttons](#submit-buttons)
+- [Buttons](#buttons)
 - [Hidden Inputs](#hidden-inputs)
 - [Labels](#labels)
+- [Setting Attributes](#setting-attributes)
 
 <a href="#getting-started"></a>
 ### Getting Started
@@ -211,10 +212,13 @@ $builder->select('birth_year')->addOption('1', 1990);
 $builder->select('birth_year', ['1' => 1990, '2' => 1991, '3' => 1992])->select('3');
 ```
 
-<a href="#submit-buttons"></a>
-### Submit Buttons
+<a href="#buttons"></a>
+### Buttons
 
 ```php
+// <button type="button">Click Me</button>
+$builder->button('Click Me');
+
 // <button type="submit">Sign Up</button>
 $builder->submit('Sign Up');
 
@@ -249,6 +253,23 @@ $builder->label('Email')->before($emailElement);
 
 // <label><input type="text" name="email">Email</label>
 $builder->label('Email')->after($emailElement);
+```
+
+<a href="#setting-attributes"></a>
+### Setting Attributes
+
+```php
+// Attributes can be set with attribute(...)
+// <input type="text" name="foobar" min="4">
+$builder->text('foobar')->attribute('min', 4);
+
+// Or by calling the attribute name as a method
+// <input type="text" name="foobar" min="4">
+$builder->text('foobar')->min(4);
+
+// Setting data-* attributes
+// <input type="text" data-foo="bar" name="foobar">
+$builder->text('foobar')->data('foo', 'bar');
 ```
 
 <a href="#remembering-old-input"></a>
