@@ -84,11 +84,21 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
-	public function testButton()
+	/**
+	 * @dataProvider buttonProvider
+	 */
+	public function testButton($value, $name, $expected)
 	{
-		$expected = '<button type="button" name="click-me">Click Me</button>';
-		$result = (string)$this->form->button('Click Me', 'click-me');
+		$result = (string)$this->form->button($value, $name);
 		$this->assertEquals($expected, $result);
+	}
+
+	public function buttonProvider()
+	{
+		return array(
+			array('Click Me', 'click-me', '<button type="button" name="click-me">Click Me</button>'),
+			array('Click Me', null, '<button type="button">Click Me</button>')
+		);
 	}
 
 	public function testSelect()
