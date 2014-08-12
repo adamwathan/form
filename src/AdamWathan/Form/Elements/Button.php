@@ -1,16 +1,17 @@
 <?php namespace AdamWathan\Form\Elements;
 
-class Submit extends FormControl
+class Button extends FormControl
 {
     protected $attributes = array(
-        'type' => 'submit',
+        'type' => 'button',
     );
 
     protected $value;
 
-    public function __construct($value)
+    public function __construct($value, $name = null)
     {
-        $this->value = $value;
+        parent::__construct($name);
+        $this->value($value);
     }
 
     public function render()
