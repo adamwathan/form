@@ -210,7 +210,7 @@ class FormBuilder
 
     public function bind($model)
     {
-        $this->model = $model;
+        $this->model = is_array($model) ? (object) $model : $model;
     }
 
     protected function getValueFor($name)
