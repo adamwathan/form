@@ -469,7 +469,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function testBindArray()
 	{
-		$model = ['first_name' => 'John'];
+		$model = array('first_name' => 'John');
 		$this->form->bind($model);
 		$expected = '<input type="text" name="first_name" value="John">';
 		$result = (string)$this->form->text('first_name');
