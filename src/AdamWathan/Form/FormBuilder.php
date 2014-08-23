@@ -45,6 +45,7 @@ class FormBuilder
 
     public function close()
     {
+        $this->unbindModel();
         return '</form>';
     }
 
@@ -251,6 +252,11 @@ class FormBuilder
     protected function getModelValue($name)
     {
         return $this->model->{$name};
+    }
+
+    protected function unbindModel()
+    {
+        $this->model = null;
     }
 
     public function selectMonth($name)

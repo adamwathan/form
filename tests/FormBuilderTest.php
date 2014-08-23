@@ -476,6 +476,16 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testCloseUnbindsModel()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$this->form->close();
+		$expected = '<input type="text" name="first_name">';
+		$result = (string)$this->form->text('first_name');
+		$this->assertEquals($expected, $result);
+	}
+
 	private function getStubObject()
 	{
 		$obj = new stdClass;
