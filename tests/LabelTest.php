@@ -75,4 +75,23 @@ class LabelTest extends PHPUnit_Framework_TestCase
 		$result = $label->after($element)->getControl();
 		$this->assertEquals($element, $result);
 	}
+
+	public function testEmptyLabelDoesNotRender()
+        {
+                $label = new Label(NULL);
+                $expected = '';
+                $result = $label->render();
+                $this->assertEquals($expected, $result);
+        }
+
+        public function testEmptyLabelDoesNotWrap()
+        {
+                $element = Mockery::mock('AdamWathan\Form\Elements\Element');
+                $element->shouldReceive('render')->once()->andReturn('<input>');
+                $label = new Label(NULL);
+                $expected = '<input>';
+
+                $result = $label->before($element)->render();
+                $this->assertEquals($expected, $result);
+        }
 }
