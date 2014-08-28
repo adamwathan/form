@@ -13,6 +13,10 @@ class Label extends Element
 
     public function render()
     {
+        if ($this->label === NULL) {
+            return $this->renderElement();
+        }
+
         $result = '<label';
         $result .= $this->renderAttributes();
         $result .= '>';
