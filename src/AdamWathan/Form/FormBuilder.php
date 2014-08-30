@@ -251,7 +251,15 @@ class FormBuilder
 
     protected function getModelValue($name)
     {
-        return $this->model->{$name};
+        return $this->escapeQuotes($this->model->{$name});
+    }
+
+    protected function escapeQuotes($value)
+    {
+        if (!is_string($value)) {
+            return $value;
+        }
+        return str_replace('"', '&quot;', $value);
     }
 
     protected function unbindModel()

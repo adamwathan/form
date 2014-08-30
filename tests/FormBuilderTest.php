@@ -486,6 +486,16 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testAgainstXSSAttacksInBoundModels()
+	{
+		$object = $this->getStubObject();
+		$object->first_name = '" onmouseover="alert(\'xss\')';
+		$this->form->bind($object);
+		$expected = '<input type="text" name="first_name" value="&quot; onmouseover=&quot;alert(\'xss\')">';
+		$result = (string)$this->form->text('first_name');
+		$this->assertEquals($expected, $result);
+	}
+
 	private function getStubObject()
 	{
 		$obj = new stdClass;
