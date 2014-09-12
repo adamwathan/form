@@ -137,13 +137,13 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderTextWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInput')->with('email')->andReturn(true);
-		$oldInput->shouldReceive('getOldInput')->with('email')->andReturn('example@example.com');
+		$oldInput->shouldReceive('hasOldInput')->with('title')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('title')->andReturn('Hello "quotes"');
 
 		$this->form->setOldInputProvider($oldInput);
 
-		$expected = '<input type="text" name="email" value="example@example.com">';
-		$result = (string)$this->form->text('email');
+		$expected = '<input type="text" name="title" value="Hello &quot;quotes&quot;">';
+		$result = (string)$this->form->text('title');
 		$this->assertEquals($expected, $result);
 	}
 
