@@ -238,7 +238,7 @@ class FormBuilder
 
     protected function getOldInput($name)
     {
-        return $this->oldInput->getOldInput($name);
+        return $this->escapeQuotes($this->oldInput->getOldInput($name));
     }
 
     protected function hasModelValue($name)
