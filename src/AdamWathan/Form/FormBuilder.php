@@ -53,7 +53,7 @@ class FormBuilder
     {
         $text = new Text($name);
 
-        if ($value = $this->getValueFor($name)) {
+        if (!is_null($value = $this->getValueFor($name))) {
             $text->value($value);
         }
 
@@ -64,7 +64,7 @@ class FormBuilder
     {
         $date = new Date($name);
 
-        if ($value = $this->getValueFor($name)) {
+        if (!is_null($value = $this->getValueFor($name))) {
             $date->value($value);
         }
 
@@ -75,7 +75,7 @@ class FormBuilder
     {
         $email = new Email($name);
 
-        if ($value = $this->getValueFor($name)) {
+        if (!is_null($value = $this->getValueFor($name))) {
             $email->value($value);
         }
 
@@ -86,7 +86,7 @@ class FormBuilder
     {
         $hidden = new Hidden($name);
 
-        if ($value = $this->getValueFor($name)) {
+        if (!is_null($value = $this->getValueFor($name))) {
             $hidden->value($value);
         }
 
@@ -97,7 +97,7 @@ class FormBuilder
     {
         $textarea = new TextArea($name);
 
-        if ($value = $this->getValueFor($name)) {
+        if (!is_null($value = $this->getValueFor($name))) {
             $textarea->value($value);
         }
 
@@ -224,7 +224,7 @@ class FormBuilder
             return $this->getModelValue($name);
         }
 
-        return '';
+        return null;
     }
 
     protected function hasOldInput($name)
