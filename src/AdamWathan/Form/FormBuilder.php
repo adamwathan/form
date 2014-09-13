@@ -227,6 +227,11 @@ class FormBuilder
         return '';
     }
 
+    protected function hasOldInputs()
+    {
+        return $this->oldInput->hasOldInputs();
+    }
+
     protected function hasOldInput($name)
     {
         if (! isset($this->oldInput)) {
