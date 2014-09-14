@@ -137,7 +137,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderTextWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInputs')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('title')->andReturn('Hello "quotes"');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -150,7 +150,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderCheckboxWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInputs')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('terms')->andReturn('agree');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -163,7 +163,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderRadioWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInputs')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('color')->andReturn('green');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -176,7 +176,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderSelectWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInputs')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('color')->andReturn('blue');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -189,7 +189,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderTextAreaWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInputs')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('bio')->andReturn('This is my bio');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -310,7 +310,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderDateWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInputs')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('date_of_birth')->andReturn('1999-04-06');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -323,7 +323,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderEmailWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInputs')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('email')->andReturn('example@example.com');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -336,7 +336,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderHiddenWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInputs')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('secret')->andReturn('my-secret-string');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -420,7 +420,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testOldInputTakesPrecedenceOverBinding()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInputs')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('first_name')->andReturn('Steve');
 		$this->form->setOldInputProvider($oldInput);
 
