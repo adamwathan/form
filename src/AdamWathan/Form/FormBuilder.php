@@ -216,7 +216,7 @@ class FormBuilder
 
     protected function getValueFor($name)
     {
-        if ($this->hasOldInput($name)) {
+        if ($this->hasOldInput()) {
             return $this->getOldInput($name);
         }
 
@@ -227,13 +227,13 @@ class FormBuilder
         return '';
     }
 
-    protected function hasOldInput($name)
+    protected function hasOldInput()
     {
         if (! isset($this->oldInput)) {
             return false;
         }
 
-        return $this->oldInput->hasOldInput($name);
+        return $this->oldInput->hasOldInput();
     }
 
     protected function getOldInput($name)
