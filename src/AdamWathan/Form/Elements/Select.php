@@ -43,10 +43,6 @@ class Select extends FormControl
     {
         $result = '';
 
-        if (! $this->optionValuesAreSet()) {
-            return $this->renderOptionsWithoutValues();
-        }
-
         foreach ($this->options as $value => $label) {
             if (is_array($label)) {
                 $result .= $this->renderOptGroup($value, $label);
@@ -82,47 +78,6 @@ class Select extends FormControl
     protected function isSelected($value)
     {
         return isset($this->selected) ? $this->selected == $value : false;
-    }
-
-    protected function optionValuesAreSet($options = null)
-    {
-        if (! $options) {
-            $options = $this->options;
-        }
-        $count = 0;
-        $keysSet = false;
-        foreach ($options as $value => $label) {
-            if (is_array($suboptions = $label)) {
-                $keysSet = $this->optionValuesAreSet($suboptions) ? true : $keysSet;
-            } elseif ($value !== $count) {
-                $keysSet = true;
-                break;
-            }
-            $count++;
-        }
-
-        return $keysSet;
-    }
-
-    protected function renderOptionsWithoutValues()
-    {
-        $result = '';
-
-        foreach ($this->options as $value => $label) {
-            if (is_array($label)) {
-                $result .= $this->renderOptGroupWithoutValues($value, $label);
-                continue;
-            }
-            $result .= $this->renderOption($label, $label);
-        }
-
-        return $result;
-    }
-
-    protected function renderOptGroupWithoutValues($label, $options)
-    {
-        $options = array_combine($options, $options);
-        return $this->renderOptGroup($label, $options);
     }
 
     public function addOption($value, $label)

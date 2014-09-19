@@ -25,13 +25,13 @@ class SelectTest extends PHPUnit_Framework_TestCase
 	public function testSelectCanBeCreatedWithOptions()
 	{
 		$select = new Select('birth_year', array(1990, 1991, 1992));
-		$expected = '<select name="birth_year"><option value="1990">1990</option><option value="1991">1991</option><option value="1992">1992</option></select>';
+		$expected = '<select name="birth_year"><option value="0">1990</option><option value="1">1991</option><option value="2">1992</option></select>';
 		$result = $select->render();
 
 		$this->assertEquals($expected, $result);
-		
+
 		$select = new Select('birth_year', array(2001, 2002, 2003));
-		$expected = '<select name="birth_year"><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option></select>';
+		$expected = '<select name="birth_year"><option value="0">2001</option><option value="1">2002</option><option value="2">2003</option></select>';
 		$result = $select->render();
 
 		$this->assertEquals($expected, $result);
@@ -44,7 +44,7 @@ class SelectTest extends PHPUnit_Framework_TestCase
 		$result = $select->render();
 
 		$this->assertEquals($expected, $result);
-		
+
 		$select = new Select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
 		$expected = '<select name="fruit"><option value="apple">Granny Smith</option><option value="berry">Blueberry</option></select>';
 		$result = $select->render();
@@ -59,8 +59,8 @@ class SelectTest extends PHPUnit_Framework_TestCase
 		$expected = '<select name="color"><option value="red">Red</option><option value="blue">Blue</option></select>';
 		$result = $select->render();
 
-		$this->assertEquals($expected, $result);	
-		
+		$this->assertEquals($expected, $result);
+
 		$select = new Select('fruit', array('apple' => 'Granny Smith'));
 		$select->addOption('berry', 'Blueberry');
 		$expected = '<select name="fruit"><option value="apple">Granny Smith</option><option value="berry">Blueberry</option></select>';
@@ -76,8 +76,8 @@ class SelectTest extends PHPUnit_Framework_TestCase
 		$expected = '<select name="color"><option value="red">Red</option><option value="blue">Blue</option></select>';
 		$result = $select->render();
 
-		$this->assertEquals($expected, $result);	
-		
+		$this->assertEquals($expected, $result);
+
 		$select = new Select('fruit');
 		$select->options(array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
 		$expected = '<select name="fruit"><option value="apple">Granny Smith</option><option value="berry">Blueberry</option></select>';
@@ -93,8 +93,8 @@ class SelectTest extends PHPUnit_Framework_TestCase
 		$expected = '<select name="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
 		$result = $select->select('blue')->render();
 
-		$this->assertEquals($expected, $result);	
-		
+		$this->assertEquals($expected, $result);
+
 		$select = new Select('fruit');
 		$select->options(array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
 		$expected = '<select name="fruit"><option value="apple" selected>Granny Smith</option><option value="berry">Blueberry</option></select>';
@@ -110,19 +110,19 @@ class SelectTest extends PHPUnit_Framework_TestCase
 		$result = $select->defaultValue('blue')->render();
 
 		$this->assertEquals($expected, $result);
-		
+
 		$select = new Select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
 		$expected = '<select name="fruit"><option value="apple" selected>Granny Smith</option><option value="berry">Blueberry</option></select>';
 		$result = $select->defaultValue('apple')->render();
 
 		$this->assertEquals($expected, $result);
-		
+
 		$select = new Select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
 		$expected = '<select name="fruit"><option value="apple">Granny Smith</option><option value="berry" selected>Blueberry</option></select>';
 		$result = $select->select('berry')->defaultValue('apple')->render();
 
 		$this->assertEquals($expected, $result);
-		
+
 		$select = new Select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
 		$expected = '<select name="fruit"><option value="apple">Granny Smith</option><option value="berry" selected>Blueberry</option></select>';
 		$result = $select->defaultValue('apple')->select('berry')->render();
@@ -162,7 +162,7 @@ class SelectTest extends PHPUnit_Framework_TestCase
 				),
 			);
 		$select = new Select('color', $options);
-		$expected = '<select name="color"><optgroup label="Ontario"><option value="Toronto">Toronto</option><option value="London">London</option></optgroup><optgroup label="Quebec"><option value="Montreal">Montreal</option><option value="Quebec City">Quebec City</option></optgroup></select>';
+		$expected = '<select name="color"><optgroup label="Ontario"><option value="0">Toronto</option><option value="1">London</option></optgroup><optgroup label="Quebec"><option value="0">Montreal</option><option value="1">Quebec City</option></optgroup></select>';
 		$result = $select->render();
 
 		$this->assertEquals($expected, $result);
