@@ -164,18 +164,18 @@ $builder->radio('color', 'red');
 $builder->select('birth_year');
 
 // <select name="birth_year">
-//   <option value="1990">1990</option>
-//   <option value="1991">1991</option>
-//   <option value="1992">1992</option>
+//   <option value="0">1990</option>
+//   <option value="1">1991</option>
+//   <option value="2">1992</option>
 // </select>
 $builder->select('birth_year', [1990, 1991, 1992]);
 
 // <select name="birth_year">
-//   <option value="1">1990</option>
-//   <option value="2">1991</option>
-//   <option value="3">1992</option>
+//   <option value="1990">1990</option>
+//   <option value="1991">1991</option>
+//   <option value="1992">1992</option>
 // </select>
-$builder->select('birth_year', ['1' => 1990, '2' => 1991, '3' => 1992]);
+$builder->select('birth_year', ['1990' => 1990, '1991' => 1991, '1992' => 1992]);
 
 // <select name="birth_year">
 //   <optgroup label="Ontario">
