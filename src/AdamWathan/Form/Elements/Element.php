@@ -1,7 +1,11 @@
 <?php namespace AdamWathan\Form\Elements;
 
+use AdamWathan\Form\OldInput\OldInputInterface;
+
 abstract class Element
 {
+    protected $oldInput;
+
     protected $attributes = array();
 
     protected function setAttribute($attribute, $value = null)
@@ -94,5 +98,46 @@ abstract class Element
         $params = array_merge(array($method), $params);
         call_user_func_array(array($this, 'attribute'), $params);
         return $this;
+    }
+
+
+    public function setOldInputProvider(OldInputInterface $oldInputProvider)
+    {
+        $this->oldInput = $oldInputProvider;
+    }
+
+    protected function getOldInput($name)
+    {
+        return $this->escapeQuotes($this->oldInput->getOldInput($name));
+    }
+
+    protected function escapeQuotes($value)
+    {
+        if (!is_string($value)) {
+            return $value;
+        }
+        return str_replace('"', '&quot;', $value);
+    }
+
+    protected function getValueFor($name)
+    {
+        if ($this->hasOldInput()) {
+            return $this->getOldInput($name);
+        }
+
+        if ($this->hasModelValue($name)) {
+            return $this->getModelValue($name);
+        }
+
+        return null;
+    }
+
+    protected function hasOldInput()
+    {
+        if (! isset($this->oldInput)) {
+            return false;
+        }
+
+        return $this->oldInput->hasOldInput();
     }
 }

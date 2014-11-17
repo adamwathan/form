@@ -59,4 +59,24 @@ class Checkbox extends Input
             $this->setAttribute('checked', 'checked');
         }
     }
+    
+    public function value($value)
+    {
+        $this->setValue($value);
+
+        $this->checkForOldInput($value);
+
+        return $this;
+    }
+
+    public function checkForOldInput($value)
+    {
+        if (
+            $this->oldInput &&
+            $this->hasOldInput($this->attributes['name']) &&
+            in_array($value, $this->getValueFor($this->attributes['name']))
+        ) {
+            $this->setAttribute('checked', 'checked');
+        }
+    }
 }
