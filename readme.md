@@ -353,3 +353,5 @@ $builder->close();
 > This will work out of the box with Laravel's Eloquent models.
 
 When using model binding, old input will still take priority over any values on your model, so you can still easily redirect the user back to the form with any validation errors without losing any of the data they entered.
+
+Warning, bind method must be called before elements initializations.
