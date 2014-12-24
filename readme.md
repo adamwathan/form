@@ -13,16 +13,11 @@ Boring name for a boring package. Builds form HTML with a fluent-ish, hopefully 
 <a href="#installation"></a>
 ## Installation
 
-You can install this package via Composer by including the following in your `composer.json`:
+You can install this package via Composer by running this command in your terminal in the root of your project:
 
-```json
-{
-    "require": {
-        "adamwathan/form": "~0.3"
-    }
-}
+```bash
+composer require adamwathan/form
 ```
-*Note: you could also require `dev-master` to test the latest version, but make sure you drop your `minimum-stability` to `dev`.*
 
 ### Laravel 4
 
