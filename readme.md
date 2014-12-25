@@ -1,6 +1,8 @@
 Form
 ========
 
+[![Code Climate](https://codeclimate.com/github/adamwathan/form/badges/gpa.svg)](https://codeclimate.com/github/adamwathan/form)
+
 Boring name for a boring package. Builds form HTML with a fluent-ish, hopefully intuitive syntax.
 
 - [Installation](#installation)
