@@ -82,10 +82,23 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$expected = '<button type="submit">Sign In</button>';
 		$result = (string)$this->form->submit('Sign In');
 		$this->assertEquals($expected, $result);
+	}
 
-		$expected = '<button type="submit">Log In</button>';
-		$result = (string)$this->form->submit('Log In');
+	/**
+	 * @dataProvider buttonProvider
+	 */
+	public function testButton($value, $name, $expected)
+	{
+		$result = (string)$this->form->button($value, $name);
 		$this->assertEquals($expected, $result);
+	}
+
+	public function buttonProvider()
+	{
+		return array(
+			array('Click Me', 'click-me', '<button type="button" name="click-me">Click Me</button>'),
+			array('Click Me', null, '<button type="button">Click Me</button>')
+		);
 	}
 
 	public function testSelect()
@@ -124,20 +137,20 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderTextWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInput')->with('email')->andReturn(true);
-		$oldInput->shouldReceive('getOldInput')->with('email')->andReturn('example@example.com');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('title')->andReturn('Hello "quotes"');
 
 		$this->form->setOldInputProvider($oldInput);
 
-		$expected = '<input type="text" name="email" value="example@example.com">';
-		$result = (string)$this->form->text('email');
+		$expected = '<input type="text" name="title" value="Hello &quot;quotes&quot;">';
+		$result = (string)$this->form->text('title');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testRenderCheckboxWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInput')->with('terms')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('terms')->andReturn('agree');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -150,7 +163,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderRadioWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInput')->with('color')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('color')->andReturn('green');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -163,7 +176,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderSelectWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInput')->with('color')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('color')->andReturn('blue');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -176,7 +189,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderTextAreaWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInput')->with('bio')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('bio')->andReturn('This is my bio');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -297,7 +310,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderDateWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInput')->with('date_of_birth')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('date_of_birth')->andReturn('1999-04-06');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -310,7 +323,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderEmailWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInput')->with('email')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('email')->andReturn('example@example.com');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -323,7 +336,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testRenderHiddenWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInput')->with('secret')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('secret')->andReturn('my-secret-string');
 
 		$this->form->setOldInputProvider($oldInput);
@@ -377,6 +390,15 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testBindTextWithIntegerZero()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="text" name="number" value="0">';
+		$result = (string)$this->form->text('number');
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testBindDate()
 	{
 		$object = $this->getStubObject();
@@ -407,7 +429,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testOldInputTakesPrecedenceOverBinding()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
-		$oldInput->shouldReceive('hasOldInput')->with('first_name')->andReturn(true);
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
 		$oldInput->shouldReceive('getOldInput')->with('first_name')->andReturn('Steve');
 		$this->form->setOldInputProvider($oldInput);
 
@@ -454,6 +476,35 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testBindArray()
+	{
+		$model = array('first_name' => 'John');
+		$this->form->bind($model);
+		$expected = '<input type="text" name="first_name" value="John">';
+		$result = (string)$this->form->text('first_name');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testCloseUnbindsModel()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$this->form->close();
+		$expected = '<input type="text" name="first_name">';
+		$result = (string)$this->form->text('first_name');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testAgainstXSSAttacksInBoundModels()
+	{
+		$object = $this->getStubObject();
+		$object->first_name = '" onmouseover="alert(\'xss\')';
+		$this->form->bind($object);
+		$expected = '<input type="text" name="first_name" value="&quot; onmouseover=&quot;alert(\'xss\')">';
+		$result = (string)$this->form->text('first_name');
+		$this->assertEquals($expected, $result);
+	}
+
 	private function getStubObject()
 	{
 		$obj = new stdClass;
@@ -463,6 +514,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$obj->date_of_birth = new \DateTime('1985-05-06');
 		$obj->gender = 'male';
 		$obj->terms = 'agree';
+		$obj->number = '0';
 		return $obj;
 	}
 }

@@ -1,6 +1,8 @@
 Form
 ========
 
+[![Code Climate](https://codeclimate.com/github/adamwathan/form/badges/gpa.svg)](https://codeclimate.com/github/adamwathan/form)
+
 Boring name for a boring package. Builds form HTML with a fluent-ish, hopefully intuitive syntax.
 
 - [Installation](#installation)
@@ -13,16 +15,11 @@ Boring name for a boring package. Builds form HTML with a fluent-ish, hopefully 
 <a href="#installation"></a>
 ## Installation
 
-You can install this package via Composer by including the following in your `composer.json`:
+You can install this package via Composer by running this command in your terminal in the root of your project:
 
-```json
-{
-    "require": {
-        "adamwathan/form": "0.2"
-    }
-}
+```bash
+composer require adamwathan/form
 ```
-*Note: you could also require `dev-master` to test the latest version, but make sure you drop your `minimum-stability` to `dev`.*
 
 ### Laravel 4
 
@@ -46,9 +43,10 @@ To do so, just update the `providers` array in your `app/config/app.php`:
 - [Textareas](#textareas)
 - [Checkboxes and Radio Buttons](#checkboxes-and-radio-buttons)
 - [Selects](#selects)
-- [Submit Buttons](#submit-buttons)
+- [Buttons](#buttons)
 - [Hidden Inputs](#hidden-inputs)
 - [Labels](#labels)
+- [Setting Attributes](#setting-attributes)
 
 <a href="#getting-started"></a>
 ### Getting Started
@@ -163,18 +161,18 @@ $builder->radio('color', 'red');
 $builder->select('birth_year');
 
 // <select name="birth_year">
-//   <option value="1990">1990</option>
-//   <option value="1991">1991</option>
-//   <option value="1992">1992</option>
+//   <option value="0">1990</option>
+//   <option value="1">1991</option>
+//   <option value="2">1992</option>
 // </select>
 $builder->select('birth_year', [1990, 1991, 1992]);
 
 // <select name="birth_year">
-//   <option value="1">1990</option>
-//   <option value="2">1991</option>
-//   <option value="3">1992</option>
+//   <option value="1990">1990</option>
+//   <option value="1991">1991</option>
+//   <option value="1992">1992</option>
 // </select>
-$builder->select('birth_year', ['1' => 1990, '2' => 1991, '3' => 1992]);
+$builder->select('birth_year', ['1990' => 1990, '1991' => 1991, '1992' => 1992]);
 
 // <select name="birth_year">
 //   <optgroup label="Ontario">
@@ -211,10 +209,13 @@ $builder->select('birth_year')->addOption('1', 1990);
 $builder->select('birth_year', ['1' => 1990, '2' => 1991, '3' => 1992])->select('3');
 ```
 
-<a href="#submit-buttons"></a>
-### Submit Buttons
+<a href="#buttons"></a>
+### Buttons
 
 ```php
+// <button type="button">Click Me</button>
+$builder->button('Click Me');
+
 // <button type="submit">Sign Up</button>
 $builder->submit('Sign Up');
 
@@ -249,6 +250,23 @@ $builder->label('Email')->before($emailElement);
 
 // <label><input type="text" name="email">Email</label>
 $builder->label('Email')->after($emailElement);
+```
+
+<a href="#setting-attributes"></a>
+### Setting Attributes
+
+```php
+// Attributes can be set with attribute(...)
+// <input type="text" name="foobar" min="4">
+$builder->text('foobar')->attribute('min', 4);
+
+// Or by calling the attribute name as a method
+// <input type="text" name="foobar" min="4">
+$builder->text('foobar')->min(4);
+
+// Setting data-* attributes
+// <input type="text" data-foo="bar" name="foobar">
+$builder->text('foobar')->data('foo', 'bar');
 ```
 
 <a href="#remembering-old-input"></a>
