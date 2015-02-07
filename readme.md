@@ -21,18 +21,31 @@ You can install this package via Composer by running this command in your termin
 composer require adamwathan/form
 ```
 
-### Laravel 4
+### Laravel
 
-If you are using Laravel 4, you can also register the FormServiceProvider to automatically gain access to the Old Input and Error Message functionality.
+> This package works great as a replacement Form Builder that was removed in Laravel 5. The API is different but all of the features are there. 
 
-To do so, just update the `providers` array in your `app/config/app.php`:
+If you are using Laravel 4 or 5, you can register the FormServiceProvider to automatically gain access to the Old Input and Error Message functionality.
+
+To do so, just update the `providers` array in your `config/app.php`:
 
 ```php
-'providers' => array(
+'providers' => [
         //...
         'AdamWathan\Form\FormServiceProvider'
-    ),
+    ],
 ```
+
+You can also choose to use the Facade by adding an alias in `config/app.php`:
+
+```php
+'aliases' => [
+        //...
+        'Form' => 'AdamWathan\Form\Facades\Form',
+    ],
+```
+
+> Note that in Laravel 4, there is already a Form facade for the built-in Form Builder. If you want to use both, use a different alias. If you'd just like to use this one, remove the Form alias that points to the Illuminate component.
 
 <a href="#basic-usage"></a>
 ## Basic Usage
@@ -284,7 +297,7 @@ Now, your form elements will automatically populate with the user's old input da
 
 This works well with the `defaultValue()` methods, allowing you to set a default value that will be overridden by old input if the user has already submitted the form.
 
-> This package ships with a Laravel 4 implementation out of the box, called `IlluminateOldInput`.
+> This package ships with a Laravel implementation out of the box, called `IlluminateOldInput`.
 
 <a href="#error-messages"></a>
 ## Error Messages
@@ -295,7 +308,7 @@ FormBuilder also allows you to easily retrieve error messages for your form elem
 $builder->setErrorStore($myErrorStore);
 ```
 
-> This package ships with a Laravel 4 implementation out of the box, called `IlluminateErrorStore`.
+> This package ships with a Laravel implementation out of the box, called `IlluminateErrorStore`.
 
 ```php
 // Check if the form has an error for an element
@@ -321,7 +334,7 @@ You can also supply a `format` parameter to `getError()` to cleanup your markup.
 <a href="#csrf-tokens"></a>
 ## CSRF Protection
 
-Assuming you set a CSRF token when instantiating the Formbuilder (or you are using Laravel 4), add a CSRF token to your form easily like so:
+Assuming you set a CSRF token when instantiating the Formbuilder (or you are using Laravel), add a CSRF token to your form easily like so:
 
 ```php
 $builder->token();
