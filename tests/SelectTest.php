@@ -211,4 +211,17 @@ class SelectTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testSelectCanBeCreatedWithIntegerKeyValueOptions()
+	{
+		$select = new Select('color', array('0' => 'Red', '1' => 'Blue'));
+		$expected = '<select name="color"><option value="0">Red</option><option value="1">Blue</option></select>';
+		$result = $select->render();
+		$this->assertEquals($expected, $result);
+
+		$select = new Select('fruit', array('1' => 'Granny Smith', '0' => 'Blueberry'));
+		$expected = '<select name="fruit"><option value="1">Granny Smith</option><option value="0">Blueberry</option></select>';
+		$result = $select->render();
+		$this->assertEquals($expected, $result);
+	}
 }
