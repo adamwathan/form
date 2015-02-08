@@ -130,6 +130,33 @@ class SelectTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testCanSetDefaultOptionMultiselect()
+	{
+		$select = new Select('color', array('red' => 'Red', 'blue' => 'Blue'));
+		$expected = '<select name="color"><option value="red" selected>Red</option><option value="blue" selected>Blue</option></select>';
+		$result = $select->defaultValue(array('blue', 'red'))->render();
+
+		$this->assertEquals($expected, $result);
+
+		$select = new Select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
+		$expected = '<select name="fruit"><option value="apple" selected>Granny Smith</option><option value="berry">Blueberry</option></select>';
+		$result = $select->defaultValue(array('apple'))->render();
+
+		$this->assertEquals($expected, $result);
+
+		$select = new Select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
+		$expected = '<select name="fruit"><option value="apple">Granny Smith</option><option value="berry" selected>Blueberry</option></select>';
+		$result = $select->select('berry')->defaultValue(array('apple', 'berry'))->render();
+
+		$this->assertEquals($expected, $result);
+
+		$select = new Select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
+		$expected = '<select name="fruit"><option value="apple">Granny Smith</option><option value="berry" selected>Blueberry</option></select>';
+		$result = $select->defaultValue('apple')->select(array('berry'))->render();
+
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testCanUseNestedOptions()
 	{
 		$options = array(
