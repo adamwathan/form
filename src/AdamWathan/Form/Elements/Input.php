@@ -21,7 +21,7 @@ abstract class Input extends FormControl
 
     protected function setValue($value)
     {
-        $this->setAttribute('value', $value);
+        $this->setAttribute('value', htmlspecialchars($value));
         return $this;
     }
 }

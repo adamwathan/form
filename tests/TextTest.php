@@ -60,7 +60,7 @@ class TextTest extends PHPUnit_Framework_TestCase
 		$text = new Text('first_name');
 		$text = $text->value(null);
 
-		$expected = '<input type="text" name="first_name">';
+		$expected = '<input type="text" name="first_name" value="">';
 		$result = $text->render();
 		$this->assertEquals($expected, $result);
 	}

@@ -142,7 +142,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 		$this->form->setOldInputProvider($oldInput);
 
-		$expected = '<input type="text" name="title" value="Hello &quot;quotes&quot;">';
+		$expected = '<input type="text" name="title" value="Hello &amp;quot;quotes&amp;quot;">';
 		$result = (string)$this->form->text('title');
 		$this->assertEquals($expected, $result);
 	}
@@ -500,7 +500,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$object->first_name = '" onmouseover="alert(\'xss\')';
 		$this->form->bind($object);
-		$expected = '<input type="text" name="first_name" value="&quot; onmouseover=&quot;alert(\'xss\')">';
+		$expected = '<input type="text" name="first_name" value="&amp;quot; onmouseover=&amp;quot;alert(\'xss\')">';
 		$result = (string)$this->form->text('first_name');
 		$this->assertEquals($expected, $result);
 	}
