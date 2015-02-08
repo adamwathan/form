@@ -364,4 +364,4 @@ $builder->close();
 
 When using model binding, old input will still take priority over any values on your model, so you can still easily redirect the user back to the form with any validation errors without losing any of the data they entered.
 
-Warning, bind method must be called before elements initializations.
+> Note: Be sure to `bind` before creating any other form elements.
