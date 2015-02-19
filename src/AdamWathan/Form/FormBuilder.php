@@ -187,8 +187,6 @@ class FormBuilder
             return false;
         }
 
-        $name = $this->transformKey($name);
-
         return $this->errorStore->hasError($name);
     }
 
@@ -201,8 +199,6 @@ class FormBuilder
         if (! $this->hasError($name)) {
             return '';
         }
-
-        $name = $this->transformKey($name);
 
         $message = $this->errorStore->getError($name);
 
@@ -289,10 +285,5 @@ class FormBuilder
         );
 
         return $this->select($name, $options);
-    }
-
-    protected function transformKey($key)
-    {
-        return str_replace(array('.', '[]', '[', ']'), array('_', '', '.', ''), $key);
     }
 }
