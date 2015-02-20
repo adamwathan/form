@@ -103,6 +103,23 @@ class SelectTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testCanSelectNumericKeys()
+	{
+		$select = new Select('fruit');
+		$select->options(array('1' => 'Granny Smith', '2' => 'Blueberry'));
+		$expected = '<select name="fruit"><option value="1" selected>Granny Smith</option><option value="2">Blueberry</option></select>';
+		$result = $select->select('1')->render();
+
+		$this->assertEquals($expected, $result);
+
+		$select = new Select('fruit');
+		$select->options(array('1' => 'Granny Smith', '2' => 'Blueberry'));
+		$expected = '<select name="fruit"><option value="1">Granny Smith</option><option value="2" selected>Blueberry</option></select>';
+		$result = $select->select('2')->render();
+
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testCanSetDefaultOption()
 	{
 		$select = new Select('color', array('red' => 'Red', 'blue' => 'Blue'));

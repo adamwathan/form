@@ -77,7 +77,7 @@ class Select extends FormControl
 
     protected function isSelected($value)
     {
-        return in_array($value, (array) $this->selected, true);
+        return in_array($value, (array) $this->selected);
     }
 
     public function addOption($value, $label)
