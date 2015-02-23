@@ -35,4 +35,17 @@ abstract class FormControl extends Element
         $this->removeAttribute('disabled');
         return $this;
     }
+
+    public function autofocus()
+    {
+        $this->setAttribute('autofocus', 'autofocus');
+        return $this;
+    }
+
+    public function unfocus()
+    {
+        $this->removeAttribute('autofocus');
+        return $this;
+    }
+
 }

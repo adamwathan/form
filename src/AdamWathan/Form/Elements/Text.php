@@ -2,6 +2,7 @@
 
 class Text extends Input
 {
+
     protected $attributes = array(
         'type' => 'text',
     );
