@@ -117,6 +117,30 @@ class TextTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+    public function testAutofocus()
+    {
+        $text = new Text('');
+
+        $result = $text->autofocus()->render();
+        $message = "autofocus attribute should be set";
+        $this->assertContains('autofocus="autofocus"', $result, $message);
+    }
+
+    public function testUnfocus() {
+        $pattern = 'autofocus="autofocus"';
+        $text = new Text('');
+
+        $result = $text->unfocus()->render();
+        $message = "autofocus attribute should not be set";
+        $this->assertNotContains($pattern, $result, $message);
+
+        $text = new Text('');
+
+        $result = $text->autofocus()->unfocus()->render();
+        $message = "autofocus attribute should be removed";
+        $this->assertNotContains($pattern, $result, $message);
+    }
+
 	public function testOptional()
 	{
 		$text = new Text('email');

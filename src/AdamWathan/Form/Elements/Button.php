@@ -2,6 +2,7 @@
 
 class Button extends FormControl
 {
+
     protected $attributes = array(
         'type' => 'button',
     );
