@@ -99,6 +99,12 @@ $builder->open()->delete();
 
 // <form method="POST" action="/test">
 $builder->open()->action('/test')->render();
+
+// <form method="POST" action="" enctype="multipart/form-data">
+$builder->open()->multipart()
+
+// <form method="POST" action="" enctype="custom">
+$builder->open()->encodingType("custom")
 ```
 <a href="#text-and-password-fields"></a>
 ### Text and Password Fields
