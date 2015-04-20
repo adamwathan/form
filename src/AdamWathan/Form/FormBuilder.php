@@ -13,20 +13,16 @@ use AdamWathan\Form\Elements\Hidden;
 use AdamWathan\Form\Elements\File;
 use AdamWathan\Form\Elements\Date;
 use AdamWathan\Form\Elements\Email;
-use AdamWathan\Form\OldInput\OldInputInterface;
+use AdamWathan\Form\Traits\OldInputTrait;
 use AdamWathan\Form\ErrorStore\ErrorStoreInterface;
 
 class FormBuilder
 {
-    private $oldInput;
+    use OldInputTrait;
+    
     private $errorStore;
     private $csrfToken;
     private $model;
-
-    public function setOldInputProvider(OldInputInterface $oldInputProvider)
-    {
-        $this->oldInput = $oldInputProvider;
-    }
 
     public function setErrorStore(ErrorStoreInterface $errorStore)
     {
@@ -113,6 +109,10 @@ class FormBuilder
     {
         $checkbox = new Checkbox($name, $value);
 
+        if($this->oldInput) {
+            $checkbox->setOldInputProvider($this->oldInput);
+        }
+
         $oldValue = $this->getValueFor($name);
 
         if ($value == $oldValue) {
@@ -127,6 +127,10 @@ class FormBuilder
         $value = is_null($value) ? $name : $value;
 
         $radio = new RadioButton($name, $value);
+
+        if($this->oldInput) {
+            $checkbox->setOldInputProvider($this->oldInput);
+        }
 
         $oldValue = $this->getValueFor($name);
 
@@ -214,33 +218,6 @@ class FormBuilder
         $this->model = is_array($model) ? (object) $model : $model;
     }
 
-    protected function getValueFor($name)
-    {
-        if ($this->hasOldInput()) {
-            return $this->getOldInput($name);
-        }
-
-        if ($this->hasModelValue($name)) {
-            return $this->getModelValue($name);
-        }
-
-        return null;
-    }
-
-    protected function hasOldInput()
-    {
-        if (! isset($this->oldInput)) {
-            return false;
-        }
-
-        return $this->oldInput->hasOldInput();
-    }
-
-    protected function getOldInput($name)
-    {
-        return $this->escapeQuotes($this->oldInput->getOldInput($name));
-    }
-
     protected function hasModelValue($name)
     {
         if (! isset($this->model)) {
@@ -252,14 +229,6 @@ class FormBuilder
     protected function getModelValue($name)
     {
         return $this->escapeQuotes($this->model->{$name});
-    }
-
-    protected function escapeQuotes($value)
-    {
-        if (!is_string($value)) {
-            return $value;
-        }
-        return str_replace('"', '&quot;', $value);
     }
 
     protected function unbindModel()
