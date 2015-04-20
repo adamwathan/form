@@ -15,7 +15,6 @@ class HttpRequestOldInput implements OldInputInterface {
 
     public function getOldInput($key,$value=false)
     {
-        var_dump($value);
         $key = $this->transformKey($key);
 
         if(isset($_REQUEST[$key])) {
