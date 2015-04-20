@@ -1,7 +1,11 @@
 <?php namespace AdamWathan\Form\Elements;
 
+use AdamWathan\Form\Traits\OldInputTrait;
+
 abstract class Element
 {
+    use OldInputTrait;
+
     protected $attributes = array();
 
     protected function setAttribute($attribute, $value = null)
