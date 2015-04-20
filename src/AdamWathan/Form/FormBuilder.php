@@ -129,7 +129,7 @@ class FormBuilder
         $radio = new RadioButton($name, $value);
 
         if($this->oldInput) {
-            $checkbox->setOldInputProvider($this->oldInput);
+            $radio->setOldInputProvider($this->oldInput);
         }
 
         $oldValue = $this->getValueFor($name);
