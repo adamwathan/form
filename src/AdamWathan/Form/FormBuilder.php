@@ -214,7 +214,7 @@ class FormBuilder
         $this->model = is_array($model) ? (object) $model : $model;
     }
 
-    protected function getValueFor($name)
+    public function getValueFor($name)
     {
         if ($this->hasOldInput()) {
             return $this->getOldInput($name);
