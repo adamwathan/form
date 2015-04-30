@@ -15,7 +15,7 @@
         "illuminate/support": "4.*",
         "phpunit/phpunit": "3.7.*",
         "mockery/mockery": "~0.9",
-        "codeclimate/php-test-reporter": "0.1.*@dev"
+        "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
         "psr-0": {

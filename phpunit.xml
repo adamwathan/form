@@ -15,7 +15,18 @@
             <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
-
+    <filter>
+        <blacklist>
+            <directory suffix=".php">.</directory>
+        </blacklist>
+        <whitelist>
+            <directory suffix=".php">./src</directory>
+            <exclude>
+                <file>./src/AdamWathan/Form/FormServiceProvider.php</file>
+                <file>./src/AdamWathan/Form/Facades/Form.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
     <logging>
         <log type="coverage-clover" target="build/logs/clover.xml"/>
     </logging>
