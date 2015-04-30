@@ -14,10 +14,21 @@ class FormOpen extends Element
         $result  = '<form';
         $result .= $this->renderAttributes();
         $result .= '>';
+
+        if ($this->hasToken()) {
+            $result .= $this->token->render();
+        }
+
         if ($this->hasHiddenMethod()) {
             $result .= $this->hiddenMethod->render();
         }
+
         return $result;
+    }
+
+    protected function hasToken()
+    {
+        return isset($this->token);
     }
 
     protected function hasHiddenMethod()
@@ -45,6 +56,13 @@ class FormOpen extends Element
     public function delete()
     {
         return $this->setHiddenMethod('DELETE');
+    }
+
+    public function token($token)
+    {
+        $this->token = new Hidden('_token');
+        $this->token->value($token);
+        return $this;
     }
 
     protected function setHiddenMethod($method)

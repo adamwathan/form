@@ -22,14 +22,14 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testFormOpen()
 	{
 		$expected = '<form method="POST" action="">';
-		$result = $this->form->open();
+		$result = (string)$this->form->open();
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testCanCloseForm()
 	{
 		$expected = '</form>';
-		$result = $this->form->close();
+		$result = (string)$this->form->close();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -357,6 +357,14 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 		$expected = '<input type="hidden" name="_token" value="12345">';
 		$result = (string)$this->form->token();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testTokenIsRenderedAutomaticallyOnOpenIfSet()
+	{
+		$this->form->setToken('12345');
+		$expected = '<form method="POST" action=""><input type="hidden" name="_token" value="12345">';
+		$result = (string)$this->form->open();
 		$this->assertEquals($expected, $result);
 	}
 

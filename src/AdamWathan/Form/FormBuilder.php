@@ -40,7 +40,18 @@ class FormBuilder
 
     public function open()
     {
-        return new FormOpen;
+        $open = new FormOpen;
+
+        if ($this->hasToken()) {
+            $open->token($this->csrfToken);
+        }
+
+        return $open;
+    }
+
+    protected function hasToken()
+    {
+        return isset($this->csrfToken);
     }
 
     public function close()
