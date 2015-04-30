@@ -7,6 +7,7 @@ class FormOpen extends Element
         'action' => '',
     );
 
+    protected $token;
     protected $hiddenMethod;
 
     public function render()
