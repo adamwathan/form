@@ -249,5 +249,11 @@ class SelectTest extends PHPUnit_Framework_TestCase
 		$result = $select->multiple()->render();
 
 		$this->assertEquals($expected, $result);
+
+		$select = new Select('people[]');
+		$expected = '<select name="people[]" multiple="multiple"></select>';
+		$result = $select->multiple()->render();
+
+		$this->assertEquals($expected, $result);
 	}
 }

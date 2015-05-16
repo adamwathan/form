@@ -102,7 +102,12 @@ class Select extends FormControl
 
     public function multiple()
     {
-        $this->setName($this->name . '[]');
+        $name = $this->name;
+        if (substr($name, -2) != '[]') {
+            $name .= '[]';
+        }
+
+        $this->setName($name);
         $this->setAttribute('multiple', 'multiple');
         return $this;
     }
