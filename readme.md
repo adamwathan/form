@@ -99,7 +99,7 @@ $builder->open()->put();
 $builder->open()->delete();
 
 // <form method="POST" action="/test">
-$builder->open()->action('/test')->render();
+$builder->open()->action('/test');
 
 // <form method="POST" action="" enctype="multipart/form-data">
 $builder->open()->multipart()
