@@ -5,13 +5,10 @@ class Select extends FormControl
 
     private $options;
     private $selected;
-    private $name;
 
     public function __construct($name, $options = array())
     {
-        $this->name = $name;
         $this->setName($name);
-
         $this->setOptions($options);
     }
 
@@ -102,7 +99,7 @@ class Select extends FormControl
 
     public function multiple()
     {
-        $name = $this->name;
+        $name = $this->attributes['name'];
         if (substr($name, -2) != '[]') {
             $name .= '[]';
         }
