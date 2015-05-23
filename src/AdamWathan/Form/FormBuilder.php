@@ -249,7 +249,7 @@ class FormBuilder
 
     protected function getOldInput($name)
     {
-        return $this->escapeQuotes($this->oldInput->getOldInput($name));
+        return $this->escape($this->oldInput->getOldInput($name));
     }
 
     protected function hasModelValue($name)
@@ -262,15 +262,15 @@ class FormBuilder
 
     protected function getModelValue($name)
     {
-        return $this->escapeQuotes($this->model->{$name});
+        return $this->escape($this->model->{$name});
     }
 
-    protected function escapeQuotes($value)
+    protected function escape($value)
     {
         if (!is_string($value)) {
             return $value;
         }
-        return str_replace('"', '&quot;', $value);
+        return htmlentities($value, ENT_QUOTES, 'UTF-8');
     }
 
     protected function unbindModel()

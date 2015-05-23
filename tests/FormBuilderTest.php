@@ -199,6 +199,19 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testRenderingTextAreaWithOldInputEscapesDangerousCharacters()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('bio')->andReturn('<script>alert("xss!");</script>');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<textarea name="bio" rows="10" cols="50">&lt;script&gt;alert(&quot;xss!&quot;);&lt;/script&gt;</textarea>';
+		$result = (string)$this->form->textarea('bio');
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testNoErrorStoreReturnsNull()
 	{
 		$expected = '';
@@ -508,7 +521,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$object->first_name = '" onmouseover="alert(\'xss\')';
 		$this->form->bind($object);
-		$expected = '<input type="text" name="first_name" value="&quot; onmouseover=&quot;alert(\'xss\')">';
+		$expected = '<input type="text" name="first_name" value="&quot; onmouseover=&quot;alert(&#039;xss&#039;)">';
 		$result = (string)$this->form->text('first_name');
 		$this->assertEquals($expected, $result);
 	}
