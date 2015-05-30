@@ -260,4 +260,14 @@ class TextTest extends PHPUnit_Framework_TestCase
 		$result = $text->render();
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testCanAddAttributesThroughMagicMethodsWithOptionalParameter()
+	{
+		$text = new Text('cow');
+		$text = $text->moo();
+
+		$expected = '<input type="text" name="cow" moo="moo">';
+		$result = $text->render();
+		$this->assertEquals($expected, $result);
+	}
 }

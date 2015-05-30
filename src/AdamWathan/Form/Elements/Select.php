@@ -96,4 +96,16 @@ class Select extends FormControl
         $this->select($value);
         return $this;
     }
+
+    public function multiple()
+    {
+        $name = $this->attributes['name'];
+        if (substr($name, -2) != '[]') {
+            $name .= '[]';
+        }
+
+        $this->setName($name);
+        $this->setAttribute('multiple', 'multiple');
+        return $this;
+    }
 }
