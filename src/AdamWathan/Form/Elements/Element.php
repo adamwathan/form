@@ -18,6 +18,11 @@ abstract class Element
         unset($this->attributes[$attribute]);
     }
 
+    public function type()
+    {
+        return $this->attributes['type'];
+    }
+
     public function data($attribute, $value)
     {
         $this->setAttribute('data-'.$attribute, $value);
