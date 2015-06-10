@@ -536,7 +536,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testGetTypeAttribute()
 	{
 		$expected = 'radio';
-		$result = $this->form->radio('fm-transmission')->type();
+		$result = $this->form->radio('fm-transmission')->getAttribute('type');
 		$this->assertEquals($expected, $result);
 	}
 

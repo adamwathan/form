@@ -18,9 +18,9 @@ abstract class Element
         unset($this->attributes[$attribute]);
     }
 
-    public function type()
+    public function getAttribute($attribute)
     {
-        return $this->attributes['type'];
+        return $this->attributes[$attribute];
     }
 
     public function data($attribute, $value)
