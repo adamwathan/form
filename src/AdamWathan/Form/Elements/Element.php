@@ -18,6 +18,11 @@ abstract class Element
         unset($this->attributes[$attribute]);
     }
 
+    public function type()
+    {
+        return $this->attributes['type'];
+    }
+
     public function data($attribute, $value)
     {
         $this->setAttribute('data-'.$attribute, $value);
@@ -55,7 +60,13 @@ abstract class Element
         if (! isset($this->attributes['class'])) {
             return $this;
         }
+
         $class = trim(str_replace($class, '', $this->attributes['class']));
+        if ($class == '') {
+            $this->removeAttribute('class');
+            return $this;
+        }
+
         $this->setAttribute('class', $class);
         return $this;
     }
