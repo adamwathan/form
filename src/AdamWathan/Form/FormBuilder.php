@@ -1,6 +1,7 @@
 <?php namespace AdamWathan\Form;
 
 use AdamWathan\Form\Elements\Text;
+use AdamWathan\Form\Elements\Number;
 use AdamWathan\Form\Elements\Password;
 use AdamWathan\Form\Elements\Checkbox;
 use AdamWathan\Form\Elements\RadioButton;
@@ -69,6 +70,17 @@ class FormBuilder
         }
 
         return $text;
+    }
+
+    public function number($name)
+    {
+        $number = new Number($name);
+
+        if (!is_null($value = $this->getValueFor($name))) {
+            $number->value($value);
+        }
+
+        return $number;
     }
 
     public function date($name)
