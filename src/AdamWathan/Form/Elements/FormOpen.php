@@ -54,6 +54,11 @@ class FormOpen extends Element
         return $this->setHiddenMethod('PUT');
     }
 
+    public function patch()
+    {
+        return $this->setHiddenMethod('PATCH');
+    }
+
     public function delete()
     {
         return $this->setHiddenMethod('DELETE');
