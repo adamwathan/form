@@ -256,4 +256,13 @@ class SelectTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testCanSelectMultipleElementsInMultiselects()
+	{
+		$select = new Select('color', array('red' => 'Red', 'blue' => 'Blue'));
+		$expected = '<select name="color[]" multiple="multiple"><option value="red" selected>Red</option><option value="blue" selected>Blue</option></select>';
+		$result = $select->multiple()->select(array('red', 'blue'))->render();
+
+		$this->assertEquals($expected, $result);
+	}
 }
