@@ -124,6 +124,10 @@ class FormBuilder
     {
         $checkbox = new Checkbox($name, $value);
 
+        if($this->oldInput) {
+            $checkbox->setOldInputProvider($this->oldInput);
+        }
+
         $oldValue = $this->getValueFor($name);
 
         if ($value == $oldValue) {
@@ -138,6 +142,10 @@ class FormBuilder
         $value = is_null($value) ? $name : $value;
 
         $radio = new RadioButton($name, $value);
+
+        if($this->oldInput) {
+            $checkbox->setOldInputProvider($this->oldInput);
+        }
 
         $oldValue = $this->getValueFor($name);
 
