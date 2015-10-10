@@ -16,7 +16,7 @@ class FormOpen extends Element
         $result .= $this->renderAttributes();
         $result .= '>';
 
-        if ($this->hasToken()) {
+        if ($this->hasToken() && ($this->attributes['method'] !== 'GET')) {
             $result .= $this->token->render();
         }
 
