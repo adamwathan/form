@@ -73,7 +73,7 @@ $builder = new AdamWathan\Form\FormBuilder;
 Next, use the FormBuilder to build an element. For example:
 ```php
 // <input type="text" name="email" value="example@example.com" required="required">
-$builder->text('email')->value('example@example.com')->required();
+<?= $builder->text('email')->value('example@example.com')->required(); ?>
 ```
 
 - All elements support method chaining, so you can add as many options to an element as you need.
@@ -85,28 +85,29 @@ $builder->text('email')->value('example@example.com')->required();
 
 ```php
 // <form method="POST">
-$builder->open();
+<?= $builder->open(); ?>
 
 // <form method="GET">
-$builder->open()->get();
+<?= $builder->open()->get(); ?>
 
 // <form method="POST">
 // <input type="hidden" name="_method" value="PUT">
-$builder->open()->put();
+<?= $builder->open()->put(); ?>
 
 // <form method="POST">
 // <input type="hidden" name="_method" value="DELETE">
-$builder->open()->delete();
+<?= $builder->open()->delete(); ?>
 
 // <form method="POST" action="/test">
-$builder->open()->action('/test');
+<?= $builder->open()->action('/test'); ?>
 
 // <form method="POST" action="" enctype="multipart/form-data">
-$builder->open()->multipart()
+<?= $builder->open()->multipart() ?>
 
 // <form method="POST" action="" enctype="custom">
-$builder->open()->encodingType("custom")
+<?= $builder->open()->encodingType("custom") ?>
 ```
+
 <a href="#text-and-password-fields"></a>
 ### Text and Password Fields
 
@@ -114,16 +115,16 @@ Text and password fields share the same interface.
 
 ```php
 // <input type="text" name="email">
-$builder->text('email');
+<?= $builder->text('email'); ?>
 
 // <input type="text" name="email" id="email_field">
-$builder->text('email')->id('email_field');
+<?= $builder->text('email')->id('email_field'); ?>
 
 // <input type="password" name="password" class="required">
-$builder->password('password')->addClass('required');
+<?= $builder->password('password')->addClass('required'); ?>
 
 // <input type="text" name="email" value="example@example.com" required="required">
-$builder->text('email')->value('example@example.com')->required();
+<?= $builder->text('email')->value('example@example.com')->required(); ?>
 ```
 
 Other available methods:
@@ -141,13 +142,13 @@ Textareas share the same interface as regular text fields, with a couple of extr
 
 ```php
 // <textarea name="bio" rows="5" cols="50"></textarea>
-$builder->textarea('bio')->rows(5);
+<?= $builder->textarea('bio')->rows(5); ?>
 
 // <textarea name="bio" rows="10" cols="20"></textarea>
-$builder->textarea('bio')->cols(20);
+<?= $builder->textarea('bio')->cols(20); ?>
 
 // <textarea name="bio" rows="5" cols="20" class="important">My biography</textarea>
-$builder->textarea('bio')->rows(5)->cols(20)->addClass('important')->value('My biography');
+<?= $builder->textarea('bio')->rows(5)->cols(20)->addClass('important')->value('My biography'); ?>
 ```
 
 <a href="#checkboxes-and-radio-buttons"></a>
@@ -155,22 +156,22 @@ $builder->textarea('bio')->rows(5)->cols(20)->addClass('important')->value('My b
 
 ```php
 // <input type="checkbox" name="terms" value="1">
-$builder->checkbox('terms');
+<?= $builder->checkbox('terms'); ?>
 
 // <input type="checkbox" name="terms" value="1" checked="checked">
-$builder->checkbox('terms')->check();
+<?= $builder->checkbox('terms')->check(); ?>
 
 // <input type="checkbox" name="terms" value="1">
-$builder->checkbox('terms')->uncheck();
+<?= $builder->checkbox('terms')->uncheck(); ?>
 
 // <input type="checkbox" name="terms" value="1" checked="checked">
-$builder->checkbox('terms')->defaultToChecked();
+<?= $builder->checkbox('terms')->defaultToChecked(); ?>
 
 // <input type="checkbox" name="terms" value="agree">
-$builder->checkbox('terms')->value('agree');
+<?= $builder->checkbox('terms')->value('agree'); ?>
 
 // <input type="radio" name="color" value="red">
-$builder->radio('color', 'red');
+<?= $builder->radio('color', 'red'); ?>
 ```
 
 <a href="#selects"></a>
@@ -178,21 +179,21 @@ $builder->radio('color', 'red');
 
 ```php
 // <select name="birth_year"></select>
-$builder->select('birth_year');
+<?= $builder->select('birth_year'); ?>
 
 // <select name="birth_year">
 //   <option value="0">1990</option>
 //   <option value="1">1991</option>
 //   <option value="2">1992</option>
 // </select>
-$builder->select('birth_year', [1990, 1991, 1992]);
+<?= $builder->select('birth_year', [1990, 1991, 1992]); ?>
 
 // <select name="birth_year">
 //   <option value="1990">1990</option>
 //   <option value="1991">1991</option>
 //   <option value="1992">1992</option>
 // </select>
-$builder->select('birth_year', ['1990' => 1990, '1991' => 1991, '1992' => 1992]);
+<?= $builder->select('birth_year', ['1990' => 1990, '1991' => 1991, '1992' => 1992]); ?>
 
 // <select name="birth_year">
 //   <optgroup label="Ontario">
@@ -214,19 +215,20 @@ $options = [
 		'quebec_city' => 'Quebec City',
 	]
 ];
-$builder->select('birth_year', $options);
+
+<?= $builder->select('birth_year', $options); ?>
 
 // <select name="birth_year">
 //   <option value="1">1990</option>
 // </select>
-$builder->select('birth_year')->addOption('1', 1990);
+<?= $builder->select('birth_year')->addOption('1', 1990); ?>
 
 // <select name="birth_year">
 //   <option value="1">1990</option>
 //   <option value="2">1991</option>
 //   <option value="3" selected>1992</option>
 // </select>
-$builder->select('birth_year', ['1' => 1990, '2' => 1991, '3' => 1992])->select('3');
+<?= $builder->select('birth_year', ['1' => 1990, '2' => 1991, '3' => 1992])->select('3'); ?>
 ```
 
 <a href="#buttons"></a>
@@ -234,13 +236,13 @@ $builder->select('birth_year', ['1' => 1990, '2' => 1991, '3' => 1992])->select(
 
 ```php
 // <button type="button">Click Me</button>
-$builder->button('Click Me');
+<?= $builder->button('Click Me'); ?>
 
 // <button type="submit">Sign Up</button>
-$builder->submit('Sign Up');
+<?= $builder->submit('Sign Up'); ?>
 
 // <button type="submit" class="js-submit">Sign Up</button>
-$builder->submit('Sign Up')->addClass('js-submit');
+<?= $builder->submit('Sign Up')->addClass('js-submit'); ?>
 ```
 
 <a href="#hidden-inputs"></a>
@@ -248,7 +250,7 @@ $builder->submit('Sign Up')->addClass('js-submit');
 
 ```php
 // <input type="hidden" name="secret" value="my-secret-value">
-$builder->hidden('secret')->value('my-secret-value');
+<?= $builder->hidden('secret')->value('my-secret-value'); ?>
 ```
 
 <a href="#labels"></a>
@@ -257,19 +259,19 @@ $builder->hidden('secret')->value('my-secret-value');
 **Basic Label**
 ```php
 // <label>Email</label>
-$builder->label('Email');
+<?= $builder->label('Email'); ?>
 
 // <label for="email">Email</label>
-$builder->label('Email')->forId('email');
+<?= $builder->label('Email')->forId('email'); ?>
 ```
 
 **Wrapping another element**
 ```php
 // <label>Email<input type="text" name="email"></label>
-$builder->label('Email')->before($emailElement);
+<?= $builder->label('Email')->before($emailElement); ?>
 
 // <label><input type="text" name="email">Email</label>
-$builder->label('Email')->after($emailElement);
+<?= $builder->label('Email')->after($emailElement); ?>
 ```
 
 <a href="#setting-attributes"></a>
@@ -278,15 +280,15 @@ $builder->label('Email')->after($emailElement);
 ```php
 // Attributes can be set with attribute(...)
 // <input type="text" name="foobar" min="4">
-$builder->text('foobar')->attribute('min', 4);
+<?= $builder->text('foobar')->attribute('min', 4); ?>
 
 // Or by calling the attribute name as a method
 // <input type="text" name="foobar" min="4">
-$builder->text('foobar')->min(4);
+<?= $builder->text('foobar')->min(4); ?>
 
 // Setting data-* attributes
 // <input type="text" data-foo="bar" name="foobar">
-$builder->text('foobar')->data('foo', 'bar');
+<?= $builder->text('foobar')->data('foo', 'bar'); ?>
 ```
 
 <a href="#remembering-old-input"></a>
@@ -344,7 +346,7 @@ You can also supply a `format` parameter to `getError()` to cleanup your markup.
 Assuming you set a CSRF token when instantiating the Formbuilder (or you are using Laravel), add a CSRF token to your form easily like so:
 
 ```php
-$builder->token();
+<?= $builder->token(); ?>
 ```
 
 <a href="#model-binding"></a>
@@ -358,13 +360,13 @@ $model->last_name = "Doe";
 $model->email = "john@example.com";
 $model->date_of_birth = new DateTime('1985-05-06');
 
-$builder->open();
-$builder->bind($model);
-$builder->text('first_name');
-$builder->text('last_name');
-$builder->email('email');
-$builder->date('date_of_birth');
-$builder->close();
+<?= $builder->open(); ?>
+<?= $builder->bind($model); ?>
+<?= $builder->text('first_name'); ?>
+<?= $builder->text('last_name'); ?>
+<?= $builder->email('email'); ?>
+<?= $builder->date('date_of_birth'); ?>
+<?= $builder->close(); ?>
 ```
 
 > This will work out of the box with Laravel's Eloquent models.
