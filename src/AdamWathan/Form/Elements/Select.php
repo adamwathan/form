@@ -2,11 +2,10 @@
 
 class Select extends FormControl
 {
-
     private $options;
     private $selected;
 
-    public function __construct($name, $options = array())
+    public function __construct($name, $options = [])
     {
         $this->setName($name);
         $this->setOptions($options);

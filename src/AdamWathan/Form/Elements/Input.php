@@ -4,7 +4,7 @@ abstract class Input extends FormControl
 {
     public function render()
     {
-        $result  = '<input';
+        $result = '<input';
 
         $result .= $this->renderAttributes();
 

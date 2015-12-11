@@ -2,12 +2,11 @@
 
 class TextArea extends FormControl
 {
-
-    protected $attributes = array(
+    protected $attributes = [
         'name' => '',
         'rows' => 10,
         'cols' => 50,
-    );
+    ];
 
     protected $value;
 
@@ -48,7 +47,7 @@ class TextArea extends FormControl
 
     public function defaultValue($value)
     {
-        if (! $this->hasValue()) {
+        if (!$this->hasValue()) {
             $this->value($value);
         }
 

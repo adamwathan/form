@@ -2,9 +2,9 @@
 
 class Date extends Text
 {
-    protected $attributes = array(
+    protected $attributes = [
         'type' => 'date',
-    );
+    ];
 
     public function value($value)
     {

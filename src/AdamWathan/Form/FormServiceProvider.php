@@ -1,8 +1,8 @@
 <?php namespace AdamWathan\Form;
 
-use Illuminate\Support\ServiceProvider;
 use AdamWathan\Form\ErrorStore\IlluminateErrorStore;
 use AdamWathan\Form\OldInput\IlluminateOldInputProvider;
+use Illuminate\Support\ServiceProvider;
 
 class FormServiceProvider extends ServiceProvider
 {
@@ -58,6 +58,6 @@ class FormServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('adamwathan.form');
+        return ['adamwathan.form'];
     }
 }

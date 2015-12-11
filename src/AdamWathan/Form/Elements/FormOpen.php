@@ -2,17 +2,17 @@
 
 class FormOpen extends Element
 {
-    protected $attributes = array(
+    protected $attributes = [
         'method' => 'POST',
         'action' => '',
-    );
+    ];
 
     protected $token;
     protected $hiddenMethod;
 
     public function render()
     {
-        $result  = '<form';
+        $result = '<form';
         $result .= $this->renderAttributes();
         $result .= '>';
 

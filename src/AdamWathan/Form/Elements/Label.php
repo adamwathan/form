@@ -23,7 +23,7 @@ class Label extends Element
 
         $result .= $this->renderElement();
 
-        if (! $this->labelBefore) {
+        if (!$this->labelBefore) {
             $result .= $this->label;
         }
 
@@ -54,7 +54,7 @@ class Label extends Element
 
     protected function renderElement()
     {
-        if (! $this->element) {
+        if (!$this->element) {
             return '';
         }
 

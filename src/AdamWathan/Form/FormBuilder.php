@@ -1,20 +1,20 @@
 <?php namespace AdamWathan\Form;
 
-use AdamWathan\Form\Elements\Text;
-use AdamWathan\Form\Elements\Password;
-use AdamWathan\Form\Elements\Checkbox;
-use AdamWathan\Form\Elements\RadioButton;
 use AdamWathan\Form\Elements\Button;
-use AdamWathan\Form\Elements\Select;
-use AdamWathan\Form\Elements\TextArea;
-use AdamWathan\Form\Elements\Label;
-use AdamWathan\Form\Elements\FormOpen;
-use AdamWathan\Form\Elements\Hidden;
-use AdamWathan\Form\Elements\File;
+use AdamWathan\Form\Elements\Checkbox;
 use AdamWathan\Form\Elements\Date;
 use AdamWathan\Form\Elements\Email;
-use AdamWathan\Form\OldInput\OldInputInterface;
+use AdamWathan\Form\Elements\File;
+use AdamWathan\Form\Elements\FormOpen;
+use AdamWathan\Form\Elements\Hidden;
+use AdamWathan\Form\Elements\Label;
+use AdamWathan\Form\Elements\Password;
+use AdamWathan\Form\Elements\RadioButton;
+use AdamWathan\Form\Elements\Select;
+use AdamWathan\Form\Elements\Text;
+use AdamWathan\Form\Elements\TextArea;
 use AdamWathan\Form\ErrorStore\ErrorStoreInterface;
+use AdamWathan\Form\OldInput\OldInputInterface;
 
 class FormBuilder
 {
@@ -161,7 +161,7 @@ class FormBuilder
         return $submit;
     }
 
-    public function select($name, $options = array())
+    public function select($name, $options = [])
     {
         $select = new Select($name, $options);
 
@@ -194,7 +194,7 @@ class FormBuilder
 
     public function hasError($name)
     {
-        if (! isset($this->errorStore)) {
+        if (!isset($this->errorStore)) {
             return false;
         }
 
@@ -203,11 +203,11 @@ class FormBuilder
 
     public function getError($name, $format = null)
     {
-        if (! isset($this->errorStore)) {
+        if (!isset($this->errorStore)) {
             return null;
         }
 
-        if (! $this->hasError($name)) {
+        if (!$this->hasError($name)) {
             return '';
         }
 
@@ -240,7 +240,7 @@ class FormBuilder
 
     protected function hasOldInput()
     {
-        if (! isset($this->oldInput)) {
+        if (!isset($this->oldInput)) {
             return false;
         }
 
@@ -254,7 +254,7 @@ class FormBuilder
 
     protected function hasModelValue($name)
     {
-        if (! isset($this->model)) {
+        if (!isset($this->model)) {
             return false;
         }
         return isset($this->model->{$name}) || method_exists($this->model, '__get');
@@ -280,7 +280,7 @@ class FormBuilder
 
     public function selectMonth($name)
     {
-        $options = array(
+        return $this->select($name, [
             "1" => "January",
             "2" => "February",
             "3" => "March",
@@ -293,8 +293,6 @@ class FormBuilder
             "10" => "October",
             "11" => "November",
             "12" => "December",
-        );
-
-        return $this->select($name, $options);
+        ]);
     }
 }

@@ -2,7 +2,7 @@
 
 abstract class Element
 {
-    protected $attributes = array();
+    protected $attributes = [];
 
     protected function setAttribute($attribute, $value = null)
     {
@@ -25,7 +25,7 @@ abstract class Element
 
     public function data($attribute, $value)
     {
-        $this->setAttribute('data-'.$attribute, $value);
+        $this->setAttribute('data-' . $attribute, $value);
         return $this;
     }
 
@@ -37,7 +37,7 @@ abstract class Element
 
     public function clear($attribute)
     {
-        if (! isset($this->attributes[$attribute])) {
+        if (!isset($this->attributes[$attribute])) {
             return $this;
         }
 
@@ -57,7 +57,7 @@ abstract class Element
 
     public function removeClass($class)
     {
-        if (! isset($this->attributes['class'])) {
+        if (!isset($this->attributes['class'])) {
             return $this;
         }
 
@@ -102,9 +102,9 @@ abstract class Element
 
     public function __call($method, $params)
     {
-        $params = count($params) ? $params : array($method);
-        $params = array_merge(array($method), $params);
-        call_user_func_array(array($this, 'attribute'), $params);
+        $params = count($params) ? $params : [$method];
+        $params = array_merge([$method], $params);
+        call_user_func_array([$this, 'attribute'], $params);
         return $this;
     }
 }
