@@ -10,7 +10,7 @@ Boring name for a boring package. Builds form HTML with a fluent-ish, hopefully 
 - [Basic Usage](#basic-usage)
 - [Remembering Old Input](#remembering-old-input)
 - [Error Messages](#error-messages)
-- [CSRF Protection](#csrf-tokens)
+- [CSRF Protection](#csrf-protection)
 - [Model Binding](#model-binding)
 
 <a href="#installation"></a>
@@ -340,7 +340,7 @@ You can also supply a `format` parameter to `getError()` to cleanup your markup.
 <?= $builder->getError('email', '<span class="error">:message</span'); ?>
 ```
 
-<a href="#csrf-tokens"></a>
+<a href="#csrf-protection"></a>
 ## CSRF Protection
 
 Assuming you set a CSRF token when instantiating the Formbuilder (or you are using Laravel), add a CSRF token to your form easily like so:
