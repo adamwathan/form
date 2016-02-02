@@ -4,16 +4,16 @@ use AdamWathan\Form\Elements\Email;
 
 class EmailTest extends PHPUnit_Framework_TestCase
 {
-	public function testEmailCanBeCreated()
-	{
-		$email = new Email('email');
-	}
 
-	public function testRenderEmailInput()
-	{
-		$email = new Email('email');
-		$expected = '<input type="email" name="email">';
-		$result = $email->render();
-		$this->assertEquals($expected, $result);
-	}
+    use TextSubclassContractTest;
+
+    protected function newTestSubjectInstance($name)
+    {
+        return new Email($name);
+    }
+
+    protected function getTestSubjectType()
+    {
+        return "email";
+    }
 }
