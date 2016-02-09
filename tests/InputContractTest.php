@@ -78,12 +78,14 @@ trait InputContractTest
         $text = $this->newTestSubjectInstance('email');
         $result = $text->optional()->render();
 
-        $this->assertNotRegExp($this->elementRegExp($pattern), $result);
+        $message = 'required attribute should not be set';
+        $this->assertNotRegExp($this->elementRegExp($pattern), $result, $message);
 
         $text = $this->newTestSubjectInstance('email');
         $result = $text->required()->optional()->render();
 
-        $this->assertNotRegExp($this->elementRegExp($pattern), $result);
+        $message = 'required attribute should be removed';
+        $this->assertNotRegExp($this->elementRegExp($pattern), $result, $message);
     }
 
     public function testDisable()
@@ -91,7 +93,8 @@ trait InputContractTest
         $text = $this->newTestSubjectInstance('email');
         $result = $text->disable()->render();
 
-        $this->assertRegExp($this->elementRegExp('disabled="disabled"'), $result);
+        $message = 'disabled attribute should be set';
+        $this->assertRegExp($this->elementRegExp('disabled="disabled"'), $result, $message);
     }
 
     public function testEnable()
@@ -101,12 +104,14 @@ trait InputContractTest
         $text = $this->newTestSubjectInstance('email');
         $result = $text->enable()->render();
 
-        $this->assertNotRegExp($this->elementRegExp($pattern), $result);
+        $message = 'disabled attribute should not be set';
+        $this->assertNotRegExp($this->elementRegExp($pattern), $result, $message);
 
         $text = $this->newTestSubjectInstance('email');
         $result = $text->disable()->enable()->render();
 
-        $this->assertNotRegExp($this->elementRegExp('disabled="disabled"'), $result);
+        $message = 'disabled attribute should not be removed';
+        $this->assertNotRegExp($this->elementRegExp('disabled="disabled"'), $result, $message);
     }
 
     public function testCanBeCastToString()
@@ -115,7 +120,8 @@ trait InputContractTest
 
         $expected = $text->render();
         $result = (string)$text;
-        $this->assertEquals($expected, $result);
+        $message = 'Casting input element to string should return the rendered element';
+        $this->assertEquals($expected, $result, $message);
     }
 
     public function testCanRenderBasicFormControl()
@@ -123,12 +129,14 @@ trait InputContractTest
         $text = $this->newTestSubjectInstance('email');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('name="email"'), $result);
+        $message = 'name attribute should be set';
+        $this->assertRegExp($this->elementRegExp('name="email"'), $result, $message);
 
         $text = $this->newTestSubjectInstance('first_name');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('name="first_name"'), $result);
+        $message = 'name attribute should be changed';
+        $this->assertRegExp($this->elementRegExp('name="first_name"'), $result, $message);
     }
 
     public function testCanRenderWithId()
@@ -137,13 +145,15 @@ trait InputContractTest
         $text = $text->id('email_field');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('id="email_field"'), $result);
+        $message = 'id attribute should be set';
+        $this->assertRegExp($this->elementRegExp('id="email_field"'), $result, $message);
 
         $text = $this->newTestSubjectInstance('first_name');
         $text = $text->id('name_field');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('id="name_field"'), $result);
+        $message = 'id attribute should be changed';
+        $this->assertRegExp($this->elementRegExp('id="name_field"'), $result, $message);
     }
 
     public function testCanRenderWithValue()
@@ -152,19 +162,22 @@ trait InputContractTest
         $text = $text->value('example@example.com');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('value="example@example.com"'), $result);
+        $message ='value attribute should be set';
+        $this->assertRegExp($this->elementRegExp('value="example@example.com"'), $result, $message);
 
         $text = $this->newTestSubjectInstance('first_name');
         $text = $text->value('test@test.com');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('value="test@test.com"'), $result);
+        $message = 'value attribute should be changed';
+        $this->assertRegExp($this->elementRegExp('value="test@test.com"'), $result, $message);
 
         $text = $this->newTestSubjectInstance('first_name');
         $text = $text->value(null);
 
         $result = $text->render();
-        $this->assertNotRegExp($this->elementRegExp('value="test@test.com"'), $result);
+        $message = 'value attribute should be removed';
+        $this->assertNotRegExp($this->elementRegExp('value="test@test.com"'), $result, $message);
     }
 
     public function testCanRenderWithClass()
@@ -173,13 +186,15 @@ trait InputContractTest
         $text = $text->addClass('error');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('class="error"'), $result);
+        $message = 'class attribute should be set';
+        $this->assertRegExp($this->elementRegExp('class="error"'), $result, $message);
 
         $text = $this->newTestSubjectInstance('email');
         $text = $text->addClass('success');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('class="success"'), $result);
+        $message = 'class attribute should be changed';
+        $this->assertRegExp($this->elementRegExp('class="success"'), $result, $message);
     }
 
     public function testCanRenderWithPlaceholder()
@@ -188,13 +203,15 @@ trait InputContractTest
         $text = $text->placeholder('error');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('placeholder="error"'), $result);
+        $message = 'placeholder attribute should be set';
+        $this->assertRegExp($this->elementRegExp('placeholder="error"'), $result, $message);
 
         $text = $this->newTestSubjectInstance('email');
         $text = $text->placeholder('success');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('placeholder="success"'), $result);
+        $message = 'placeholder attribute should be removed';
+        $this->assertRegExp($this->elementRegExp('placeholder="success"'), $result, $message);
     }
 
     public function testCustomAttribute()
@@ -202,10 +219,12 @@ trait InputContractTest
         $text = $this->newTestSubjectInstance('email');
         $result = $text->attribute('custom', 'test-value')->render();
 
-        $this->assertRegExp($this->elementRegExp('custom="test-value"'), $result);
+        $message = 'custom attribute should be set';
+        $this->assertRegExp($this->elementRegExp('custom="test-value"'), $result, $message);
         $result = $text->clear('custom')->render();
 
-        $this->assertNotRegExp($this->elementRegExp('custom="test-value"'), $result);
+        $message = 'custom attribute should be removed';
+        $this->assertNotRegExp($this->elementRegExp('custom="test-value"'), $result, $message);
     }
 
     public function testDataAttribute()
@@ -213,12 +232,14 @@ trait InputContractTest
         $text = $this->newTestSubjectInstance('email');
         $result = $text->data('sample', 'test-value')->render();
 
-        $this->assertRegExp($this->elementRegExp('data-sample="test-value"'), $result);
+        $message = 'data-sample attribute should be set';
+        $this->assertRegExp($this->elementRegExp('data-sample="test-value"'), $result, $message);
 
         $text = $this->newTestSubjectInstance('email');
         $result = $text->data('custom', 'another-value')->render();
 
-        $this->assertRegExp($this->elementRegExp('data-custom="another-value"'), $result);
+        $message = 'data-custom attribute should be set';
+        $this->assertRegExp($this->elementRegExp('data-custom="another-value"'), $result, $message);
     }
 
     public function testCanRemoveClass()
@@ -227,17 +248,20 @@ trait InputContractTest
         $text = $text->addClass('error');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('class="error"'), $result);
+        $message = 'class attribute should be set';
+        $this->assertRegExp($this->elementRegExp('class="error"'), $result, $message);
 
         $text = $text->addClass('large');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('class="error large"'), $result);
+        $message = 'large class should be added to the class attribute';
+        $this->assertRegExp($this->elementRegExp('class="error large"'), $result, $message);
 
         $text = $text->removeClass('error');
 
         $result = $text->render();
-        $this->assertRegExp($this->elementRegExp('class="large"'), $result);
+        $message = 'error class should be removed from the class attribute';
+        $this->assertRegExp($this->elementRegExp('class="large"'), $result, $message);
     }
 
     public function testCanAddAttributesThroughMagicMethods()
@@ -245,7 +269,8 @@ trait InputContractTest
         $text = $this->newTestSubjectInstance('email');
         $result = $text->maxlength('5')->render();
 
-        $this->assertRegExp($this->elementRegExp('maxlength="5"'), $result);
+        $message = 'maxlength attribute should be set through magic method';
+        $this->assertRegExp($this->elementRegExp('maxlength="5"'), $result, $message);
     }
 
     public function testCanAddAttributesThroughMagicMethodsWithOptionalParameter()
@@ -253,6 +278,7 @@ trait InputContractTest
         $text = $this->newTestSubjectInstance('cow');
         $result = $text->moo()->render();
 
-        $this->assertRegExp($this->elementRegExp('moo="moo"'), $result);
+        $message = 'moo attribute should be set through magic method without parameter';
+        $this->assertRegExp($this->elementRegExp('moo="moo"'), $result, $message);
     }
 }
