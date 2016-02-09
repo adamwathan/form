@@ -262,6 +262,12 @@ trait InputContractTest
         $result = $text->render();
         $message = 'error class should be removed from the class attribute';
         $this->assertRegExp($this->elementRegExp('class="large"'), $result, $message);
+
+        $text = $text->removeClass('large');
+
+        $result = $text->render();
+        $message = 'class attribute should be removed';
+        $this->assertNotRegExp($this->elementRegExp('class'), $result, $message);
     }
 
     public function testCanAddAttributesThroughMagicMethods()
