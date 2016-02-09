@@ -1,12 +1,19 @@
 <?php
 
+/**
+ * @method assertNotNull($value)
+ * @method assertRegExp($pattern, $value, $message)
+ * @method assertNotRegExp($pattern, $value, $message)
+ * @method assertEquals($expected, $value, $message)
+ * @method placeholder($value) : AdamWathan\Form\Elements\Input
+ */
 trait InputContractTest
 {
 
     /**
      * @param string $name
      *
-     * @return AdamWathan\Form\Elements\FormControl
+     * @return AdamWathan\Form\Elements\Input
      */
     protected abstract function newTestSubjectInstance($name);
 
