@@ -14,7 +14,7 @@ class TextAreaTest extends PHPUnit_Framework_TestCase
 
 	protected function getTestSubjectType() {}
 
-	protected function elementRegExp($attributes = '')
+	protected function elementRegExp($attributes)
 	{
 		return '/\A<textarea .*?' . $attributes . '( .*?|)><\/textarea>\z/';
 	}

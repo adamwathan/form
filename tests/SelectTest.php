@@ -14,7 +14,7 @@ class SelectTest extends PHPUnit_Framework_TestCase
 
 	protected function getTestSubjectType()	{}
 
-	protected function elementRegExp($attributes = '')
+	protected function elementRegExp($attributes)
 	{
 		return '/\A<select .*?' . $attributes . '( .*?|)><\/select>\z/';
 	}
