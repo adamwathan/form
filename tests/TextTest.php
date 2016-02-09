@@ -14,6 +14,6 @@ class TextTest extends PHPUnit_Framework_TestCase
 
     protected function getTestSubjectType()
     {
-        return "text";
+        return 'text';
     }
 }

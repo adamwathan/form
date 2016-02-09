@@ -14,6 +14,6 @@ class EmailTest extends PHPUnit_Framework_TestCase
 
     protected function getTestSubjectType()
     {
-        return "email";
+        return 'email';
     }
 }

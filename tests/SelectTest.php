@@ -4,22 +4,19 @@ use AdamWathan\Form\Elements\Select;
 
 class SelectTest extends PHPUnit_Framework_TestCase
 {
-	public function testSelectCanBeCreated()
+
+	use InputContractTest;
+
+	protected function newTestSubjectInstance($name)
 	{
-		$select = new Select('birth_year');
+		return new Select($name);
 	}
 
-	public function testCanRenderBasicSelect()
-	{
-		$select = new Select('birth_year');
-		$expected = '<select name="birth_year"></select>';
-		$result = $select->render();
-		$this->assertEquals($expected, $result);
+	protected function getTestSubjectType()	{}
 
-		$select = new Select('color');
-		$expected = '<select name="color"></select>';
-		$result = $select->render();
-		$this->assertEquals($expected, $result);
+	protected function elementRegExp($attributes = '')
+	{
+		return '/\A<select .*?' . $attributes . '( .*?|)><\/select>\z/';
 	}
 
 	public function testSelectCanBeCreatedWithOptions()
