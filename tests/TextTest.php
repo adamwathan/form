@@ -229,6 +229,21 @@ class TextTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testDataAttributeArray()
+	{
+		$text = new Text('email');
+		
+		$expected = '<input type="text" name="email" data-sample="test-value" data-sample-two="test-value-two">';
+		$result = $text->data(['sample' => 'test-value', 'sample-two' => 'test-value-two'])->render();
+		$this->assertEquals($expected, $result);
+		
+		$text = new Text('email');
+		
+		$expected = '<input type="text" name="email" data-custom="another-value" data-custom-two="another-value-two">';
+		$result = $text->data(['custom' => 'another-value', 'custom-two' => 'another-value-two'])->render();
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testCanRemoveClass()
 	{
 		$text = new Text('email');
