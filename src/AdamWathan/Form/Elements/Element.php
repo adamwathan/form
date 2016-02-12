@@ -23,9 +23,16 @@ abstract class Element
         return $this->attributes[$attribute];
     }
 
-    public function data($attribute, $value)
+    public function data($attribute, $value = null)
     {
-        $this->setAttribute('data-'.$attribute, $value);
+        if (is_array($attribute)) {
+            foreach ($attribute as $key => $val) {
+                $this->setAttribute('data-'.$key, $val);
+            }
+        } else {
+            $this->setAttribute('data-'.$attribute, $value);
+        }
+
         return $this;
     }
 
