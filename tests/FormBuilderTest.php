@@ -159,7 +159,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$result = (string)$this->form->checkbox('terms', 'agree');
 		$this->assertEquals($expected, $result);
 
-        $expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
+		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
 		$result = (string)$this->form->checkbox('terms')->value('agree');
 		$this->assertEquals($expected, $result);
 	}
@@ -176,9 +176,9 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$result = (string)$this->form->radio('color', 'green');
 		$this->assertEquals($expected, $result);
 
-        $expected = '<input type="radio" name="color" value="green" checked="checked">';
-        $result = (string)$this->form->radio('color')->value('green');
-        $this->assertEquals($expected, $result);
+		$expected = '<input type="radio" name="color" value="green" checked="checked">';
+		$result = (string)$this->form->radio('color')->value('green');
+		$this->assertEquals($expected, $result);
 	}
 
 	public function testRenderSelectWithOldInput()
