@@ -193,7 +193,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
 		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
-		$oldInput->shouldReceive('getOldInput')->with('boolean')->andReturn('green');
+		$oldInput->shouldReceive('getOldInput')->with('boolean')->andReturn(1);
 
 		$this->form->setOldInputProvider($oldInput);
 
@@ -201,8 +201,8 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$result = (string)$this->form->checkbox('boolean', 0);
 		$this->assertEquals($expected, $result);
 
-		$expected = '<input type="checkbox" name="boolean" value="0">';
-		$result = (string)$this->form->checkbox('boolean')->value(0);
+		$expected = '<input type="checkbox" name="boolean" value="1" checked="checked">';
+		$result = (string)$this->form->checkbox('boolean', 1);
 		$this->assertEquals($expected, $result);
 	}
 
@@ -210,7 +210,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
 		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
-		$oldInput->shouldReceive('getOldInput')->with('boolean')->andReturn('green');
+		$oldInput->shouldReceive('getOldInput')->with('boolean')->andReturn(1);
 
 		$this->form->setOldInputProvider($oldInput);
 
@@ -218,8 +218,8 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$result = (string)$this->form->radio('boolean', 0);
 		$this->assertEquals($expected, $result);
 
-		$expected = '<input type="radio" name="boolean" value="0">';
-		$result = (string)$this->form->radio('boolean')->value(0);
+		$expected = '<input type="radio" name="boolean" value="1" checked="checked">';
+		$result = (string)$this->form->radio('boolean')->value(1);
 		$this->assertEquals($expected, $result);
 	}
 
