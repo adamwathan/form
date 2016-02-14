@@ -21,6 +21,11 @@ class Checkbox extends Input
         $this->oldValue = $oldValue;
     }
 
+    public function unsetOldValue()
+    {
+        $this->oldValue = null;
+    }
+
     public function defaultToChecked()
     {
         if (! isset($this->checked)) {
@@ -53,6 +58,7 @@ class Checkbox extends Input
 
     public function uncheck()
     {
+        $this->unsetOldValue();
         $this->setChecked(false);
         return $this;
     }
