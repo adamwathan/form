@@ -72,7 +72,7 @@ class Checkbox extends Input
         $currentValue = $this->getAttribute('value');
         $oldValue = $this->oldValue;
 
-        if ($currentValue == $oldValue) {
+        if ($currentValue === $oldValue) {
             $this->check();
         }
     }
