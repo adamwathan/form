@@ -16,6 +16,11 @@ class Checkbox extends Input
         $this->setValue($value);
     }
 
+    public function setOldValue($oldValue)
+    {
+        $this->oldValue = $oldValue;
+    }
+
     public function defaultToChecked()
     {
         if (! isset($this->checked)) {
@@ -62,17 +67,12 @@ class Checkbox extends Input
         }
     }
 
-    public function setOldValue($oldValue)
-    {
-        $this->oldValue = $oldValue;
-    }
-
     protected function checkBinding()
     {
         $currentValue = $this->getAttribute('value');
         $oldValue = $this->oldValue;
 
-        if ($currentValue == $oldValue) {
+        if ($currentValue === $oldValue) {
             $this->check();
         }
     }
