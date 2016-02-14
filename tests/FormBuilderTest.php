@@ -64,6 +64,10 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$expected = '<input type="checkbox" name="terms" value="agree">';
 		$result = (string)$this->form->checkbox('terms', 'agree');
 		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="checkbox" name="terms" value="agree">';
+		$result = (string)$this->form->checkbox('terms')->value('agree');
+		$this->assertEquals($expected, $result);
 	}
 
 	public function testRadio()
@@ -74,6 +78,10 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 		$expected = '<input type="radio" name="terms" value="agree">';
 		$result = (string)$this->form->radio('terms', 'agree');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="radio" name="terms" value="agree">';
+		$result = (string)$this->form->radio('terms')->value('agree');
 		$this->assertEquals($expected, $result);
 	}
 
