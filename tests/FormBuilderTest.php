@@ -189,6 +189,32 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testRenderCheckboxWithOldInputAndForceUncheck()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('terms')->andReturn('agree');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="checkbox" name="terms" value="agree">';
+		$result = (string)$this->form->checkbox('terms', 'agree')->uncheck();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderRadioWithOldInputAndForceUncheck()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('color')->andReturn('green');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="radio" name="color" value="green">';
+		$result = (string)$this->form->radio('color', 'green')->uncheck();
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testRenderCheckboxAgainstBinaryZero()
 	{
 		$expected = '<input type="checkbox" name="boolean" value="0">';
