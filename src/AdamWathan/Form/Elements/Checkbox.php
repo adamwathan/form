@@ -8,6 +8,8 @@ class Checkbox extends Input
 
     private $checked;
 
+    private $oldValue;
+
     public function __construct($name, $value = 1)
     {
         parent::__construct($name);
@@ -58,5 +60,27 @@ class Checkbox extends Input
         if ($checked) {
             $this->setAttribute('checked', 'checked');
         }
+    }
+
+    public function setOldValue($oldValue)
+    {
+        $this->oldValue = $oldValue;
+    }
+
+    protected function checkBinding()
+    {
+        $currentValue = $this->getAttribute('value');
+        $oldValue = $this->oldValue;
+
+        if ($currentValue == $oldValue) {
+            $this->check();
+        }
+    }
+
+    public function render()
+    {
+        $this->checkBinding();
+
+        return parent::render();
     }
 }

@@ -125,10 +125,7 @@ class FormBuilder
         $checkbox = new Checkbox($name, $value);
 
         $oldValue = $this->getValueFor($name);
-
-        if ($value == $oldValue) {
-            $checkbox->check();
-        }
+        $checkbox->setOldValue($oldValue);
 
         return $checkbox;
     }
@@ -140,10 +137,7 @@ class FormBuilder
         $radio = new RadioButton($name, $value);
 
         $oldValue = $this->getValueFor($name);
-
-        if ($value == $oldValue) {
-            $radio->check();
-        }
+        $radio->setOldValue($oldValue);
 
         return $radio;
     }
