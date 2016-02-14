@@ -158,6 +158,10 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
 		$result = (string)$this->form->checkbox('terms', 'agree');
 		$this->assertEquals($expected, $result);
+
+        $expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
+		$result = (string)$this->form->checkbox('terms')->value('agree');
+		$this->assertEquals($expected, $result);
 	}
 
 	public function testRenderRadioWithOldInput()
@@ -171,6 +175,10 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$expected = '<input type="radio" name="color" value="green" checked="checked">';
 		$result = (string)$this->form->radio('color', 'green');
 		$this->assertEquals($expected, $result);
+
+        $expected = '<input type="radio" name="color" value="green" checked="checked">';
+        $result = (string)$this->form->radio('color')->value('green');
+        $this->assertEquals($expected, $result);
 	}
 
 	public function testRenderSelectWithOldInput()
@@ -183,6 +191,10 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 		$expected = '<select name="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
 		$result = (string)$this->form->select('color', array('red' => 'Red', 'blue' => 'Blue'));
+		$this->assertEquals($expected, $result);
+
+		$expected = '<select name="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
+		$result = (string)$this->form->select('color')->options(array('red' => 'Red', 'blue' => 'Blue'));
 		$this->assertEquals($expected, $result);
 	}
 
