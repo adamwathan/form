@@ -64,6 +64,10 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$expected = '<input type="checkbox" name="terms" value="agree">';
 		$result = (string)$this->form->checkbox('terms', 'agree');
 		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="checkbox" name="terms" value="agree">';
+		$result = (string)$this->form->checkbox('terms')->value('agree');
+		$this->assertEquals($expected, $result);
 	}
 
 	public function testRadio()
@@ -74,6 +78,10 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 		$expected = '<input type="radio" name="terms" value="agree">';
 		$result = (string)$this->form->radio('terms', 'agree');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="radio" name="terms" value="agree">';
+		$result = (string)$this->form->radio('terms')->value('agree');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -158,6 +166,10 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
 		$result = (string)$this->form->checkbox('terms', 'agree');
 		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
+		$result = (string)$this->form->checkbox('terms')->value('agree');
+		$this->assertEquals($expected, $result);
 	}
 
 	public function testRenderRadioWithOldInput()
@@ -171,6 +183,24 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$expected = '<input type="radio" name="color" value="green" checked="checked">';
 		$result = (string)$this->form->radio('color', 'green');
 		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="radio" name="color" value="green" checked="checked">';
+		$result = (string)$this->form->radio('color')->value('green');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderCheckboxAgainstBinaryZero()
+	{
+		$expected = '<input type="checkbox" name="boolean" value="0">';
+		$result = (string)$this->form->checkbox('boolean', 0);
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderRadioAgainstBinaryZero()
+	{
+		$expected = '<input type="radio" name="boolean" value="0">';
+		$result = (string)$this->form->radio('boolean', 0);
+		$this->assertEquals($expected, $result);
 	}
 
 	public function testRenderSelectWithOldInput()
@@ -183,6 +213,10 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 		$expected = '<select name="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
 		$result = (string)$this->form->select('color', array('red' => 'Red', 'blue' => 'Blue'));
+		$this->assertEquals($expected, $result);
+
+		$expected = '<select name="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
+		$result = (string)$this->form->select('color')->options(array('red' => 'Red', 'blue' => 'Blue'));
 		$this->assertEquals($expected, $result);
 	}
 
