@@ -132,8 +132,6 @@ class FormBuilder
 
     public function radio($name, $value = null)
     {
-        $value = is_null($value) ? $name : $value;
-
         $radio = new RadioButton($name, $value);
 
         $oldValue = $this->getValueFor($name);
