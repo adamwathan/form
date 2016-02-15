@@ -4,9 +4,19 @@ use AdamWathan\Form\Elements\TextArea;
 
 class TextAreaTest extends PHPUnit_Framework_TestCase
 {
-	public function testTextAreaCanBeCreated()
+
+	use InputContractTest;
+
+	protected  function newTestSubjectInstance($name)
 	{
-		$textarea = new TextArea('bio');
+		return new TextArea($name);
+	}
+
+	protected function getTestSubjectType() {}
+
+	protected function elementRegExp($attributes)
+	{
+		return '/\A<textarea .*?' . $attributes . '( .*?|)><\/textarea>\z/';
 	}
 
 	public function testRenderBasicTextArea()
@@ -54,7 +64,7 @@ class TextAreaTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
-	public function testRenderWithValue()
+	public function testCanRenderWithValue()
 	{
 		$textarea = new TextArea('bio');
 		$expected = '<textarea name="bio" rows="10" cols="50">Sample text</textarea>';

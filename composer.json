@@ -22,5 +22,8 @@
             "AdamWathan\\Form": "src/"
         }
     },
+    "autoload-dev": {
+        "classmap": ["tests/"]
+    },
     "minimum-stability": "dev"
 }
