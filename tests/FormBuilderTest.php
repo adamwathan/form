@@ -210,6 +210,32 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 		$this->form->setOldInputProvider($oldInput);
 
+		$expected = '<input type="radio" name="color" value="green" checked="checked">';
+		$result = (string)$this->form->radio('color', 'green')->check();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testExplicitCheckOnCheckboxTakesPrecedenceOverOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('terms')->andReturn('agree');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
+		$result = (string)$this->form->checkbox('terms', 'agree')->check();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testExplicitCheckOnRadioTakesPrecedenceOverOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('color')->andReturn('green');
+
+		$this->form->setOldInputProvider($oldInput);
+
 		$expected = '<input type="radio" name="color" value="green">';
 		$result = (string)$this->form->radio('color', 'green')->uncheck();
 		$this->assertEquals($expected, $result);
