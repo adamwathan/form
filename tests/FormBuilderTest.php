@@ -189,7 +189,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
-	public function testRenderCheckboxWithOldInputAndForceUncheck()
+	public function testExplicitUncheckOnCheckboxTakesPrecedenceOverOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
 		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
@@ -202,7 +202,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
-	public function testRenderRadioWithOldInputAndForceUncheck()
+	public function testExplicitUncheckOnRadioTakesPrecedenceOverOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
 		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
