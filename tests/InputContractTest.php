@@ -242,6 +242,17 @@ trait InputContractTest
         $this->assertRegExp($this->elementRegExp('data-custom="another-value"'), $result, $message);
     }
 
+    public function testArrayOfDataAttributes()
+    {
+        $text = $this->newTestSubjectInstance('email');
+        $result = $text->data(['custom' => 'value', 'other' => 'value2'])->render();
+
+        $message = 'data-custom attribute should be set';
+        $this->assertRegExp($this->elementRegExp('data-custom="value"'), $result, $message);
+        $message = 'data-other attribute should be set';
+        $this->assertRegExp($this->elementRegExp('data-other="value2"'), $result, $message);
+    }
+
     public function testCanRemoveClass()
     {
         $text = $this->newTestSubjectInstance('email');
