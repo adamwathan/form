@@ -52,6 +52,7 @@ class Checkbox extends Input
 
     public function check()
     {
+        $this->unsetOldValue();
         $this->setChecked(true);
         return $this;
     }

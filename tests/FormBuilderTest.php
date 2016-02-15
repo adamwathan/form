@@ -565,6 +565,24 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testExplicitCheckOnCheckboxTakesPrecedenceOverBinding()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="radio" name="terms" value="agree" checked="checked">';
+		$result = (string)$this->form->radio('terms', 'agree')->check();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testExplicitCheckOnRadioTakesPrecedenceOverBinding()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="radio" name="color" value="green" checked="checked">';
+		$result = (string)$this->form->radio('color', 'green')->check();
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testBindUnsetProperty()
 	{
 		$object = $this->getStubObject();
