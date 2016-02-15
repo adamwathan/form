@@ -547,6 +547,24 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testExplicitUncheckOnCheckboxTakesPrecedenceOverBinding()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="radio" name="terms" value="agree">';
+		$result = (string)$this->form->radio('terms', 'agree')->uncheck();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testExplicitUncheckOnRadioTakesPrecedenceOverBinding()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="radio" name="color" value="green">';
+		$result = (string)$this->form->radio('color', 'green')->uncheck();
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testBindUnsetProperty()
 	{
 		$object = $this->getStubObject();
@@ -617,6 +635,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$obj->date_of_birth = new \DateTime('1985-05-06');
 		$obj->gender = 'male';
 		$obj->terms = 'agree';
+		$obj->color = 'green';
 		$obj->number = '0';
 		return $obj;
 	}
