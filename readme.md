@@ -289,6 +289,10 @@ $options = [
 // Setting data-* attributes
 // <input type="text" data-foo="bar" name="foobar">
 <?= $builder->text('foobar')->data('foo', 'bar'); ?>
+
+// Multiple data-* attributes can be set at once
+// <input type="text" data-foo="bar" data-bar="foo" name="foobar">
+<?= $builder->text('foobar')->data(['foo' => 'bar', 'bar' => 'foo']); ?>
 ```
 
 <a href="#remembering-old-input"></a>
