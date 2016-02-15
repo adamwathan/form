@@ -210,8 +210,8 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 		$this->form->setOldInputProvider($oldInput);
 
-		$expected = '<input type="radio" name="color" value="green" checked="checked">';
-		$result = (string)$this->form->radio('color', 'green')->check();
+		$expected = '<input type="radio" name="color" value="green">';
+		$result = (string)$this->form->radio('color', 'green')->uncheck();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -236,8 +236,8 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 		$this->form->setOldInputProvider($oldInput);
 
-		$expected = '<input type="radio" name="color" value="green">';
-		$result = (string)$this->form->radio('color', 'green')->uncheck();
+		$expected = '<input type="radio" name="color" value="green" checked="checked">';
+		$result = (string)$this->form->radio('color', 'green')->check();
 		$this->assertEquals($expected, $result);
 	}
 
