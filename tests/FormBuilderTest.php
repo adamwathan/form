@@ -44,6 +44,13 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testNumberBox()
+	{
+		$expected = '<input type="number" name="age">';
+		$result = (string)$this->form->text('age');
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testPassword()
 	{
 		$expected = '<input type="password" name="password">';
