@@ -189,6 +189,58 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testExplicitUncheckOnCheckboxTakesPrecedenceOverOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('terms')->andReturn('agree');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="checkbox" name="terms" value="agree">';
+		$result = (string)$this->form->checkbox('terms', 'agree')->uncheck();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testExplicitUncheckOnRadioTakesPrecedenceOverOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('color')->andReturn('green');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="radio" name="color" value="green">';
+		$result = (string)$this->form->radio('color', 'green')->uncheck();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testExplicitCheckOnCheckboxTakesPrecedenceOverOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('terms')->andReturn('agree');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
+		$result = (string)$this->form->checkbox('terms', 'agree')->check();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testExplicitCheckOnRadioTakesPrecedenceOverOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('color')->andReturn('green');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="radio" name="color" value="green" checked="checked">';
+		$result = (string)$this->form->radio('color', 'green')->check();
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testRenderCheckboxAgainstBinaryZero()
 	{
 		$expected = '<input type="checkbox" name="boolean" value="0">';
@@ -521,6 +573,42 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testExplicitUncheckOnCheckboxTakesPrecedenceOverBinding()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="radio" name="terms" value="agree">';
+		$result = (string)$this->form->radio('terms', 'agree')->uncheck();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testExplicitUncheckOnRadioTakesPrecedenceOverBinding()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="radio" name="color" value="green">';
+		$result = (string)$this->form->radio('color', 'green')->uncheck();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testExplicitCheckOnCheckboxTakesPrecedenceOverBinding()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="radio" name="terms" value="agree" checked="checked">';
+		$result = (string)$this->form->radio('terms', 'agree')->check();
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testExplicitCheckOnRadioTakesPrecedenceOverBinding()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+		$expected = '<input type="radio" name="color" value="green" checked="checked">';
+		$result = (string)$this->form->radio('color', 'green')->check();
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testBindUnsetProperty()
 	{
 		$object = $this->getStubObject();
@@ -591,6 +679,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$obj->date_of_birth = new \DateTime('1985-05-06');
 		$obj->gender = 'male';
 		$obj->terms = 'agree';
+		$obj->color = 'green';
 		$obj->number = '0';
 		return $obj;
 	}
