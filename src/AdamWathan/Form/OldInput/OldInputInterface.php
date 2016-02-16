@@ -2,6 +2,6 @@
 
 interface OldInputInterface
 {
-    public function hasOldInput();
+    public function hasOldInput($key);
     public function getOldInput($key);
 }
