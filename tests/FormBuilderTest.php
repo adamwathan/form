@@ -172,6 +172,27 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testRenderCheckboxArrayWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('favourite_foods')->andReturn(array(0 => 'fish', 1 => 'chips'));
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="fish" checked="checked">';
+		$result = (string)$this->form->checkbox('favourite_foods[]', 'fish');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="tofu">';
+		$result = (string)$this->form->checkbox('favourite_foods[]', 'tofu');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="chips" checked="checked">';
+		$result = (string)$this->form->checkbox('favourite_foods[]', 'chips');
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testRenderRadioWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
@@ -592,6 +613,24 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->bind($object);
 		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
 		$result = (string)$this->form->checkbox('terms', 'agree');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testBindCheckboxArray()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="fish" checked="checked">';
+		$result = (string)$this->form->checkbox('favourite_foods[]', 'fish');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="tofu">';
+		$result = (string)$this->form->checkbox('favourite_foods[]', 'tofu');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="chips" checked="checked">';
+		$result = (string)$this->form->checkbox('favourite_foods[]', 'chips');
 		$this->assertEquals($expected, $result);
 	}
 
