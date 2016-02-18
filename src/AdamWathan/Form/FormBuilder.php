@@ -219,6 +219,8 @@ class FormBuilder
 
     public function getValueFor($name)
     {
+        $name = $this->transformKey($name);
+
         if ($this->hasOldInput()) {
             return $this->getOldInput($name);
         }
@@ -288,5 +290,10 @@ class FormBuilder
         );
 
         return $this->select($name, $options);
+    }
+
+    protected function transformKey($key)
+    {
+        return str_replace(array('.', '[]', '[', ']'), array('_', '', '.', ''), $key);
     }
 }
