@@ -272,6 +272,23 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testRenderMultipleSelectWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+	    $oldInput->shouldReceive('hasOldInput')->andReturn(true);
+	    $oldInput->shouldReceive('getOldInput')->with('favourite_foods')->andReturn(array(0 => 'fish', 1 => 'chips'));
+
+	    $this->form->setOldInputProvider($oldInput);
+
+		$expected  = '<select name="favourite_foods[]" multiple="multiple">';
+		$expected .= '<option value="fish" selected>Fish</option>';
+		$expected .= '<option value="tofu">Tofu</option>';
+		$expected .= '<option value="chips" selected>Chips</option>';
+		$expected .= '</select>';
+		$result = (string)$this->form->select('favourite_foods', array('fish' => 'Fish', 'tofu' => 'Tofu', 'chips' => 'Chips'))->multiple();
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testRenderTextAreaWithOldInput()
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
@@ -532,6 +549,20 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testBindMultipleSelect()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+
+		$expected  = '<select name="favourite_foods[]" multiple="multiple">';
+		$expected .= '<option value="fish" selected>Fish</option>';
+		$expected .= '<option value="tofu">Tofu</option>';
+		$expected .= '<option value="chips" selected>Chips</option>';
+		$expected .= '</select>';
+		$result = (string)$this->form->select('favourite_foods', array('fish' => 'Fish', 'tofu' => 'Tofu', 'chips' => 'Chips'))->multiple();
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testBindHidden()
 	{
 		$object = $this->getStubObject();
@@ -681,6 +712,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$obj->terms = 'agree';
 		$obj->color = 'green';
 		$obj->number = '0';
+		$obj->favourite_foods = array('fish', 'chips');
 		return $obj;
 	}
 }
