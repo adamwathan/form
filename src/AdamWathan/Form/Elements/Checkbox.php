@@ -18,12 +18,6 @@ class Checkbox extends Input
 
     public function setOldValue($oldValue)
     {
-        $value = $this->getAttribute('value');
-
-        if (is_array($oldValue) && in_array($value, $oldValue)) {
-            $oldValue = $value;
-        }
-
         $this->oldValue = $oldValue;
     }
 
@@ -85,8 +79,12 @@ class Checkbox extends Input
         $currentValue = $this->getAttribute('value');
         $oldValue = $this->oldValue;
 
+        if (is_array($oldValue) && in_array($currentValue, $oldValue)) {
+             return $this->check();
+        }
+
         if ($currentValue === $oldValue) {
-            $this->check();
+            return $this->check();
         }
     }
 
