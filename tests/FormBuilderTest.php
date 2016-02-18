@@ -269,6 +269,19 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
+	public function testRenderCheckboxAgainstBinaryOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('agree_to_terms')->andReturn('1');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="checkbox" name="agree_to_terms" value="1" checked="checked">';
+		$result = (string)$this->form->checkbox('agree_to_terms', 1);
+		$this->assertEquals($expected, $result);
+	}
+
 	public function testRenderRadioAgainstBinaryZero()
 	{
 		$expected = '<input type="radio" name="boolean" value="0">';
