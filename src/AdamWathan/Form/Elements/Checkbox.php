@@ -76,14 +76,13 @@ class Checkbox extends Input
 
     protected function checkBinding()
     {
-        $currentValue = $this->getAttribute('value');
+        $currentValue = (string) $this->getAttribute('value');
+
         $oldValue = $this->oldValue;
+        $oldValue = is_array($oldValue) ? $oldValue : array($oldValue);
+        $oldValue = array_map('strval', $oldValue);
 
-        if (is_array($oldValue) && in_array($currentValue, $oldValue)) {
-             return $this->check();
-        }
-
-        if ($currentValue === $oldValue) {
+        if (in_array($currentValue, $oldValue)) {
             return $this->check();
         }
     }
