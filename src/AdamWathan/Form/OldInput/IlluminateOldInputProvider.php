@@ -23,6 +23,6 @@ class IlluminateOldInputProvider implements OldInputInterface
 
     protected function transformKey($key)
     {
-        return str_replace(array('.', '[]', '[', ']'), array('_', '', '.', ''), $key);
+        return str_replace(['.', '[]', '[', ']'], ['_', '', '.', ''], $key);
     }
 }

@@ -22,73 +22,73 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testFormOpen()
 	{
 		$expected = '<form method="POST" action="">';
-		$result = (string)$this->form->open();
+		$result = (string) $this->form->open();
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testCanCloseForm()
 	{
 		$expected = '</form>';
-		$result = (string)$this->form->close();
+		$result = (string) $this->form->close();
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testTextBox()
 	{
 		$expected = '<input type="text" name="email">';
-		$result = (string)$this->form->text('email');
+		$result = (string) $this->form->text('email');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="text" name="first_name">';
-		$result = (string)$this->form->text('first_name');
+		$result = (string) $this->form->text('first_name');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testPassword()
 	{
 		$expected = '<input type="password" name="password">';
-		$result = (string)$this->form->password('password');
+		$result = (string) $this->form->password('password');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="password" name="password_confirmed">';
-		$result = (string)$this->form->password('password_confirmed');
+		$result = (string) $this->form->password('password_confirmed');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testCheckbox()
 	{
 		$expected = '<input type="checkbox" name="terms" value="1">';
-		$result = (string)$this->form->checkbox('terms');
+		$result = (string) $this->form->checkbox('terms');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="checkbox" name="terms" value="agree">';
-		$result = (string)$this->form->checkbox('terms', 'agree');
+		$result = (string) $this->form->checkbox('terms', 'agree');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="checkbox" name="terms" value="agree">';
-		$result = (string)$this->form->checkbox('terms')->value('agree');
+		$result = (string) $this->form->checkbox('terms')->value('agree');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testRadio()
 	{
 		$expected = '<input type="radio" name="terms" value="terms">';
-		$result = (string)$this->form->radio('terms');
+		$result = (string) $this->form->radio('terms');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="radio" name="terms" value="agree">';
-		$result = (string)$this->form->radio('terms', 'agree');
+		$result = (string) $this->form->radio('terms', 'agree');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="radio" name="terms" value="agree">';
-		$result = (string)$this->form->radio('terms')->value('agree');
+		$result = (string) $this->form->radio('terms')->value('agree');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testSubmit()
 	{
 		$expected = '<button type="submit">Sign In</button>';
-		$result = (string)$this->form->submit('Sign In');
+		$result = (string) $this->form->submit('Sign In');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -97,48 +97,48 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testButton($value, $name, $expected)
 	{
-		$result = (string)$this->form->button($value, $name);
+		$result = (string) $this->form->button($value, $name);
 		$this->assertEquals($expected, $result);
 	}
 
 	public function buttonProvider()
 	{
-		return array(
-			array('Click Me', 'click-me', '<button type="button" name="click-me">Click Me</button>'),
-			array('Click Me', null, '<button type="button">Click Me</button>')
-		);
+		return [
+			['Click Me', 'click-me', '<button type="button" name="click-me">Click Me</button>'],
+			['Click Me', null, '<button type="button">Click Me</button>'],
+		];
 	}
 
 	public function testSelect()
 	{
 		$expected = '<select name="color"><option value="red">Red</option><option value="blue">Blue</option></select>';
-		$result = (string)$this->form->select('color', array('red' => 'Red', 'blue' => 'Blue'));
+		$result = (string) $this->form->select('color', ['red' => 'Red', 'blue' => 'Blue']);
 		$this->assertEquals($expected, $result);
 
 		$expected = '<select name="fruit"><option value="apple">Granny Smith</option><option value="berry">Blueberry</option></select>';
-		$result = (string)$this->form->select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
+		$result = (string) $this->form->select('fruit', ['apple' => 'Granny Smith', 'berry' => 'Blueberry']);
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testTextArea()
 	{
 		$expected = '<textarea name="bio" rows="10" cols="50"></textarea>';
-		$result = (string)$this->form->textarea('bio');
+		$result = (string) $this->form->textarea('bio');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<textarea name="description" rows="10" cols="50"></textarea>';
-		$result = (string)$this->form->textarea('description');
+		$result = (string) $this->form->textarea('description');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testLabel()
 	{
 		$expected = '<label>Email</label>';
-		$result = (string)$this->form->label('Email');
+		$result = (string) $this->form->label('Email');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<label>First Name</label>';
-		$result = (string)$this->form->label('First Name');
+		$result = (string) $this->form->label('First Name');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -151,7 +151,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<input type="text" name="title" value="Hello &quot;quotes&quot;">';
-		$result = (string)$this->form->text('title');
+		$result = (string) $this->form->text('title');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -164,11 +164,32 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
-		$result = (string)$this->form->checkbox('terms', 'agree');
+		$result = (string) $this->form->checkbox('terms', 'agree');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
-		$result = (string)$this->form->checkbox('terms')->value('agree');
+		$result = (string) $this->form->checkbox('terms')->value('agree');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderCheckboxArrayWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('favourite_foods')->andReturn(['fish', 'chips']);
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="fish" checked="checked">';
+		$result = (string) $this->form->checkbox('favourite_foods[]', 'fish');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="tofu">';
+		$result = (string) $this->form->checkbox('favourite_foods[]', 'tofu');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="chips" checked="checked">';
+		$result = (string) $this->form->checkbox('favourite_foods[]', 'chips');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -181,11 +202,11 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<input type="radio" name="color" value="green" checked="checked">';
-		$result = (string)$this->form->radio('color', 'green');
+		$result = (string) $this->form->radio('color', 'green');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="radio" name="color" value="green" checked="checked">';
-		$result = (string)$this->form->radio('color')->value('green');
+		$result = (string) $this->form->radio('color')->value('green');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -198,7 +219,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<input type="checkbox" name="terms" value="agree">';
-		$result = (string)$this->form->checkbox('terms', 'agree')->uncheck();
+		$result = (string) $this->form->checkbox('terms', 'agree')->uncheck();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -211,7 +232,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<input type="radio" name="color" value="green">';
-		$result = (string)$this->form->radio('color', 'green')->uncheck();
+		$result = (string) $this->form->radio('color', 'green')->uncheck();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -224,7 +245,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
-		$result = (string)$this->form->checkbox('terms', 'agree')->check();
+		$result = (string) $this->form->checkbox('terms', 'agree')->check();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -237,21 +258,34 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<input type="radio" name="color" value="green" checked="checked">';
-		$result = (string)$this->form->radio('color', 'green')->check();
+		$result = (string) $this->form->radio('color', 'green')->check();
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testRenderCheckboxAgainstBinaryZero()
 	{
 		$expected = '<input type="checkbox" name="boolean" value="0">';
-		$result = (string)$this->form->checkbox('boolean', 0);
+		$result = (string) $this->form->checkbox('boolean', 0);
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderCheckboxAgainstBinaryOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
+		$oldInput->shouldReceive('getOldInput')->with('agree_to_terms')->andReturn('1');
+
+		$this->form->setOldInputProvider($oldInput);
+
+		$expected = '<input type="checkbox" name="agree_to_terms" value="1" checked="checked">';
+		$result = (string) $this->form->checkbox('agree_to_terms', 1);
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testRenderRadioAgainstBinaryZero()
 	{
 		$expected = '<input type="radio" name="boolean" value="0">';
-		$result = (string)$this->form->radio('boolean', 0);
+		$result = (string) $this->form->radio('boolean', 0);
 		$this->assertEquals($expected, $result);
 	}
 
@@ -264,11 +298,28 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<select name="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
-		$result = (string)$this->form->select('color', array('red' => 'Red', 'blue' => 'Blue'));
+		$result = (string) $this->form->select('color', ['red' => 'Red', 'blue' => 'Blue']);
 		$this->assertEquals($expected, $result);
 
 		$expected = '<select name="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
-		$result = (string)$this->form->select('color')->options(array('red' => 'Red', 'blue' => 'Blue'));
+		$result = (string) $this->form->select('color')->options(['red' => 'Red', 'blue' => 'Blue']);
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderMultipleSelectWithOldInput()
+	{
+		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+	    $oldInput->shouldReceive('hasOldInput')->andReturn(true);
+	    $oldInput->shouldReceive('getOldInput')->with('favourite_foods')->andReturn(['fish', 'chips']);
+
+	    $this->form->setOldInputProvider($oldInput);
+
+		$expected  = '<select name="favourite_foods[]" multiple="multiple">';
+		$expected .= '<option value="fish" selected>Fish</option>';
+		$expected .= '<option value="tofu">Tofu</option>';
+		$expected .= '<option value="chips" selected>Chips</option>';
+		$expected .= '</select>';
+		$result = (string) $this->form->select('favourite_foods', ['fish' => 'Fish', 'tofu' => 'Tofu', 'chips' => 'Chips'])->multiple();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -281,7 +332,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<textarea name="bio" rows="10" cols="50">This is my bio</textarea>';
-		$result = (string)$this->form->textarea('bio');
+		$result = (string) $this->form->textarea('bio');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -294,14 +345,14 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<textarea name="bio" rows="10" cols="50">&lt;script&gt;alert(&quot;xss!&quot;);&lt;/script&gt;</textarea>';
-		$result = (string)$this->form->textarea('bio');
+		$result = (string) $this->form->textarea('bio');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testNoErrorStoreReturnsNull()
 	{
 		$expected = '';
-		$result = (string)$this->form->getError('email');
+		$result = (string) $this->form->getError('email');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -365,44 +416,44 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testHidden()
 	{
 		$expected = '<input type="hidden" name="secret">';
-		$result = (string)$this->form->hidden('secret');
+		$result = (string) $this->form->hidden('secret');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="hidden" name="token">';
-		$result = (string)$this->form->hidden('token');
+		$result = (string) $this->form->hidden('token');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testFile()
 	{
 		$expected = '<input type="file" name="photo">';
-		$result = (string)$this->form->file('photo');
+		$result = (string) $this->form->file('photo');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="file" name="document">';
-		$result = (string)$this->form->file('document');
+		$result = (string) $this->form->file('document');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testDate()
 	{
 		$expected = '<input type="date" name="date_of_birth">';
-		$result = (string)$this->form->date('date_of_birth');
+		$result = (string) $this->form->date('date_of_birth');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="date" name="start_date">';
-		$result = (string)$this->form->date('start_date');
+		$result = (string) $this->form->date('start_date');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testEmail()
 	{
 		$expected = '<input type="email" name="email">';
-		$result = (string)$this->form->email('email');
+		$result = (string) $this->form->email('email');
 		$this->assertEquals($expected, $result);
 
 		$expected = '<input type="email" name="alternate_email">';
-		$result = (string)$this->form->email('alternate_email');
+		$result = (string) $this->form->email('alternate_email');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -415,7 +466,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<input type="date" name="date_of_birth" value="1999-04-06">';
-		$result = (string)$this->form->date('date_of_birth');
+		$result = (string) $this->form->date('date_of_birth');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -428,7 +479,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<input type="email" name="email" value="example@example.com">';
-		$result = (string)$this->form->email('email');
+		$result = (string) $this->form->email('email');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -441,7 +492,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<input type="hidden" name="secret" value="my-secret-string">';
-		$result = (string)$this->form->hidden('secret');
+		$result = (string) $this->form->hidden('secret');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -455,7 +506,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setToken('12345');
 
 		$expected = '<input type="hidden" name="_token" value="12345">';
-		$result = (string)$this->form->token();
+		$result = (string) $this->form->token();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -463,7 +514,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	{
 		$this->form->setToken('12345');
 		$expected = '<form method="POST" action=""><input type="hidden" name="_token" value="12345">';
-		$result = (string)$this->form->open();
+		$result = (string) $this->form->open();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -471,14 +522,14 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	{
 		$this->form->setToken('12345');
 		$expected = '<form method="GET" action="">';
-		$result = (string)$this->form->open()->get();
+		$result = (string) $this->form->open()->get();
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testSelectMonth()
 	{
 		$expected = '<select name="month"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>';
-		$result = (string)$this->form->selectMonth('month');
+		$result = (string) $this->form->selectMonth('month');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -492,7 +543,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="email" name="email" value="johndoe@example.com">';
-		$result = (string)$this->form->email('email');
+		$result = (string) $this->form->email('email');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -501,7 +552,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="text" name="first_name" value="John">';
-		$result = (string)$this->form->text('first_name');
+		$result = (string) $this->form->text('first_name');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -510,7 +561,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="text" name="number" value="0">';
-		$result = (string)$this->form->text('number');
+		$result = (string) $this->form->text('number');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -519,7 +570,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="date" name="date_of_birth" value="1985-05-06">';
-		$result = (string)$this->form->date('date_of_birth');
+		$result = (string) $this->form->date('date_of_birth');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -528,7 +579,21 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<select name="gender"><option value="male" selected>Male</option><option value="female">Female</option></select>';
-		$result = (string)$this->form->select('gender', array('male' => 'Male', 'female' => 'Female'));
+		$result = (string) $this->form->select('gender', ['male' => 'Male', 'female' => 'Female']);
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testBindMultipleSelect()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+
+		$expected  = '<select name="favourite_foods[]" multiple="multiple">';
+		$expected .= '<option value="fish" selected>Fish</option>';
+		$expected .= '<option value="tofu">Tofu</option>';
+		$expected .= '<option value="chips" selected>Chips</option>';
+		$expected .= '</select>';
+		$result = (string) $this->form->select('favourite_foods', ['fish' => 'Fish', 'tofu' => 'Tofu', 'chips' => 'Chips'])->multiple();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -537,7 +602,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="hidden" name="last_name" value="Doe">';
-		$result = (string)$this->form->hidden('last_name');
+		$result = (string) $this->form->hidden('last_name');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -551,7 +616,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="text" name="first_name" value="Steve">';
-		$result = (string)$this->form->text('first_name');
+		$result = (string) $this->form->text('first_name');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -560,7 +625,25 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
-		$result = (string)$this->form->checkbox('terms', 'agree');
+		$result = (string) $this->form->checkbox('terms', 'agree');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testBindCheckboxArray()
+	{
+		$object = $this->getStubObject();
+		$this->form->bind($object);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="fish" checked="checked">';
+		$result = (string) $this->form->checkbox('favourite_foods[]', 'fish');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="tofu">';
+		$result = (string) $this->form->checkbox('favourite_foods[]', 'tofu');
+		$this->assertEquals($expected, $result);
+
+		$expected = '<input type="checkbox" name="favourite_foods[]" value="chips" checked="checked">';
+		$result = (string) $this->form->checkbox('favourite_foods[]', 'chips');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -569,7 +652,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="text" name="first_name" value="Mike">';
-		$result = (string)$this->form->text('first_name')->value('Mike');
+		$result = (string) $this->form->text('first_name')->value('Mike');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -578,7 +661,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="radio" name="terms" value="agree">';
-		$result = (string)$this->form->radio('terms', 'agree')->uncheck();
+		$result = (string) $this->form->radio('terms', 'agree')->uncheck();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -587,7 +670,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="radio" name="color" value="green">';
-		$result = (string)$this->form->radio('color', 'green')->uncheck();
+		$result = (string) $this->form->radio('color', 'green')->uncheck();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -596,7 +679,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="radio" name="terms" value="agree" checked="checked">';
-		$result = (string)$this->form->radio('terms', 'agree')->check();
+		$result = (string) $this->form->radio('terms', 'agree')->check();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -605,7 +688,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="radio" name="color" value="green" checked="checked">';
-		$result = (string)$this->form->radio('color', 'green')->check();
+		$result = (string) $this->form->radio('color', 'green')->check();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -614,7 +697,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<input type="text" name="not_set">';
-		$result = (string)$this->form->text('not_set');
+		$result = (string) $this->form->text('not_set');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -623,16 +706,16 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = new MagicGetter;
 		$this->form->bind($object);
 		$expected = '<input type="text" name="not_set" value="foo">';
-		$result = (string)$this->form->text('not_set');
+		$result = (string) $this->form->text('not_set');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testBindArray()
 	{
-		$model = array('first_name' => 'John');
+		$model = ['first_name' => 'John'];
 		$this->form->bind($model);
 		$expected = '<input type="text" name="first_name" value="John">';
-		$result = (string)$this->form->text('first_name');
+		$result = (string) $this->form->text('first_name');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -642,7 +725,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->bind($object);
 		$this->form->close();
 		$expected = '<input type="text" name="first_name">';
-		$result = (string)$this->form->text('first_name');
+		$result = (string) $this->form->text('first_name');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -652,14 +735,14 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object->first_name = '" onmouseover="alert(\'xss\')';
 		$this->form->bind($object);
 		$expected = '<input type="text" name="first_name" value="&quot; onmouseover=&quot;alert(&#039;xss&#039;)">';
-		$result = (string)$this->form->text('first_name');
+		$result = (string) $this->form->text('first_name');
 		$this->assertEquals($expected, $result);
 	}
 
 	public function testRemoveClass()
 	{
 		$expected = '<input type="text" name="food">';
-		$result = (string)$this->form->text('food')->addClass('sandwich pizza')->removeClass('sandwich')->removeClass('pizza');
+		$result = (string) $this->form->text('food')->addClass('sandwich pizza')->removeClass('sandwich')->removeClass('pizza');
 		$this->assertEquals($expected, $result);
 	}
 
@@ -681,6 +764,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$obj->terms = 'agree';
 		$obj->color = 'green';
 		$obj->number = '0';
+		$obj->favourite_foods = ['fish', 'chips'];
 		return $obj;
 	}
 }

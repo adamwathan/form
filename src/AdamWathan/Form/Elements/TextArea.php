@@ -2,12 +2,11 @@
 
 class TextArea extends FormControl
 {
-
-    protected $attributes = array(
+    protected $attributes = [
         'name' => '',
         'rows' => 10,
         'cols' => 50,
-    );
+    ];
 
     protected $value;
 

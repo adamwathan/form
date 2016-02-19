@@ -58,6 +58,6 @@ class FormServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('adamwathan.form');
+        return ['adamwathan.form'];
     }
 }

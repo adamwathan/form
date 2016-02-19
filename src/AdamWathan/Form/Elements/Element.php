@@ -2,7 +2,7 @@
 
 abstract class Element
 {
-    protected $attributes = array();
+    protected $attributes = [];
 
     protected function setAttribute($attribute, $value = null)
     {
@@ -109,9 +109,9 @@ abstract class Element
 
     public function __call($method, $params)
     {
-        $params = count($params) ? $params : array($method);
-        $params = array_merge(array($method), $params);
-        call_user_func_array(array($this, 'attribute'), $params);
+        $params = count($params) ? $params : [$method];
+        $params = array_merge([$method], $params);
+        call_user_func_array([$this, 'attribute'], $params);
         return $this;
     }
 }

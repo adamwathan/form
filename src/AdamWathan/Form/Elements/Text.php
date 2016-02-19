@@ -2,10 +2,9 @@
 
 class Text extends Input
 {
-
-    protected $attributes = array(
+    protected $attributes = [
         'type' => 'text',
-    );
+    ];
 
     public function placeholder($placeholder)
     {
