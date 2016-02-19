@@ -103,20 +103,20 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function buttonProvider()
 	{
-		return array(
-			array('Click Me', 'click-me', '<button type="button" name="click-me">Click Me</button>'),
-			array('Click Me', null, '<button type="button">Click Me</button>')
-		);
+		return [
+			['Click Me', 'click-me', '<button type="button" name="click-me">Click Me</button>'],
+			['Click Me', null, '<button type="button">Click Me</button>'],
+		];
 	}
 
 	public function testSelect()
 	{
 		$expected = '<select name="color"><option value="red">Red</option><option value="blue">Blue</option></select>';
-		$result = (string)$this->form->select('color', array('red' => 'Red', 'blue' => 'Blue'));
+		$result = (string)$this->form->select('color', ['red' => 'Red', 'blue' => 'Blue']);
 		$this->assertEquals($expected, $result);
 
 		$expected = '<select name="fruit"><option value="apple">Granny Smith</option><option value="berry">Blueberry</option></select>';
-		$result = (string)$this->form->select('fruit', array('apple' => 'Granny Smith', 'berry' => 'Blueberry'));
+		$result = (string)$this->form->select('fruit', ['apple' => 'Granny Smith', 'berry' => 'Blueberry']);
 		$this->assertEquals($expected, $result);
 	}
 
@@ -176,7 +176,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
 		$oldInput->shouldReceive('hasOldInput')->andReturn(true);
-		$oldInput->shouldReceive('getOldInput')->with('favourite_foods')->andReturn(array(0 => 'fish', 1 => 'chips'));
+		$oldInput->shouldReceive('getOldInput')->with('favourite_foods')->andReturn(['fish', 'chips']);
 
 		$this->form->setOldInputProvider($oldInput);
 
@@ -298,11 +298,11 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$this->form->setOldInputProvider($oldInput);
 
 		$expected = '<select name="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
-		$result = (string)$this->form->select('color', array('red' => 'Red', 'blue' => 'Blue'));
+		$result = (string)$this->form->select('color', ['red' => 'Red', 'blue' => 'Blue']);
 		$this->assertEquals($expected, $result);
 
 		$expected = '<select name="color"><option value="red">Red</option><option value="blue" selected>Blue</option></select>';
-		$result = (string)$this->form->select('color')->options(array('red' => 'Red', 'blue' => 'Blue'));
+		$result = (string)$this->form->select('color')->options(['red' => 'Red', 'blue' => 'Blue']);
 		$this->assertEquals($expected, $result);
 	}
 
@@ -310,7 +310,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	{
 		$oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
 	    $oldInput->shouldReceive('hasOldInput')->andReturn(true);
-	    $oldInput->shouldReceive('getOldInput')->with('favourite_foods')->andReturn(array(0 => 'fish', 1 => 'chips'));
+	    $oldInput->shouldReceive('getOldInput')->with('favourite_foods')->andReturn(['fish', 'chips']);
 
 	    $this->form->setOldInputProvider($oldInput);
 
@@ -319,7 +319,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$expected .= '<option value="tofu">Tofu</option>';
 		$expected .= '<option value="chips" selected>Chips</option>';
 		$expected .= '</select>';
-		$result = (string)$this->form->select('favourite_foods', array('fish' => 'Fish', 'tofu' => 'Tofu', 'chips' => 'Chips'))->multiple();
+		$result = (string)$this->form->select('favourite_foods', ['fish' => 'Fish', 'tofu' => 'Tofu', 'chips' => 'Chips'])->multiple();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -579,7 +579,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$object = $this->getStubObject();
 		$this->form->bind($object);
 		$expected = '<select name="gender"><option value="male" selected>Male</option><option value="female">Female</option></select>';
-		$result = (string)$this->form->select('gender', array('male' => 'Male', 'female' => 'Female'));
+		$result = (string)$this->form->select('gender', ['male' => 'Male', 'female' => 'Female']);
 		$this->assertEquals($expected, $result);
 	}
 
@@ -593,7 +593,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$expected .= '<option value="tofu">Tofu</option>';
 		$expected .= '<option value="chips" selected>Chips</option>';
 		$expected .= '</select>';
-		$result = (string)$this->form->select('favourite_foods', array('fish' => 'Fish', 'tofu' => 'Tofu', 'chips' => 'Chips'))->multiple();
+		$result = (string)$this->form->select('favourite_foods', ['fish' => 'Fish', 'tofu' => 'Tofu', 'chips' => 'Chips'])->multiple();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -712,7 +712,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
 	public function testBindArray()
 	{
-		$model = array('first_name' => 'John');
+		$model = ['first_name' => 'John'];
 		$this->form->bind($model);
 		$expected = '<input type="text" name="first_name" value="John">';
 		$result = (string)$this->form->text('first_name');
@@ -764,7 +764,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 		$obj->terms = 'agree';
 		$obj->color = 'green';
 		$obj->number = '0';
-		$obj->favourite_foods = array('fish', 'chips');
+		$obj->favourite_foods = ['fish', 'chips'];
 		return $obj;
 	}
 }
