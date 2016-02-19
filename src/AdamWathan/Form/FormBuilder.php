@@ -153,7 +153,7 @@ class FormBuilder
         return $submit;
     }
 
-    public function select($name, $options = array())
+    public function select($name, $options = [])
     {
         $select = new Select($name, $options);
 
@@ -274,7 +274,7 @@ class FormBuilder
 
     public function selectMonth($name)
     {
-        $options = array(
+        $options = [
             "1" => "January",
             "2" => "February",
             "3" => "March",
@@ -287,13 +287,13 @@ class FormBuilder
             "10" => "October",
             "11" => "November",
             "12" => "December",
-        );
+        ];
 
         return $this->select($name, $options);
     }
 
     protected function transformKey($key)
     {
-        return str_replace(array('.', '[]', '[', ']'), array('_', '', '.', ''), $key);
+        return str_replace(['.', '[]', '[', ']'], ['_', '', '.', ''], $key);
     }
 }

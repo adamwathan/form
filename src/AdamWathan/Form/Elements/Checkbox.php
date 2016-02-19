@@ -2,9 +2,9 @@
 
 class Checkbox extends Input
 {
-    protected $attributes = array(
+    protected $attributes = [
         'type' => 'checkbox',
-    );
+    ];
 
     private $checked;
 
@@ -79,7 +79,7 @@ class Checkbox extends Input
         $currentValue = (string) $this->getAttribute('value');
 
         $oldValue = $this->oldValue;
-        $oldValue = is_array($oldValue) ? $oldValue : array($oldValue);
+        $oldValue = is_array($oldValue) ? $oldValue : [$oldValue];
         $oldValue = array_map('strval', $oldValue);
 
         if (in_array($currentValue, $oldValue)) {

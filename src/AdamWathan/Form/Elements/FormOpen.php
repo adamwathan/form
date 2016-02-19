@@ -2,10 +2,10 @@
 
 class FormOpen extends Element
 {
-    protected $attributes = array(
+    protected $attributes = [
         'method' => 'POST',
         'action' => '',
-    );
+    ];
 
     protected $token;
     protected $hiddenMethod;

@@ -119,7 +119,7 @@ trait InputContractTest
         $text = $this->newTestSubjectInstance('email');
 
         $expected = $text->render();
-        $result = (string)$text;
+        $result = (string) $text;
         $message = 'Casting input element to string should return the rendered element';
         $this->assertEquals($expected, $result, $message);
     }

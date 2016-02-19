@@ -2,7 +2,7 @@
 
 class Password extends Text
 {
-    protected $attributes = array(
+    protected $attributes = [
         'type' => 'password',
-    );
+    ];
 }
