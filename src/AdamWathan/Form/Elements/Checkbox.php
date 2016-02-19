@@ -13,6 +13,7 @@ class Checkbox extends Input
     public function __construct($name, $value = 1)
     {
         parent::__construct($name);
+
         $this->setValue($value);
     }
 
@@ -28,7 +29,7 @@ class Checkbox extends Input
 
     public function defaultToChecked()
     {
-        if (! isset($this->checked)) {
+        if (! isset($this->checked) && is_null($this->oldValue)) {
             $this->check();
         }
 
@@ -37,7 +38,7 @@ class Checkbox extends Input
 
     public function defaultToUnchecked()
     {
-        if (! isset($this->checked)) {
+        if (! isset($this->checked) && is_null($this->oldValue)) {
             $this->uncheck();
         }
 
@@ -47,6 +48,7 @@ class Checkbox extends Input
     public function defaultCheckedState($state)
     {
         $state ? $this->defaultToChecked() : $this->defaultToUnchecked();
+
         return $this;
     }
 
@@ -54,6 +56,7 @@ class Checkbox extends Input
     {
         $this->unsetOldValue();
         $this->setChecked(true);
+
         return $this;
     }
 
@@ -61,6 +64,7 @@ class Checkbox extends Input
     {
         $this->unsetOldValue();
         $this->setChecked(false);
+
         return $this;
     }
 
