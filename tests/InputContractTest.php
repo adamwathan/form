@@ -1,32 +1,11 @@
 <?php
 
-/**
- * @method assertNotNull($value)
- * @method assertRegExp($pattern, $value, $message)
- * @method assertNotRegExp($pattern, $value, $message)
- * @method assertEquals($expected, $value, $message)
- * @method placeholder($value) : AdamWathan\Form\Elements\Input
- */
 trait InputContractTest
 {
-
-    /**
-     * @param string $name
-     *
-     * @return AdamWathan\Form\Elements\Input
-     */
     protected abstract function newTestSubjectInstance($name);
 
-    /**
-     * @return string
-     */
     protected abstract function getTestSubjectType();
 
-    /**
-     * @param string $attributes
-     *
-     * @return string
-     */
     protected function elementRegExp($attributes)
     {
         return '/\A<input type="' . $this->getTestSubjectType() . '" .*?' . $attributes . '( .*?|)>\z/';

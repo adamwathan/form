@@ -4,7 +4,6 @@ use AdamWathan\Form\Elements\Checkbox;
 
 class CheckboxTest extends PHPUnit_Framework_TestCase
 {
-
 	use InputContractTest;
 
 	protected function newTestSubjectInstance($name)
@@ -17,9 +16,6 @@ class CheckboxTest extends PHPUnit_Framework_TestCase
 		return 'checkbox';
 	}
 
-	/**
-	 * @return string
-	 */
 	protected function getTestSubjectTag()
 	{
 		return 'input';
