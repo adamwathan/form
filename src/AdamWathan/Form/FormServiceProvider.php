@@ -1,8 +1,10 @@
-<?php namespace AdamWathan\Form;
+<?php
 
-use Illuminate\Support\ServiceProvider;
+namespace AdamWathan\Form;
+
 use AdamWathan\Form\ErrorStore\IlluminateErrorStore;
 use AdamWathan\Form\OldInput\IlluminateOldInputProvider;
+use Illuminate\Support\ServiceProvider;
 
 class FormServiceProvider extends ServiceProvider
 {

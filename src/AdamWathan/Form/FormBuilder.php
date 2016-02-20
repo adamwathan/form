@@ -1,26 +1,31 @@
-<?php namespace AdamWathan\Form;
+<?php
 
-use AdamWathan\Form\Elements\Text;
-use AdamWathan\Form\Elements\Password;
-use AdamWathan\Form\Elements\Checkbox;
-use AdamWathan\Form\Elements\RadioButton;
+namespace AdamWathan\Form;
+
 use AdamWathan\Form\Elements\Button;
-use AdamWathan\Form\Elements\Select;
-use AdamWathan\Form\Elements\TextArea;
-use AdamWathan\Form\Elements\Label;
-use AdamWathan\Form\Elements\FormOpen;
-use AdamWathan\Form\Elements\Hidden;
-use AdamWathan\Form\Elements\File;
+use AdamWathan\Form\Elements\Checkbox;
 use AdamWathan\Form\Elements\Date;
 use AdamWathan\Form\Elements\Email;
-use AdamWathan\Form\OldInput\OldInputInterface;
+use AdamWathan\Form\Elements\File;
+use AdamWathan\Form\Elements\FormOpen;
+use AdamWathan\Form\Elements\Hidden;
+use AdamWathan\Form\Elements\Label;
+use AdamWathan\Form\Elements\Password;
+use AdamWathan\Form\Elements\RadioButton;
+use AdamWathan\Form\Elements\Select;
+use AdamWathan\Form\Elements\Text;
+use AdamWathan\Form\Elements\TextArea;
 use AdamWathan\Form\ErrorStore\ErrorStoreInterface;
+use AdamWathan\Form\OldInput\OldInputInterface;
 
 class FormBuilder
 {
     private $oldInput;
+
     private $errorStore;
+
     private $csrfToken;
+
     private $model;
 
     public function setOldInputProvider(OldInputInterface $oldInputProvider)
@@ -57,6 +62,7 @@ class FormBuilder
     public function close()
     {
         $this->unbindModel();
+
         return '</form>';
     }
 
@@ -251,6 +257,7 @@ class FormBuilder
         if (! isset($this->model)) {
             return false;
         }
+
         return isset($this->model->{$name}) || method_exists($this->model, '__get');
     }
 
@@ -264,6 +271,7 @@ class FormBuilder
         if (!is_string($value)) {
             return $value;
         }
+
         return htmlentities($value, ENT_QUOTES, 'UTF-8');
     }
 

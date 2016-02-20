@@ -1,9 +1,13 @@
-<?php namespace AdamWathan\Form\Elements;
+<?php
+
+namespace AdamWathan\Form\Elements;
 
 class Label extends Element
 {
     private $element;
+
     private $labelBefore;
+
     private $label;
 
     public function __construct($label)
@@ -13,7 +17,7 @@ class Label extends Element
 
     public function render()
     {
-        $result = '<label';
+        $result  = '<label';
         $result .= $this->renderAttributes();
         $result .= '>';
 
@@ -35,6 +39,7 @@ class Label extends Element
     public function forId($name)
     {
         $this->setAttribute('for', $name);
+
         return $this;
     }
 
@@ -42,6 +47,7 @@ class Label extends Element
     {
         $this->element = $element;
         $this->labelBefore = true;
+
         return $this;
     }
 
@@ -49,6 +55,7 @@ class Label extends Element
     {
         $this->element = $element;
         $this->labelBefore = false;
+
         return $this;
     }
 

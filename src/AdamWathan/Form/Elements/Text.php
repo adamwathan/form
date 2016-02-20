@@ -1,4 +1,6 @@
-<?php namespace AdamWathan\Form\Elements;
+<?php
+
+namespace AdamWathan\Form\Elements;
 
 class Text extends Input
 {
@@ -9,6 +11,7 @@ class Text extends Input
     public function placeholder($placeholder)
     {
         $this->setAttribute('placeholder', $placeholder);
+
         return $this;
     }
 

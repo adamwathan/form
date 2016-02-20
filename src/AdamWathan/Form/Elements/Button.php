@@ -1,4 +1,6 @@
-<?php namespace AdamWathan\Form\Elements;
+<?php
+
+namespace AdamWathan\Form\Elements;
 
 class Button extends FormControl
 {
@@ -11,12 +13,13 @@ class Button extends FormControl
     public function __construct($value, $name = null)
     {
         parent::__construct($name);
+
         $this->value($value);
     }
 
     public function render()
     {
-        $result = '<button';
+        $result  = '<button';
         $result .= $this->renderAttributes();
         $result .= '>';
         $result .= $this->value;

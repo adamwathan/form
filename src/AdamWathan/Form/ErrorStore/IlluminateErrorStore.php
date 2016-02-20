@@ -1,4 +1,6 @@
-<?php namespace AdamWathan\Form\ErrorStore;
+<?php
+
+namespace AdamWathan\Form\ErrorStore;
 
 use Illuminate\Session\Store as Session;
 
@@ -18,6 +20,7 @@ class IlluminateErrorStore implements ErrorStoreInterface
         }
 
         $key = $this->transformKey($key);
+
         return $this->getErrors()->has($key);
     }
 
@@ -28,6 +31,7 @@ class IlluminateErrorStore implements ErrorStoreInterface
         }
 
         $key = $this->transformKey($key);
+
         return $this->getErrors()->first($key);
     }
 

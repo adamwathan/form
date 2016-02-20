@@ -1,4 +1,6 @@
-<?php namespace AdamWathan\Form\Elements;
+<?php
+
+namespace AdamWathan\Form\Elements;
 
 abstract class Element
 {
@@ -39,6 +41,7 @@ abstract class Element
     public function attribute($attribute, $value)
     {
         $this->setAttribute($attribute, $value);
+
         return $this;
     }
 
@@ -49,6 +52,7 @@ abstract class Element
         }
 
         $this->removeAttribute($attribute);
+
         return $this;
     }
 
@@ -59,6 +63,7 @@ abstract class Element
         }
 
         $this->setAttribute('class', $class);
+
         return $this;
     }
 
@@ -75,12 +80,14 @@ abstract class Element
         }
 
         $this->setAttribute('class', $class);
+
         return $this;
     }
 
     public function id($id)
     {
         $this->setId($id);
+
         return $this;
     }
 
@@ -112,6 +119,7 @@ abstract class Element
         $params = count($params) ? $params : [$method];
         $params = array_merge([$method], $params);
         call_user_func_array([$this, 'attribute'], $params);
+
         return $this;
     }
 }

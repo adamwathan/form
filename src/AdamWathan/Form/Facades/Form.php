@@ -1,4 +1,6 @@
-<?php namespace AdamWathan\Form\Facades;
+<?php
+
+namespace AdamWathan\Form\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
