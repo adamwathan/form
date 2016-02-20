@@ -2,9 +2,9 @@
 
 trait InputContractTest
 {
-    protected abstract function newTestSubjectInstance($name);
+    abstract protected function newTestSubjectInstance($name);
 
-    protected abstract function getTestSubjectType();
+    abstract protected function getTestSubjectType();
 
     protected function elementRegExp($attributes)
     {
@@ -34,7 +34,8 @@ trait InputContractTest
         $this->assertRegExp($this->elementRegExp('autofocus="autofocus"'), $result, $message);
     }
 
-    public function testUnfocus() {
+    public function testUnfocus()
+    {
         $pattern = 'autofocus="autofocus"';
 
         $text = $this->newTestSubjectInstance('');
