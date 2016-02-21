@@ -19,13 +19,7 @@ class Button extends FormControl
 
     public function render()
     {
-        $result  = '<button';
-        $result .= $this->renderAttributes();
-        $result .= '>';
-        $result .= $this->value;
-        $result .= '</button>';
-
-        return $result;
+        return sprintf('<button%s>%s</button>', $this->renderAttributes(), $this->value);
     }
 
     public function value($value)

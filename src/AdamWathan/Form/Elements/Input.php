@@ -6,11 +6,7 @@ abstract class Input extends FormControl
 {
     public function render()
     {
-        $result  = '<input';
-        $result .= $this->renderAttributes();
-        $result .= '>';
-
-        return $result;
+        return sprintf('<input%s>', $this->renderAttributes());
     }
 
     public function value($value)

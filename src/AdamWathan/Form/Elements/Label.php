@@ -17,23 +17,21 @@ class Label extends Element
 
     public function render()
     {
-        $result  = '<label';
-        $result .= $this->renderAttributes();
-        $result .= '>';
+        $tags = [sprintf('<label%s>', $this->renderAttributes())];
 
         if ($this->labelBefore) {
-            $result .= $this->label;
+            $tags[] = $this->label;
         }
 
-        $result .= $this->renderElement();
+        $tags[] = $this->renderElement();
 
         if (! $this->labelBefore) {
-            $result .= $this->label;
+            $tags[] = $this->label;
         }
 
-        $result .= '</label>';
+        $tags[] = '</label>';
 
-        return $result;
+        return implode('', $tags);
     }
 
     public function forId($name)

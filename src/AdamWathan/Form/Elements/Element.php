@@ -105,13 +105,9 @@ abstract class Element
 
     protected function renderAttributes()
     {
-        $result = '';
-
-        foreach ($this->attributes as $attribute => $value) {
-            $result .= " {$attribute}=\"{$value}\"";
-        }
-
-        return $result;
+        return implode('', array_map(function ($attribute, $value) {
+            return sprintf(' %s="%s"', $attribute, $value);
+        }, array_keys($this->attributes), $this->attributes));
     }
 
     public function __call($method, $params)
