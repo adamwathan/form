@@ -31,7 +31,7 @@ class Label extends Element
 
         $tags[] = '</label>';
 
-        return implode('', $tags);
+        return implode($tags);
     }
 
     public function forId($name)

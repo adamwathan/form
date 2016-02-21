@@ -25,7 +25,7 @@ class FormOpen extends Element
             $tags[] = $this->hiddenMethod->render();
         }
 
-        return implode('', $tags);
+        return implode($tags);
     }
 
     protected function hasToken()

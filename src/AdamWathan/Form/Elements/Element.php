@@ -105,7 +105,7 @@ abstract class Element
 
     protected function renderAttributes()
     {
-        return implode('', array_map(function ($attribute, $value) {
+        return implode(array_map(function ($attribute, $value) {
             return sprintf(' %s="%s"', $attribute, $value);
         }, array_keys($this->attributes), $this->attributes));
     }
