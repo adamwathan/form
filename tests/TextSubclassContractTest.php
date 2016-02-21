@@ -2,7 +2,6 @@
 
 trait TextSubclassContractTest
 {
-
     use InputContractTest;
 
     public function testDefaultValue()

@@ -1,32 +1,11 @@
 <?php
 
-/**
- * @method assertNotNull($value)
- * @method assertRegExp($pattern, $value, $message)
- * @method assertNotRegExp($pattern, $value, $message)
- * @method assertEquals($expected, $value, $message)
- * @method placeholder($value) : AdamWathan\Form\Elements\Input
- */
 trait InputContractTest
 {
+    abstract protected function newTestSubjectInstance($name);
 
-    /**
-     * @param string $name
-     *
-     * @return AdamWathan\Form\Elements\Input
-     */
-    protected abstract function newTestSubjectInstance($name);
+    abstract protected function getTestSubjectType();
 
-    /**
-     * @return string
-     */
-    protected abstract function getTestSubjectType();
-
-    /**
-     * @param string $attributes
-     *
-     * @return string
-     */
     protected function elementRegExp($attributes)
     {
         return '/\A<input type="' . $this->getTestSubjectType() . '" .*?' . $attributes . '( .*?|)>\z/';
@@ -55,7 +34,8 @@ trait InputContractTest
         $this->assertRegExp($this->elementRegExp('autofocus="autofocus"'), $result, $message);
     }
 
-    public function testUnfocus() {
+    public function testUnfocus()
+    {
         $pattern = 'autofocus="autofocus"';
 
         $text = $this->newTestSubjectInstance('');

@@ -4,7 +4,6 @@ use AdamWathan\Form\Elements\File;
 
 class FileTest extends PHPUnit_Framework_TestCase
 {
-
     use InputContractTest;
 
     protected function newTestSubjectInstance($name)

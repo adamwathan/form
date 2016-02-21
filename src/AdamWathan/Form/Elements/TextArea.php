@@ -1,4 +1,6 @@
-<?php namespace AdamWathan\Form\Elements;
+<?php
+
+namespace AdamWathan\Form\Elements;
 
 class TextArea extends FormControl
 {
@@ -12,7 +14,7 @@ class TextArea extends FormControl
 
     public function render()
     {
-        $result = '<textarea';
+        $result  = '<textarea';
         $result .= $this->renderAttributes();
         $result .= '>';
         $result .= $this->value;
@@ -24,24 +26,28 @@ class TextArea extends FormControl
     public function rows($rows)
     {
         $this->setAttribute('rows', $rows);
+
         return $this;
     }
 
     public function cols($cols)
     {
         $this->setAttribute('cols', $cols);
+
         return $this;
     }
 
     public function value($value)
     {
         $this->value = $value;
+
         return $this;
     }
 
     public function placeholder($placeholder)
     {
         $this->setAttribute('placeholder', $placeholder);
+
         return $this;
     }
 

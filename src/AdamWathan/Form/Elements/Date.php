@@ -1,4 +1,6 @@
-<?php namespace AdamWathan\Form\Elements;
+<?php
+
+namespace AdamWathan\Form\Elements;
 
 class Date extends Text
 {
@@ -11,6 +13,7 @@ class Date extends Text
         if ($value instanceof \DateTime) {
             $value = $value->format('Y-m-d');
         }
+
         return parent::value($value);
     }
 }

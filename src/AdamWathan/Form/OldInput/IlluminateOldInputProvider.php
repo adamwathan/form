@@ -1,4 +1,6 @@
-<?php namespace AdamWathan\Form\OldInput;
+<?php
+
+namespace AdamWathan\Form\OldInput;
 
 use Illuminate\Session\Store as Session;
 
