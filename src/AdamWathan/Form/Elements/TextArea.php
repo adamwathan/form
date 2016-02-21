@@ -14,7 +14,7 @@ class TextArea extends FormControl
 
     public function render()
     {
-        return implode('', [
+        return implode([
             sprintf('<textarea%s>', $this->renderAttributes()),
             $this->value,
             '</textarea>',

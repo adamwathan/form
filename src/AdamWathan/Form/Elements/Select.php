@@ -35,7 +35,7 @@ class Select extends FormControl
 
     public function render()
     {
-        return implode('', [
+        return implode([
             sprintf('<select%s>', $this->renderAttributes()),
             $this->renderOptions(),
             '</select>',
@@ -51,7 +51,7 @@ class Select extends FormControl
             return $this->renderOption($value, $label);
         }, array_keys($this->options), $this->options);
 
-        return implode('', $tags);
+        return implode($tags);
     }
 
     protected function renderOptGroup($label, $options)
@@ -60,16 +60,16 @@ class Select extends FormControl
             return $this->renderOption($value, $label);
         }, array_keys($options), $options);
 
-        return implode('', [
+        return implode([
             sprintf('<optgroup label="%s">', $label),
-            implode('', $options),
+            implode($options),
             '</optgroup>',
         ]);
     }
 
     protected function renderOption($value, $label)
     {
-        return implode('', [
+        return implode([
             sprintf('<option value="%s"%s>', $value, $this->isSelected($value) ? ' selected' : ''),
             $label,
             '</option>',
