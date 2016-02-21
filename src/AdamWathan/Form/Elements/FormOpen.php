@@ -15,19 +15,17 @@ class FormOpen extends Element
 
     public function render()
     {
-        $result  = '<form';
-        $result .= $this->renderAttributes();
-        $result .= '>';
+        $tags = [sprintf('<form%s>', $this->renderAttributes())];
 
         if ($this->hasToken() && ($this->attributes['method'] !== 'GET')) {
-            $result .= $this->token->render();
+            $tags[] = $this->token->render();
         }
 
         if ($this->hasHiddenMethod()) {
-            $result .= $this->hiddenMethod->render();
+            $tags[] = $this->hiddenMethod->render();
         }
 
-        return $result;
+        return implode('', $tags);
     }
 
     protected function hasToken()

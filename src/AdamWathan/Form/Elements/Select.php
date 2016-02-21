@@ -35,51 +35,45 @@ class Select extends FormControl
 
     public function render()
     {
-        $result  = '<select';
-        $result .= $this->renderAttributes();
-        $result .= '>';
-        $result .= $this->renderOptions();
-        $result .= '</select>';
-
-        return $result;
+        return implode('', [
+            sprintf('<select%s>', $this->renderAttributes()),
+            $this->renderOptions(),
+            '</select>',
+        ]);
     }
 
     protected function renderOptions()
     {
-        $result = '';
-
-        foreach ($this->options as $value => $label) {
+        $tags = array_map(function ($value, $label) {
             if (is_array($label)) {
-                $result .= $this->renderOptGroup($value, $label);
-                continue;
+                return $this->renderOptGroup($value, $label);
             }
-            $result .= $this->renderOption($value, $label);
-        }
+            return $this->renderOption($value, $label);
+        }, array_keys($this->options), $this->options);
 
-        return $result;
+        return implode('', $tags);
     }
 
     protected function renderOptGroup($label, $options)
     {
-        $result = "<optgroup label=\"{$label}\">";
-        foreach ($options as $value => $label) {
-            $result .= $this->renderOption($value, $label);
-        }
-        $result .= "</optgroup>";
+        $options = array_map(function ($value, $label) {
+            return $this->renderOption($value, $label);
+        }, array_keys($options), $options);
 
-        return $result;
+        return implode('', [
+            sprintf('<optgroup label="%s">', $label),
+            implode('', $options),
+            '</optgroup>',
+        ]);
     }
 
     protected function renderOption($value, $label)
     {
-        $option  = '<option ';
-        $option .= 'value="' . $value . '"';
-        $option .= $this->isSelected($value) ? ' selected' : '';
-        $option .= '>';
-        $option .= $label;
-        $option .= '</option>';
-
-        return $option;
+        return implode('', [
+            sprintf('<option value="%s"%s>', $value, $this->isSelected($value) ? ' selected' : ''),
+            $label,
+            '</option>',
+        ]);
     }
 
     protected function isSelected($value)

@@ -14,13 +14,11 @@ class TextArea extends FormControl
 
     public function render()
     {
-        $result  = '<textarea';
-        $result .= $this->renderAttributes();
-        $result .= '>';
-        $result .= $this->value;
-        $result .= '</textarea>';
-
-        return $result;
+        return implode('', [
+            sprintf('<textarea%s>', $this->renderAttributes()),
+            $this->value,
+            '</textarea>',
+        ]);
     }
 
     public function rows($rows)
