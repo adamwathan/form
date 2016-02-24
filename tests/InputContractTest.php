@@ -77,7 +77,16 @@ trait InputContractTest
         $this->assertRegExp($this->elementRegExp('disabled="disabled"'), $result, $message);
     }
 
-    public function testEnable()
+    public function testReadyOnly()
+    {
+        $text = $this->newTestSubjectInstance('email');
+        $result = $text->readonly()->render();
+
+        $message = 'readonly attribute should be set';
+        $this->assertRegExp($this->elementRegExp('readonly="readonly"'), $result, $message);
+    }
+
+    public function testEnableDisabled()
     {
         $pattern = 'disabled="disabled"';
 
@@ -92,6 +101,23 @@ trait InputContractTest
 
         $message = 'disabled attribute should not be removed';
         $this->assertNotRegExp($this->elementRegExp('disabled="disabled"'), $result, $message);
+    }
+
+    public function testEnableReadOnly()
+    {
+        $pattern = 'readonly="readonly"';
+
+        $text = $this->newTestSubjectInstance('email');
+        $result = $text->enable()->render();
+
+        $message = 'readonly attribute should not be set';
+        $this->assertNotRegExp($this->elementRegExp($pattern), $result, $message);
+
+        $text = $this->newTestSubjectInstance('email');
+        $result = $text->readonly()->enable()->render();
+
+        $message = 'readonly attribute should not be removed';
+        $this->assertNotRegExp($this->elementRegExp('readonly="readonly"'), $result, $message);
     }
 
     public function testCanBeCastToString()
