@@ -35,9 +35,17 @@ abstract class FormControl extends Element
         return $this;
     }
 
+    public function readonly()
+    {
+        $this->setAttribute('readonly', 'readonly');
+
+        return $this;
+    }
+
     public function enable()
     {
         $this->removeAttribute('disabled');
+        $this->removeAttribute('readonly');
 
         return $this;
     }
