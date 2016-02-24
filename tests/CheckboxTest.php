@@ -24,7 +24,7 @@ class CheckboxTest extends PHPUnit_Framework_TestCase
     public function testCanCheckCheckbox()
     {
         $checkbox = new Checkbox('terms');
-        $expected = '<input type="checkbox" name="terms" value="1" checked="checked">';
+        $expected = '<input type="checkbox" name="terms" value="1" checked>';
         $result = $checkbox->check()->render();
 
         $this->assertEquals($expected, $result);
@@ -42,7 +42,7 @@ class CheckboxTest extends PHPUnit_Framework_TestCase
     public function testDefaultToChecked()
     {
         $checkbox = new Checkbox('above_18');
-        $expected = '<input type="checkbox" name="above_18" value="1" checked="checked">';
+        $expected = '<input type="checkbox" name="above_18" value="1" checked>';
         $result = $checkbox->defaultToChecked()->render();
 
         $this->assertEquals($expected, $result);
@@ -69,13 +69,13 @@ class CheckboxTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
 
         $checkbox = new Checkbox('above_18');
-        $expected = '<input type="checkbox" name="above_18" value="1" checked="checked">';
+        $expected = '<input type="checkbox" name="above_18" value="1" checked>';
         $result = $checkbox->defaultToUnchecked()->check()->render();
 
         $this->assertEquals($expected, $result);
 
         $checkbox = new Checkbox('above_18');
-        $expected = '<input type="checkbox" name="above_18" value="1" checked="checked">';
+        $expected = '<input type="checkbox" name="above_18" value="1" checked>';
         $result = $checkbox->check()->defaultToUnchecked()->render();
 
         $this->assertEquals($expected, $result);
@@ -84,7 +84,7 @@ class CheckboxTest extends PHPUnit_Framework_TestCase
     public function testDefaultCheckedState()
     {
         $checkbox = new Checkbox('above_18');
-        $expected = '<input type="checkbox" name="above_18" value="1" checked="checked">';
+        $expected = '<input type="checkbox" name="above_18" value="1" checked>';
         $result = $checkbox->defaultCheckedState(true)->render();
 
         $this->assertEquals($expected, $result);
@@ -101,7 +101,7 @@ class CheckboxTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
 
         $checkbox = new Checkbox('above_18');
-        $expected = '<input type="checkbox" name="above_18" value="1" checked="checked">';
+        $expected = '<input type="checkbox" name="above_18" value="1" checked>';
         $result = $checkbox->check()->defaultCheckedState(false)->render();
 
         $this->assertEquals($expected, $result);

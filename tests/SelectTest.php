@@ -243,13 +243,13 @@ class SelectTest extends PHPUnit_Framework_TestCase
     public function testSelectCanBeMultiple()
     {
         $select = new Select('people');
-        $expected = '<select name="people[]" multiple="multiple"></select>';
+        $expected = '<select name="people[]" multiple></select>';
         $result = $select->multiple()->render();
 
         $this->assertEquals($expected, $result);
 
         $select = new Select('people[]');
-        $expected = '<select name="people[]" multiple="multiple"></select>';
+        $expected = '<select name="people[]" multiple></select>';
         $result = $select->multiple()->render();
 
         $this->assertEquals($expected, $result);
@@ -258,7 +258,12 @@ class SelectTest extends PHPUnit_Framework_TestCase
     public function testCanSelectMultipleElementsInMultiselects()
     {
         $select = new Select('color', ['red' => 'Red', 'blue' => 'Blue']);
-        $expected = '<select name="color[]" multiple="multiple"><option value="red" selected>Red</option><option value="blue" selected>Blue</option></select>';
+        $expected = implode([
+            '<select name="color[]" multiple>',
+                '<option value="red" selected>Red</option>',
+                '<option value="blue" selected>Blue</option>',
+            '</select>',
+        ]);
         $result = $select->multiple()->select(['red', 'blue'])->render();
 
         $this->assertEquals($expected, $result);

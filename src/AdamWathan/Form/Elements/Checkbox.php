@@ -76,7 +76,7 @@ class Checkbox extends Input
         $this->removeAttribute('checked');
 
         if ($checked) {
-            $this->setAttribute('checked', 'checked');
+            $this->setAttribute('checked');
         }
     }
 

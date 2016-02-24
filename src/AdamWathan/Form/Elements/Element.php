@@ -8,10 +8,6 @@ abstract class Element
 
     protected function setAttribute($attribute, $value = null)
     {
-        if (is_null($value)) {
-            return;
-        }
-
         $this->attributes[$attribute] = $value;
     }
 
@@ -38,7 +34,7 @@ abstract class Element
         return $this;
     }
 
-    public function attribute($attribute, $value)
+    public function attribute($attribute, $value = null)
     {
         $this->setAttribute($attribute, $value);
 
@@ -105,14 +101,26 @@ abstract class Element
 
     protected function renderAttributes()
     {
-        return implode(array_map(function ($attribute, $value) {
-            return sprintf(' %s="%s"', $attribute, $value);
-        }, array_keys($this->attributes), $this->attributes));
+        $attributes = array_map(function ($attribute, $value) {
+            return $this->renderAttribute($attribute, $value);
+        }, array_keys($this->attributes), $this->attributes);
+
+        $attributes = array_merge([''], $attributes);
+
+        return implode(' ', $attributes);
+    }
+
+    protected function renderAttribute($attribute, $value = null)
+    {
+        if ($value === null) {
+            return "{$attribute}";
+        }
+
+        return sprintf('%s="%s"', $attribute, $value);
     }
 
     public function __call($method, $params)
     {
-        $params = count($params) ? $params : [$method];
         $params = array_merge([$method], $params);
         call_user_func_array([$this, 'attribute'], $params);
 

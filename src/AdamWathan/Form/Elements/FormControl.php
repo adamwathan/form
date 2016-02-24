@@ -4,9 +4,11 @@ namespace AdamWathan\Form\Elements;
 
 abstract class FormControl extends Element
 {
-    public function __construct($name)
+    public function __construct($name = null)
     {
-        $this->setName($name);
+        if ($name !== null) {
+            $this->setName($name);
+        }
     }
 
     protected function setName($name)
@@ -16,7 +18,7 @@ abstract class FormControl extends Element
 
     public function required()
     {
-        $this->setAttribute('required', 'required');
+        $this->setAttribute('required');
 
         return $this;
     }
@@ -30,14 +32,14 @@ abstract class FormControl extends Element
 
     public function disable()
     {
-        $this->setAttribute('disabled', 'disabled');
+        $this->setAttribute('disabled');
 
         return $this;
     }
 
     public function readonly()
     {
-        $this->setAttribute('readonly', 'readonly');
+        $this->setAttribute('readonly');
 
         return $this;
     }
@@ -52,7 +54,7 @@ abstract class FormControl extends Element
 
     public function autofocus()
     {
-        $this->setAttribute('autofocus', 'autofocus');
+        $this->setAttribute('autofocus');
 
         return $this;
     }

@@ -74,7 +74,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = $this->getStubObject();
         $this->form->bind($object);
 
-        $expected  = '<select name="favourite_foods[]" multiple="multiple">';
+        $expected  = '<select name="favourite_foods[]" multiple>';
         $expected .= '<option value="fish" selected>Fish</option>';
         $expected .= '<option value="tofu">Tofu</option>';
         $expected .= '<option value="chips" selected>Chips</option>';
@@ -98,7 +98,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = $this->getStubObject();
         $this->form->bind($object);
 
-        $expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
+        $expected = '<input type="checkbox" name="terms" value="agree" checked>';
         $result = (string) $this->form->checkbox('terms', 'agree');
         $this->assertEquals($expected, $result);
     }
@@ -108,7 +108,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = $this->getStubObject();
         $this->form->bind($object);
 
-        $expected = '<input type="checkbox" name="favourite_foods[]" value="fish" checked="checked">';
+        $expected = '<input type="checkbox" name="favourite_foods[]" value="fish" checked>';
         $result = (string) $this->form->checkbox('favourite_foods[]', 'fish');
         $this->assertEquals($expected, $result);
 
@@ -116,7 +116,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $result = (string) $this->form->checkbox('favourite_foods[]', 'tofu');
         $this->assertEquals($expected, $result);
 
-        $expected = '<input type="checkbox" name="favourite_foods[]" value="chips" checked="checked">';
+        $expected = '<input type="checkbox" name="favourite_foods[]" value="chips" checked>';
         $result = (string) $this->form->checkbox('favourite_foods[]', 'chips');
         $this->assertEquals($expected, $result);
     }
@@ -188,7 +188,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = $this->getStubObject();
         $this->form->bind($object);
 
-        $expected  = '<input type="checkbox" name="published[]" value="1" checked="checked">';
+        $expected  = '<input type="checkbox" name="published[]" value="1" checked>';
         $expected .= '<input type="checkbox" name="published[]" value="0">';
         $result  = (string) $this->form->checkbox('published[]', 1);
         $result .= (string) $this->form->checkbox('published[]', 0)->defaultToChecked();
@@ -200,7 +200,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = $this->getStubObject();
         $this->form->bind($object);
 
-        $expected  = '<input type="checkbox" name="published[]" value="1" checked="checked">';
+        $expected  = '<input type="checkbox" name="published[]" value="1" checked>';
         $expected .= '<input type="checkbox" name="published[]" value="0">';
         $result  = (string) $this->form->checkbox('published[]', 1)->defaultToUnchecked();
         $result .= (string) $this->form->checkbox('published[]', 0);
@@ -212,7 +212,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = $this->getStubObject();
         $this->form->bind($object);
 
-        $expected  = '<input type="radio" name="published[]" value="1" checked="checked">';
+        $expected  = '<input type="radio" name="published[]" value="1" checked>';
         $expected .= '<input type="radio" name="published[]" value="0">';
         $result  = (string) $this->form->radio('published[]', 1);
         $result .= (string) $this->form->radio('published[]', 0)->defaultToChecked();
@@ -224,7 +224,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = $this->getStubObject();
         $this->form->bind($object);
 
-        $expected  = '<input type="radio" name="published[]" value="1" checked="checked">';
+        $expected  = '<input type="radio" name="published[]" value="1" checked>';
         $expected .= '<input type="radio" name="published[]" value="0">';
         $result  = (string) $this->form->radio('published[]', 1)->defaultToUnchecked();
         $result .= (string) $this->form->radio('published[]', 0);
@@ -271,7 +271,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = $this->getStubObject();
         $this->form->bind($object);
 
-        $expected = '<input type="radio" name="terms" value="agree" checked="checked">';
+        $expected = '<input type="radio" name="terms" value="agree" checked>';
         $result = (string) $this->form->radio('terms', 'agree')->check();
         $this->assertEquals($expected, $result);
     }
@@ -281,7 +281,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = $this->getStubObject();
         $this->form->bind($object);
 
-        $expected = '<input type="radio" name="color" value="green" checked="checked">';
+        $expected = '<input type="radio" name="color" value="green" checked>';
         $result = (string) $this->form->radio('color', 'green')->check();
         $this->assertEquals($expected, $result);
     }
