@@ -20,11 +20,6 @@ class IlluminateOldInputProvider implements OldInputInterface
 
     public function getOldInput($key)
     {
-        return $this->session->getOldInput($this->transformKey($key));
-    }
-
-    protected function transformKey($key)
-    {
-        return str_replace(['.', '[]', '[', ']'], ['_', '', '.', ''], $key);
+        return $this->session->getOldInput($key);
     }
 }
