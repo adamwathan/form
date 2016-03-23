@@ -225,8 +225,6 @@ class FormBuilder
 
     public function getValueFor($name)
     {
-        $name = $this->transformKey($name);
-
         if ($this->hasOldInput()) {
             return $this->getOldInput($name);
         }
@@ -258,11 +256,15 @@ class FormBuilder
             return false;
         }
 
+        $name = $this->transformKey($name);
+
         return isset($this->model->{$name}) || method_exists($this->model, '__get');
     }
 
     protected function getModelValue($name)
     {
+        $name = $this->transformKey($name);
+
         return $this->escape($this->model->{$name});
     }
 
@@ -302,6 +304,6 @@ class FormBuilder
 
     protected function transformKey($key)
     {
-        return str_replace(['.', '[]', '[', ']'], ['_', '', '.', ''], $key);
+        return str_replace('[]', '', $key);
     }
 }

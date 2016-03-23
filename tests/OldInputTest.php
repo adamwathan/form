@@ -48,7 +48,7 @@ class OldInputTest extends PHPUnit_Framework_TestCase
     {
         $oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
         $oldInput->shouldReceive('hasOldInput')->andReturn(true);
-        $oldInput->shouldReceive('getOldInput')->with('favourite_foods')->andReturn(['fish', 'chips']);
+        $oldInput->shouldReceive('getOldInput')->with('favourite_foods[]')->andReturn(['fish', 'chips']);
 
         $this->form->setOldInputProvider($oldInput);
 
