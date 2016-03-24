@@ -4,11 +4,11 @@ namespace AdamWathan\Form\Elements;
 
 class Label extends Element
 {
-    private $element;
+    protected $element;
 
-    private $labelBefore;
+    protected $labelBefore;
 
-    private $label;
+    protected $label;
 
     public function __construct($label)
     {
