@@ -4,9 +4,9 @@ namespace AdamWathan\Form\Elements;
 
 class Select extends FormControl
 {
-    private $options;
+    protected $options;
 
-    private $selected;
+    protected $selected;
 
     public function __construct($name, $options = [])
     {
