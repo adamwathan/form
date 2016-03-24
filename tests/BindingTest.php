@@ -143,11 +143,34 @@ class BindingTest extends PHPUnit_Framework_TestCase
 
     public function testBindArray()
     {
-        $model = ['first_name' => 'John'];
-        $this->form->bind($model);
+        $array = ['first_name' => 'John'];
+        $this->form->bind($array);
 
         $expected = '<input type="text" name="first_name" value="John">';
         $result = (string) $this->form->text('first_name');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBindNestedArray()
+    {
+        $array = [
+            'address' => [
+                'city' => 'Roswell',
+                'tree' => [
+                    'has' => [
+                        'nested' => 'Bird'
+                    ]
+                ],
+            ],
+        ];
+        $this->form->bind($array);
+
+        $expected = '<input type="text" name="address[city]" value="Roswell">';
+        $result = (string) $this->form->text('address[city]');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="address[tree][has][nested]" value="Bird">';
+        $result = (string) $this->form->text('address[city][has][nested]');
         $this->assertEquals($expected, $result);
     }
 
