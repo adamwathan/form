@@ -4,9 +4,9 @@ namespace AdamWathan\Form\Elements;
 
 class Select extends FormControl
 {
-    private $options;
+    protected $options;
 
-    private $selected;
+    protected $selected;
 
     public function __construct($name, $options = [])
     {
@@ -21,11 +21,6 @@ class Select extends FormControl
         return $this;
     }
 
-    public function getSelected()
-    {
-        return $this->selected;
-    }
-
     protected function setOptions($options)
     {
         $this->options = $options;
@@ -36,11 +31,6 @@ class Select extends FormControl
         $this->setOptions($options);
 
         return $this;
-    }
-
-    public function getOptions()
-    {
-        return $this->options;
     }
 
     public function render()
