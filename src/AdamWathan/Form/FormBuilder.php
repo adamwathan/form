@@ -20,13 +20,13 @@ use AdamWathan\Form\OldInput\OldInputInterface;
 
 class FormBuilder
 {
-    private $oldInput;
+    protected $oldInput;
 
-    private $errorStore;
+    protected $errorStore;
 
-    private $csrfToken;
+    protected $csrfToken;
 
-    private $model;
+    protected $model;
 
     public function setOldInputProvider(OldInputInterface $oldInputProvider)
     {
