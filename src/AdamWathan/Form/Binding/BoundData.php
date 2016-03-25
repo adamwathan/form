@@ -11,41 +11,35 @@ class BoundData
         $this->data = $data;
     }
 
-    public function has($name)
+    public function get($name, $default = null)
     {
-        return $this->dotGet($this->transformKey($name)) !== false;
+        return $this->dotGet($this->transformKey($name), $default);
     }
 
-    public function get($name)
-    {
-        return $this->dotGet($this->transformKey($name));
-    }
-
-    protected function dotGet($dotKey)
+    protected function dotGet($dotKey, $default)
     {
         $keyParts = array_filter(explode('.', $dotKey));
 
-        return $this->dataGet($this->data, $keyParts);
+        return $this->dataGet($this->data, $keyParts, $default);
     }
 
-    protected function dataGet($target, $keyParts)
+    protected function dataGet($target, $keyParts, $default)
     {
         if (count($keyParts) == 0) {
             return $target;
         }
 
-        $key = $keyParts[0];
-        $remainingKeys = array_slice($keyParts, 1);
+        $key = array_shift($keyParts);
 
         if (is_array($target) && isset($target[$key])) {
-            return $this->dataGet($target[$key], $remainingKeys);
+            return $this->dataGet($target[$key], $keyParts, $default);
         }
 
         if (property_exists($target, $key) || method_exists($target, '__get')) {
-            return $this->dataGet($target->{$key}, $remainingKeys);
+            return $this->dataGet($target->{$key}, $keyParts, $default);
         }
 
-        return false;
+        return $default;
     }
 
     protected function transformKey($key)

@@ -230,8 +230,8 @@ class FormBuilder
             return $this->getOldInput($name);
         }
 
-        if ($this->hasBoundValue($name)) {
-            return $this->getBoundValue($name);
+        if ($this->hasBoundData()) {
+            return $this->getBoundValue($name, null);
         }
 
         return null;
@@ -251,18 +251,14 @@ class FormBuilder
         return $this->escape($this->oldInput->getOldInput($name));
     }
 
-    protected function hasBoundValue($name)
+    protected function hasBoundData()
     {
-        if (! isset($this->boundData)) {
-            return false;
-        }
-
-        return $this->boundData->has($name);
+        return isset($this->boundData);
     }
 
-    protected function getBoundValue($name)
+    protected function getBoundValue($name, $default)
     {
-        return $this->escape($this->boundData->get($name));
+        return $this->escape($this->boundData->get($name, $default));
     }
 
     protected function escape($value)
