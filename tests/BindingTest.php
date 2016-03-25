@@ -220,7 +220,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testCloseUnbindsModel()
+    public function testCloseUnbindsData()
     {
         $object = $this->getStubObject();
         $this->form->bind($object);
@@ -231,7 +231,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testAgainstXSSAttacksInBoundModels()
+    public function testAgainstXSSAttacksInBoundData()
     {
         $object = $this->getStubObject();
         $object->first_name = '" onmouseover="alert(\'xss\')';

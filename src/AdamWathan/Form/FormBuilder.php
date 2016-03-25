@@ -27,7 +27,7 @@ class FormBuilder
 
     protected $csrfToken;
 
-    protected $model;
+    protected $boundData;
 
     public function setOldInputProvider(OldInputInterface $oldInputProvider)
     {
@@ -62,7 +62,7 @@ class FormBuilder
 
     public function close()
     {
-        $this->unbindModel();
+        $this->unbindData();
 
         return '</form>';
     }
@@ -221,7 +221,7 @@ class FormBuilder
 
     public function bind($data)
     {
-        $this->model = new BoundData($data);
+        $this->boundData = new BoundData($data);
     }
 
     public function getValueFor($name)
@@ -230,8 +230,8 @@ class FormBuilder
             return $this->getOldInput($name);
         }
 
-        if ($this->hasModelValue($name)) {
-            return $this->getModelValue($name);
+        if ($this->hasBoundValue($name)) {
+            return $this->getBoundValue($name);
         }
 
         return null;
@@ -251,18 +251,18 @@ class FormBuilder
         return $this->escape($this->oldInput->getOldInput($name));
     }
 
-    protected function hasModelValue($name)
+    protected function hasBoundValue($name)
     {
-        if (! isset($this->model)) {
+        if (! isset($this->boundData)) {
             return false;
         }
 
-        return $this->model->has($name);
+        return $this->boundData->has($name);
     }
 
-    protected function getModelValue($name)
+    protected function getBoundValue($name)
     {
-        return $this->escape($this->model->get($name));
+        return $this->escape($this->boundData->get($name));
     }
 
     protected function escape($value)
@@ -274,9 +274,9 @@ class FormBuilder
         return htmlentities($value, ENT_QUOTES, 'UTF-8');
     }
 
-    protected function unbindModel()
+    protected function unbindData()
     {
-        $this->model = null;
+        $this->boundData = null;
     }
 
     public function selectMonth($name)
