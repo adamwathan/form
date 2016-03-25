@@ -2,6 +2,7 @@
 
 namespace AdamWathan\Form;
 
+use AdamWathan\Form\Binding\BoundData;
 use AdamWathan\Form\Elements\Button;
 use AdamWathan\Form\Elements\Checkbox;
 use AdamWathan\Form\Elements\Date;
@@ -26,7 +27,7 @@ class FormBuilder
 
     protected $csrfToken;
 
-    protected $model;
+    protected $boundData;
 
     public function setOldInputProvider(OldInputInterface $oldInputProvider)
     {
@@ -61,7 +62,7 @@ class FormBuilder
 
     public function close()
     {
-        $this->unbindModel();
+        $this->unbindData();
 
         return '</form>';
     }
@@ -218,9 +219,9 @@ class FormBuilder
         return $message;
     }
 
-    public function bind($model)
+    public function bind($data)
     {
-        $this->model = is_array($model) ? (object) $model : $model;
+        $this->boundData = new BoundData($data);
     }
 
     public function getValueFor($name)
@@ -229,8 +230,8 @@ class FormBuilder
             return $this->getOldInput($name);
         }
 
-        if ($this->hasModelValue($name)) {
-            return $this->getModelValue($name);
+        if ($this->hasBoundValue($name)) {
+            return $this->getBoundValue($name);
         }
 
         return null;
@@ -250,36 +251,32 @@ class FormBuilder
         return $this->escape($this->oldInput->getOldInput($name));
     }
 
-    protected function hasModelValue($name)
+    protected function hasBoundValue($name)
     {
-        if (! isset($this->model)) {
+        if (! isset($this->boundData)) {
             return false;
         }
 
-        $name = $this->transformKey($name);
-
-        return isset($this->model->{$name}) || method_exists($this->model, '__get');
+        return $this->boundData->has($name);
     }
 
-    protected function getModelValue($name)
+    protected function getBoundValue($name)
     {
-        $name = $this->transformKey($name);
-
-        return $this->escape($this->model->{$name});
+        return $this->escape($this->boundData->get($name));
     }
 
     protected function escape($value)
     {
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             return $value;
         }
 
         return htmlentities($value, ENT_QUOTES, 'UTF-8');
     }
 
-    protected function unbindModel()
+    protected function unbindData()
     {
-        $this->model = null;
+        $this->boundData = null;
     }
 
     public function selectMonth($name)
@@ -300,10 +297,5 @@ class FormBuilder
         ];
 
         return $this->select($name, $options);
-    }
-
-    protected function transformKey($key)
-    {
-        return str_replace('[]', '', $key);
     }
 }

@@ -136,22 +136,95 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = new MagicGetter;
         $this->form->bind($object);
 
-        $expected = '<input type="text" name="not_set" value="foo">';
-        $result = (string) $this->form->text('not_set');
+        $expected = '<input type="text" name="not_magic" value="foo">';
+        $result = (string) $this->form->text('not_magic');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="magic" value="bar">';
+        $result = (string) $this->form->text('magic');
         $this->assertEquals($expected, $result);
     }
 
     public function testBindArray()
     {
-        $model = ['first_name' => 'John'];
-        $this->form->bind($model);
+        $array = ['first_name' => 'John'];
+        $this->form->bind($array);
 
         $expected = '<input type="text" name="first_name" value="John">';
         $result = (string) $this->form->text('first_name');
         $this->assertEquals($expected, $result);
     }
 
-    public function testCloseUnbindsModel()
+    public function testBindNestedArray()
+    {
+        $array = [
+            'address' => [
+                'city' => 'Roswell',
+                'tree' => [
+                    'has' => [
+                        'nested' => 'Bird'
+                    ]
+                ],
+            ],
+        ];
+        $this->form->bind($array);
+
+        $expected = '<input type="text" name="address[city]" value="Roswell">';
+        $result = (string) $this->form->text('address[city]');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="address[tree][has][nested]" value="Bird">';
+        $result = (string) $this->form->text('address[tree][has][nested]');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBindNestedObject()
+    {
+        $object = json_decode(json_encode([
+            'address' => [
+                'city' => 'Roswell',
+                'tree' => [
+                    'has' => [
+                        'nested' => 'Bird'
+                    ]
+                ],
+            ],
+        ]));
+        $this->form->bind($object);
+
+        $expected = '<input type="text" name="address[city]" value="Roswell">';
+        $result = (string) $this->form->text('address[city]');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="address[tree][has][nested]" value="Bird">';
+        $result = (string) $this->form->text('address[tree][has][nested]');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBindNestedMixed()
+    {
+        $object = [
+            'address' => [
+                'city' => 'Roswell',
+                'tree' => json_decode(json_encode([
+                    'has' => [
+                        'nested' => 'Bird'
+                    ]
+                ])),
+            ],
+        ];
+        $this->form->bind($object);
+
+        $expected = '<input type="text" name="address[city]" value="Roswell">';
+        $result = (string) $this->form->text('address[city]');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="address[tree][has][nested]" value="Bird">';
+        $result = (string) $this->form->text('address[tree][has][nested]');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testCloseUnbindsData()
     {
         $object = $this->getStubObject();
         $this->form->bind($object);
@@ -162,7 +235,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testAgainstXSSAttacksInBoundModels()
+    public function testAgainstXSSAttacksInBoundData()
     {
         $object = $this->getStubObject();
         $object->first_name = '" onmouseover="alert(\'xss\')';
@@ -307,8 +380,10 @@ class BindingTest extends PHPUnit_Framework_TestCase
 
 class MagicGetter
 {
+    public $not_magic = 'foo';
+
     public function __get($key)
     {
-        return 'foo';
+        return 'bar';
     }
 }
