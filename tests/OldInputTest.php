@@ -35,11 +35,11 @@ class OldInputTest extends PHPUnit_Framework_TestCase
 
         $this->form->setOldInputProvider($oldInput);
 
-        $expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
+        $expected = '<input type="checkbox" name="terms" value="agree" checked>';
         $result = (string) $this->form->checkbox('terms', 'agree');
         $this->assertEquals($expected, $result);
 
-        $expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
+        $expected = '<input type="checkbox" name="terms" value="agree" checked>';
         $result = (string) $this->form->checkbox('terms')->value('agree');
         $this->assertEquals($expected, $result);
     }
@@ -52,7 +52,7 @@ class OldInputTest extends PHPUnit_Framework_TestCase
 
         $this->form->setOldInputProvider($oldInput);
 
-        $expected = '<input type="checkbox" name="favourite_foods[]" value="fish" checked="checked">';
+        $expected = '<input type="checkbox" name="favourite_foods[]" value="fish" checked>';
         $result = (string) $this->form->checkbox('favourite_foods[]', 'fish');
         $this->assertEquals($expected, $result);
 
@@ -60,7 +60,7 @@ class OldInputTest extends PHPUnit_Framework_TestCase
         $result = (string) $this->form->checkbox('favourite_foods[]', 'tofu');
         $this->assertEquals($expected, $result);
 
-        $expected = '<input type="checkbox" name="favourite_foods[]" value="chips" checked="checked">';
+        $expected = '<input type="checkbox" name="favourite_foods[]" value="chips" checked>';
         $result = (string) $this->form->checkbox('favourite_foods[]', 'chips');
         $this->assertEquals($expected, $result);
     }
@@ -73,11 +73,11 @@ class OldInputTest extends PHPUnit_Framework_TestCase
 
         $this->form->setOldInputProvider($oldInput);
 
-        $expected = '<input type="radio" name="color" value="green" checked="checked">';
+        $expected = '<input type="radio" name="color" value="green" checked>';
         $result = (string) $this->form->radio('color', 'green');
         $this->assertEquals($expected, $result);
 
-        $expected = '<input type="radio" name="color" value="green" checked="checked">';
+        $expected = '<input type="radio" name="color" value="green" checked>';
         $result = (string) $this->form->radio('color')->value('green');
         $this->assertEquals($expected, $result);
     }
@@ -107,7 +107,7 @@ class OldInputTest extends PHPUnit_Framework_TestCase
 
         $this->form->setOldInputProvider($oldInput);
 
-        $expected  = '<select name="favourite_foods[]" multiple="multiple">';
+        $expected  = '<select name="favourite_foods[]" multiple>';
         $expected .= '<option value="fish" selected>Fish</option>';
         $expected .= '<option value="tofu">Tofu</option>';
         $expected .= '<option value="chips" selected>Chips</option>';
@@ -189,7 +189,7 @@ class OldInputTest extends PHPUnit_Framework_TestCase
 
         $this->form->setOldInputProvider($oldInput);
 
-        $expected = '<input type="checkbox" name="agree_to_terms" value="1" checked="checked">';
+        $expected = '<input type="checkbox" name="agree_to_terms" value="1" checked>';
         $result = (string) $this->form->checkbox('agree_to_terms', 1);
         $this->assertEquals($expected, $result);
     }
@@ -215,7 +215,7 @@ class OldInputTest extends PHPUnit_Framework_TestCase
 
         $this->form->setOldInputProvider($oldInput);
 
-        $expected = '<input type="checkbox" name="published" value="1" checked="checked">';
+        $expected = '<input type="checkbox" name="published" value="1" checked>';
         $result = (string) $this->form->checkbox('published', 1)->defaultToUnchecked();
         $this->assertEquals($expected, $result);
     }
@@ -241,7 +241,7 @@ class OldInputTest extends PHPUnit_Framework_TestCase
 
         $this->form->setOldInputProvider($oldInput);
 
-        $expected = '<input type="radio" name="published" value="1" checked="checked">';
+        $expected = '<input type="radio" name="published" value="1" checked>';
         $result = (string) $this->form->radio('published', 1)->defaultToUnchecked();
         $this->assertEquals($expected, $result);
     }
@@ -280,7 +280,7 @@ class OldInputTest extends PHPUnit_Framework_TestCase
 
         $this->form->setOldInputProvider($oldInput);
 
-        $expected = '<input type="checkbox" name="terms" value="agree" checked="checked">';
+        $expected = '<input type="checkbox" name="terms" value="agree" checked>';
         $result = (string) $this->form->checkbox('terms', 'agree')->check();
         $this->assertEquals($expected, $result);
     }
@@ -293,7 +293,7 @@ class OldInputTest extends PHPUnit_Framework_TestCase
 
         $this->form->setOldInputProvider($oldInput);
 
-        $expected = '<input type="radio" name="color" value="green" checked="checked">';
+        $expected = '<input type="radio" name="color" value="green" checked>';
         $result = (string) $this->form->radio('color', 'green')->check();
         $this->assertEquals($expected, $result);
     }
