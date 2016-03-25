@@ -2,6 +2,7 @@
 
 namespace AdamWathan\Form;
 
+use AdamWathan\Form\Binding\BoundData;
 use AdamWathan\Form\Elements\Button;
 use AdamWathan\Form\Elements\Checkbox;
 use AdamWathan\Form\Elements\Date;
@@ -26,7 +27,7 @@ class FormBuilder
 
     private $csrfToken;
 
-    private $model;
+    public $model;
 
     public function setOldInputProvider(OldInputInterface $oldInputProvider)
     {
@@ -218,9 +219,9 @@ class FormBuilder
         return $message;
     }
 
-    public function bind($model)
+    public function bind($data)
     {
-        $this->model = is_array($model) ? (object) $model : $model;
+        $this->model = new BoundData($data);
     }
 
     public function getValueFor($name)
@@ -256,21 +257,17 @@ class FormBuilder
             return false;
         }
 
-        $name = $this->transformKey($name);
-
-        return isset($this->model->{$name}) || method_exists($this->model, '__get');
+        return $this->model->has($name);
     }
 
     protected function getModelValue($name)
     {
-        $name = $this->transformKey($name);
-
-        return $this->escape($this->model->{$name});
+        return $this->escape($this->model->get($name));
     }
 
     protected function escape($value)
     {
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             return $value;
         }
 
@@ -300,10 +297,5 @@ class FormBuilder
         ];
 
         return $this->select($name, $options);
-    }
-
-    protected function transformKey($key)
-    {
-        return str_replace('[]', '', $key);
     }
 }

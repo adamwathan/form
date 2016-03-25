@@ -170,7 +170,53 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
 
         $expected = '<input type="text" name="address[tree][has][nested]" value="Bird">';
-        $result = (string) $this->form->text('address[city][has][nested]');
+        $result = (string) $this->form->text('address[tree][has][nested]');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBindNestedObject()
+    {
+        $object = json_decode(json_encode([
+            'address' => [
+                'city' => 'Roswell',
+                'tree' => [
+                    'has' => [
+                        'nested' => 'Bird'
+                    ]
+                ],
+            ],
+        ]));
+        $this->form->bind($object);
+
+        $expected = '<input type="text" name="address[city]" value="Roswell">';
+        $result = (string) $this->form->text('address[city]');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="address[tree][has][nested]" value="Bird">';
+        $result = (string) $this->form->text('address[tree][has][nested]');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBindNestedMixed()
+    {
+        $object = [
+            'address' => [
+                'city' => 'Roswell',
+                'tree' => json_decode(json_encode([
+                    'has' => [
+                        'nested' => 'Bird'
+                    ]
+                ])),
+            ],
+        ];
+        $this->form->bind($object);
+
+        $expected = '<input type="text" name="address[city]" value="Roswell">';
+        $result = (string) $this->form->text('address[city]');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="address[tree][has][nested]" value="Bird">';
+        $result = (string) $this->form->text('address[tree][has][nested]');
         $this->assertEquals($expected, $result);
     }
 
