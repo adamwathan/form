@@ -136,8 +136,12 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = new MagicGetter;
         $this->form->bind($object);
 
-        $expected = '<input type="text" name="not_set" value="foo">';
-        $result = (string) $this->form->text('not_set');
+        $expected = '<input type="text" name="not_magic" value="foo">';
+        $result = (string) $this->form->text('not_magic');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="magic" value="bar">';
+        $result = (string) $this->form->text('magic');
         $this->assertEquals($expected, $result);
     }
 
@@ -376,8 +380,10 @@ class BindingTest extends PHPUnit_Framework_TestCase
 
 class MagicGetter
 {
+    public $not_magic = 'foo';
+
     public function __get($key)
     {
-        return 'foo';
+        return 'bar';
     }
 }
