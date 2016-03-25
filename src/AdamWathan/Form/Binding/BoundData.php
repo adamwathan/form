@@ -31,8 +31,8 @@ class BoundData
 
         $key = array_shift($keyParts);
 
-        if (is_array($target) && isset($target[$key])) {
-            return $this->dataGet($target[$key], $keyParts, $default);
+        if (is_array($target)) {
+            return isset($target[$key]) ? $this->dataGet($target[$key], $keyParts, $default) : $default;
         }
 
         if (property_exists($target, $key) || method_exists($target, '__get')) {

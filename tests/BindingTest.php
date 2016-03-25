@@ -155,6 +155,16 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testBindArrayWithMissingKey()
+    {
+        $array = ['first_name' => 'John'];
+        $this->form->bind($array);
+
+        $expected = '<input type="text" name="last_name">';
+        $result = (string) $this->form->text('last_name');
+        $this->assertEquals($expected, $result);
+    }
+
     public function testBindNestedArray()
     {
         $array = [
@@ -175,6 +185,23 @@ class BindingTest extends PHPUnit_Framework_TestCase
 
         $expected = '<input type="text" name="address[tree][has][nested]" value="Bird">';
         $result = (string) $this->form->text('address[tree][has][nested]');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBindNestedArrayWithMissingKey()
+    {
+        $array = [
+            'address' => [
+                'tree' => [
+                    'nested' => 'Bird'
+                ],
+            ],
+        ];
+
+        $this->form->bind($array);
+
+        $expected = '<input type="text" name="address[notSet]">';
+        $result = (string) $this->form->text('address[notSet]');
         $this->assertEquals($expected, $result);
     }
 
