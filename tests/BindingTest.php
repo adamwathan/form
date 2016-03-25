@@ -258,13 +258,32 @@ class BindingTest extends PHPUnit_Framework_TestCase
 
     public function testBindingOnCheckboxTakesPrecedenceOverDefaultToChecked()
     {
-        $object = $this->getStubObject();
+        $object = (object) ['published' => 1];
         $this->form->bind($object);
 
         $expected  = '<input type="checkbox" name="published[]" value="1" checked="checked">';
-        $expected .= '<input type="checkbox" name="published[]" value="0">';
         $result  = (string) $this->form->checkbox('published[]', 1);
-        $result .= (string) $this->form->checkbox('published[]', 0)->defaultToChecked();
+        $this->assertEquals($expected, $result);
+
+        $object = (object) ['published' => 0];
+        $this->form->bind($object);
+
+        $expected = '<input type="checkbox" name="published[]" value="1">';
+        $result = (string) $this->form->checkbox('published[]', 1)->defaultToChecked();
+        $this->assertEquals($expected, $result);
+
+        $object = (object) ['published' => true];
+        $this->form->bind($object);
+
+        $expected = '<input type="checkbox" name="published[]" value="1" checked="checked">';
+        $result = (string) $this->form->checkbox('published[]', 1);
+        $this->assertEquals($expected, $result);
+
+        $object = (object) ['published' => false];
+        $this->form->bind($object);
+
+        $expected = '<input type="checkbox" name="published[]" value="1">';
+        $result = (string) $this->form->checkbox('published[]', 1)->defaultToChecked();
         $this->assertEquals($expected, $result);
     }
 
@@ -373,6 +392,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $obj->number = '0';
         $obj->favourite_foods = ['fish', 'chips'];
         $obj->published = '1';
+        $obj->private = false;
 
         return $obj;
     }
