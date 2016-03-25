@@ -37,23 +37,15 @@ class BoundData
         $key = $keyParts[0];
         $remainingKeys = array_slice($keyParts, 1);
 
-        if (is_array($target)) {
-            return isset($target[$key]) ? $this->dataGet($target[$key], $remainingKeys) : false;
+        if (is_array($target) && isset($target[$key])) {
+            return $this->dataGet($target[$key], $remainingKeys);
         }
 
-        try {
-            if (property_exists($target, $key)) {
-                $this->dataGet($target->{$key}, $remainingKeys);
-            } elseif (method_exists($target, '__get')) {
-                $this->dataGet($target->__get($key), $remainingKeys);
-            } else {
-                return false;
-            }
-        } catch (Exception $exception) {
-            return false;
+        if (property_exists($target, $key) || method_exists($target, '__get')) {
+            return $this->dataGet($target->{$key}, $remainingKeys);
         }
 
-        return $this->dataGet($target->{$key}, $remainingKeys);
+        return false;
     }
 
     protected function transformKey($key)
