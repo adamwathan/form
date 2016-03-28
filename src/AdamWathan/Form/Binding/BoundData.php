@@ -29,17 +29,37 @@ class BoundData
             return $target;
         }
 
-        $key = array_shift($keyParts);
-
         if (is_array($target)) {
-            return isset($target[$key]) ? $this->dataGet($target[$key], $keyParts, $default) : $default;
+            return $this->arrayGet($target, $keyParts, $default);
         }
 
-        if (property_exists($target, $key) || method_exists($target, '__get')) {
-            return $this->dataGet($target->{$key}, $keyParts, $default);
+        if (is_object($target)) {
+            return $this->objectGet($target, $keyParts, $default);
         }
 
         return $default;
+    }
+
+    protected function arrayGet($target, $keyParts, $default)
+    {
+        $key = array_shift($keyParts);
+
+        if (! isset($target[$key])) {
+            return $default;
+        }
+
+        return $this->dataGet($target[$key], $keyParts, $default);
+    }
+
+    protected function objectGet($target, $keyParts, $default)
+    {
+        $key = array_shift($keyParts);
+
+        if (! (property_exists($target, $key) || method_exists($target, '__get'))) {
+            return $default;
+        }
+
+        return $this->dataGet($target->{$key}, $keyParts, $default);
     }
 
     protected function transformKey($key)
