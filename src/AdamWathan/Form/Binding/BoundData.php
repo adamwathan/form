@@ -11,12 +11,14 @@ class BoundData
         $this->data = $data;
     }
 
-    public function get($name = null, $default = null)
+    public function get($name, $default = null)
     {
-        if (is_null($name)) {
-            return $this->data;
-        }
         return $this->dotGet($this->transformKey($name), $default);
+    }
+
+    public function data()
+    {
+        return $this->data;
     }
 
     protected function dotGet($dotKey, $default)
