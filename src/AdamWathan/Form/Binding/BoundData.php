@@ -16,6 +16,11 @@ class BoundData
         return $this->dotGet($this->transformKey($name), $default);
     }
 
+    public function data()
+    {
+        return $this->data;
+    }
+
     protected function dotGet($dotKey, $default)
     {
         $keyParts = array_filter(explode('.', $dotKey));
