@@ -205,6 +205,26 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testBindArrayWithZeroAsKey()
+    {
+        $array = [
+            'hotdog' => [
+                0 => 'Tube',
+                1 => 'Steak',
+            ],
+        ];
+
+        $this->form->bind($array);
+
+        $expected = '<input type="text" name="hotdog[0]" value="Tube">';
+        $result = (string) $this->form->text('hotdog[0]');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="hotdog[1]" value="Steak">';
+        $result = (string) $this->form->text('hotdog[1]');
+        $this->assertEquals($expected, $result);
+    }
+
     public function testBindNestedObject()
     {
         $object = json_decode(json_encode([
