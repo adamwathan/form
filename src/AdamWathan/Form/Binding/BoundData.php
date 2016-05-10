@@ -23,7 +23,7 @@ class BoundData
 
     protected function dotGet($dotKey, $default)
     {
-        $keyParts = array_filter(explode('.', $dotKey));
+        $keyParts = explode('.', $dotKey);
 
         return $this->dataGet($this->data, $keyParts, $default);
     }
