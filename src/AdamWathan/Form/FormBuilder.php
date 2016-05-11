@@ -152,6 +152,14 @@ class FormBuilder
         return new Button($value, $name);
     }
 
+    public function reset($value = 'Reset')
+    {
+        $reset = new Button($value);
+        $reset->attribute('type', 'reset');
+
+        return $reset;
+    }
+
     public function submit($value = 'Submit')
     {
         $submit = new Button($value);
