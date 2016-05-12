@@ -92,6 +92,13 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testReset()
+    {
+        $expected = '<button type="reset">Reset</button>';
+        $result = (string) $this->form->reset('Reset');
+        $this->assertEquals($expected, $result);
+    }
+
     /**
      * @dataProvider buttonProvider
      */
