@@ -207,7 +207,11 @@ class FormBuilder
 
     public function getErrors()
     {
-        return $this->errorStore->getErrors();
+        if(! $this->hasErrors()){
+            return null;
+        }
+
+        return $this->errorStore->getErrors()->all();
     }
 
     public function getError($name, $format = null)

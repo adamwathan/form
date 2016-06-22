@@ -217,11 +217,22 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
     {
         $errors = new MessageBag(['foo.bar' => 'Some error']);
         $errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+        $errorStore->shouldReceive('hasErrors')->andReturn(true);
         $errorStore->shouldReceive('getErrors')->andReturn($errors);
 
         $this->form->setErrorStore($errorStore);
 
-        $expected = $errors;
+        $expected = $errors->all();
+        $result = $this->form->getErrors();
+        $this->assertEquals($expected, $result);
+
+        $errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+        $errorStore->shouldReceive('hasErrors')->andReturn(false);
+        $errorStore->shouldReceive('getErrors')->andReturn(null);
+
+        $this->form->setErrorStore($errorStore);
+
+        $expected = null;
         $result = $this->form->getErrors();
         $this->assertEquals($expected, $result);
     }
