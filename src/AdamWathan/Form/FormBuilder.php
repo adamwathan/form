@@ -191,6 +191,11 @@ class FormBuilder
         return $token;
     }
 
+    public function hasErrors()
+    {
+        return $this->errorStore->hasErrors();
+    }
+
     public function hasError($name)
     {
         if (! isset($this->errorStore)) {
@@ -198,6 +203,11 @@ class FormBuilder
         }
 
         return $this->errorStore->hasError($name);
+    }
+
+    public function getErrors()
+    {
+        return $this->errorStore->getErrors();
     }
 
     public function getError($name, $format = null)

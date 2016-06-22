@@ -1,6 +1,7 @@
 <?php
 
 use AdamWathan\Form\FormBuilder;
+use Illuminate\Support\MessageBag;
 
 class FormBuilderTest extends PHPUnit_Framework_TestCase
 {
@@ -182,6 +183,23 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($result);
     }
 
+    public function testCanCheckForErrorMessages()
+    {
+        $errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+        $errorStore->shouldReceive('hasErrors')->andReturn(true);
+
+        $this->form->setErrorStore($errorStore);
+
+        $this->assertTrue($this->form->hasErrors());
+
+        $errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+        $errorStore->shouldReceive('hasErrors')->andReturn(false);
+
+        $this->form->setErrorStore($errorStore);
+
+        $this->assertFalse($this->form->hasErrors());
+    }
+
     public function testCanRetrieveErrorMessage()
     {
         $errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
@@ -192,6 +210,19 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
         $expected = 'The e-mail address is invalid.';
         $result = $this->form->getError('email');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testCanRetrieveErrorMessages()
+    {
+        $errors = new MessageBag(['foo.bar' => 'Some error']);
+        $errorStore = Mockery::mock('AdamWathan\Form\ErrorStore\ErrorStoreInterface');
+        $errorStore->shouldReceive('getErrors')->andReturn($errors);
+
+        $this->form->setErrorStore($errorStore);
+
+        $expected = $errors;
+        $result = $this->form->getErrors();
         $this->assertEquals($expected, $result);
     }
 
