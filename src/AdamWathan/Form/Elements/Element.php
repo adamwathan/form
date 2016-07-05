@@ -2,10 +2,18 @@
 
 namespace AdamWathan\Form\Elements;
 
+/**
+ * Class Element
+ * @package AdamWathan\Form\Elements
+ */
 abstract class Element
 {
     protected $attributes = [];
 
+	/**
+     * @param $attribute
+     * @param null $value
+     */
     protected function setAttribute($attribute, $value = null)
     {
         if (is_null($value)) {
@@ -15,16 +23,28 @@ abstract class Element
         $this->attributes[$attribute] = $value;
     }
 
+	/**
+     * @param $attribute
+     */
     protected function removeAttribute($attribute)
     {
         unset($this->attributes[$attribute]);
     }
 
+	/**
+     * @param $attribute
+     * @return mixed
+     */
     public function getAttribute($attribute)
     {
         return $this->attributes[$attribute];
     }
 
+	/**
+     * @param $attribute
+     * @param null $value
+     * @return $this
+     */
     public function data($attribute, $value = null)
     {
         if (is_array($attribute)) {
@@ -38,6 +58,11 @@ abstract class Element
         return $this;
     }
 
+	/**
+     * @param $attribute
+     * @param $value
+     * @return $this
+     */
     public function attribute($attribute, $value)
     {
         $this->setAttribute($attribute, $value);
@@ -45,6 +70,10 @@ abstract class Element
         return $this;
     }
 
+	/**
+     * @param $attribute
+     * @return $this
+     */
     public function clear($attribute)
     {
         if (! isset($this->attributes[$attribute])) {
@@ -56,6 +85,10 @@ abstract class Element
         return $this;
     }
 
+	/**
+     * @param $class
+     * @return $this
+     */
     public function addClass($class)
     {
         if (isset($this->attributes['class'])) {
@@ -67,6 +100,10 @@ abstract class Element
         return $this;
     }
 
+	/**
+     * @param $class
+     * @return $this
+     */
     public function removeClass($class)
     {
         if (! isset($this->attributes['class'])) {
@@ -84,6 +121,10 @@ abstract class Element
         return $this;
     }
 
+	/**
+     * @param $id
+     * @return $this
+     */
     public function id($id)
     {
         $this->setId($id);
@@ -91,6 +132,9 @@ abstract class Element
         return $this;
     }
 
+	/**
+     * @param $id
+     */
     protected function setId($id)
     {
         $this->setAttribute('id', $id);
@@ -103,6 +147,9 @@ abstract class Element
         return $this->render();
     }
 
+	/**
+     * @return string
+     */
     protected function renderAttributes()
     {
         list($attributes, $values) = $this->splitKeysAndValues($this->attributes);
@@ -112,6 +159,10 @@ abstract class Element
         }, $attributes, $values));
     }
 
+	/**
+     * @param $array
+     * @return array
+     */
     protected function splitKeysAndValues($array)
     {
         // Disgusting crap because people might have passed a collection
@@ -126,6 +177,11 @@ abstract class Element
         return [$keys, $values];
     }
 
+	/**
+     * @param $method
+     * @param $params
+     * @return $this
+     */
     public function __call($method, $params)
     {
         $params = count($params) ? $params : [$method];

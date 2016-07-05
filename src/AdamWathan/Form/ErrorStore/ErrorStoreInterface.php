@@ -2,9 +2,21 @@
 
 namespace AdamWathan\Form\ErrorStore;
 
+/**
+ * Interface ErrorStoreInterface
+ * @package AdamWathan\Form\ErrorStore
+ */
 interface ErrorStoreInterface
 {
-    public function hasError($key);
+	/**
+	 * @param $key
+	 * @return mixed
+	 */
+	public function hasError($key);
 
-    public function getError($key);
+	/**
+	 * @param $key
+	 * @return mixed
+	 */
+	public function getError($key);
 }

@@ -2,13 +2,22 @@
 
 namespace AdamWathan\Form\Elements;
 
+/**
+ * Class RadioButton
+ * @package AdamWathan\Form\Elements
+ */
 class RadioButton extends Checkbox
 {
     protected $attributes = [
         'type' => 'radio',
     ];
 
-    public function __construct($name, $value = null)
+	/**
+	 * RadioButton constructor.
+	 * @param $name
+	 * @param null $value
+	 */
+	public function __construct($name, $value = null)
     {
         parent::__construct($name);
 

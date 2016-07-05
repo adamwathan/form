@@ -2,18 +2,32 @@
 
 namespace AdamWathan\Form\Elements;
 
+/**
+ * Class FormControl
+ * @package AdamWathan\Form\Elements
+ */
 abstract class FormControl extends Element
 {
+	/**
+     * FormControl constructor.
+     * @param $name
+     */
     public function __construct($name)
     {
         $this->setName($name);
     }
 
+	/**
+     * @param $name
+     */
     protected function setName($name)
     {
         $this->setAttribute('name', $name);
     }
 
+	/**
+     * @return $this
+     */
     public function required()
     {
         $this->setAttribute('required', 'required');
@@ -21,6 +35,9 @@ abstract class FormControl extends Element
         return $this;
     }
 
+	/**
+     * @return $this
+     */
     public function optional()
     {
         $this->removeAttribute('required');
@@ -28,6 +45,9 @@ abstract class FormControl extends Element
         return $this;
     }
 
+	/**
+     * @return $this
+     */
     public function disable()
     {
         $this->setAttribute('disabled', 'disabled');
@@ -35,6 +55,9 @@ abstract class FormControl extends Element
         return $this;
     }
 
+	/**
+     * @return $this
+     */
     public function readonly()
     {
         $this->setAttribute('readonly', 'readonly');
@@ -42,6 +65,9 @@ abstract class FormControl extends Element
         return $this;
     }
 
+	/**
+     * @return $this
+     */
     public function enable()
     {
         $this->removeAttribute('disabled');
@@ -50,6 +76,9 @@ abstract class FormControl extends Element
         return $this;
     }
 
+	/**
+     * @return $this
+     */
     public function autofocus()
     {
         $this->setAttribute('autofocus', 'autofocus');
@@ -57,6 +86,9 @@ abstract class FormControl extends Element
         return $this;
     }
 
+	/**
+     * @return $this
+     */
     public function unfocus()
     {
         $this->removeAttribute('autofocus');
