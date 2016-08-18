@@ -2,6 +2,10 @@
 
 namespace AdamWathan\Form\Elements;
 
+/**
+ * Class Checkbox
+ * @package AdamWathan\Form\Elements
+ */
 class Checkbox extends Input
 {
     protected $attributes = [
@@ -12,6 +16,11 @@ class Checkbox extends Input
 
     protected $oldValue;
 
+    /**
+     * Checkbox constructor.
+     * @param $name
+     * @param int $value
+     */
     public function __construct($name, $value = 1)
     {
         parent::__construct($name);
@@ -19,6 +28,9 @@ class Checkbox extends Input
         $this->setValue($value);
     }
 
+    /**
+     * @param $oldValue
+     */
     public function setOldValue($oldValue)
     {
         $this->oldValue = $oldValue;
@@ -29,6 +41,9 @@ class Checkbox extends Input
         $this->oldValue = null;
     }
 
+    /**
+     * @return $this
+     */
     public function defaultToChecked()
     {
         if (! isset($this->checked) && is_null($this->oldValue)) {
@@ -38,6 +53,9 @@ class Checkbox extends Input
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function defaultToUnchecked()
     {
         if (! isset($this->checked) && is_null($this->oldValue)) {
@@ -47,6 +65,10 @@ class Checkbox extends Input
         return $this;
     }
 
+    /**
+     * @param $state
+     * @return $this
+     */
     public function defaultCheckedState($state)
     {
         $state ? $this->defaultToChecked() : $this->defaultToUnchecked();
@@ -54,6 +76,9 @@ class Checkbox extends Input
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function check()
     {
         $this->unsetOldValue();
@@ -62,6 +87,9 @@ class Checkbox extends Input
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function uncheck()
     {
         $this->unsetOldValue();
@@ -70,6 +98,9 @@ class Checkbox extends Input
         return $this;
     }
 
+    /**
+     * @param bool $checked
+     */
     protected function setChecked($checked = true)
     {
         $this->checked = $checked;
@@ -80,6 +111,9 @@ class Checkbox extends Input
         }
     }
 
+    /**
+     * @return Checkbox
+     */
     protected function checkBinding()
     {
         $currentValue = (string) $this->getAttribute('value');
@@ -93,6 +127,9 @@ class Checkbox extends Input
         }
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         $this->checkBinding();

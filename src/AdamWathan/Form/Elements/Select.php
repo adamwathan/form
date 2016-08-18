@@ -2,18 +2,31 @@
 
 namespace AdamWathan\Form\Elements;
 
+/**
+ * Class Select
+ * @package AdamWathan\Form\Elements
+ */
 class Select extends FormControl
 {
     protected $options;
 
     protected $selected;
 
+    /**
+     * Select constructor.
+     * @param $name
+     * @param array $options
+     */
     public function __construct($name, $options = [])
     {
         $this->setName($name);
         $this->setOptions($options);
     }
 
+    /**
+     * @param $option
+     * @return $this
+     */
     public function select($option)
     {
         $this->selected = $option;
@@ -21,11 +34,18 @@ class Select extends FormControl
         return $this;
     }
 
+    /**
+     * @param $options
+     */
     protected function setOptions($options)
     {
         $this->options = $options;
     }
 
+    /**
+     * @param $options
+     * @return $this
+     */
     public function options($options)
     {
         $this->setOptions($options);
@@ -33,6 +53,9 @@ class Select extends FormControl
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         return implode([
@@ -42,6 +65,9 @@ class Select extends FormControl
         ]);
     }
 
+    /**
+     * @return string
+     */
     protected function renderOptions()
     {
         list($values, $labels) = $this->splitKeysAndValues($this->options);
@@ -56,6 +82,11 @@ class Select extends FormControl
         return implode($tags);
     }
 
+    /**
+     * @param $label
+     * @param $options
+     * @return string
+     */
     protected function renderOptGroup($label, $options)
     {
         list($values, $labels) = $this->splitKeysAndValues($options);
@@ -71,6 +102,11 @@ class Select extends FormControl
         ]);
     }
 
+    /**
+     * @param $value
+     * @param $label
+     * @return string
+     */
     protected function renderOption($value, $label)
     {
         return implode([
@@ -80,11 +116,20 @@ class Select extends FormControl
         ]);
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     protected function isSelected($value)
     {
         return in_array($value, (array) $this->selected);
     }
 
+    /**
+     * @param $value
+     * @param $label
+     * @return $this
+     */
     public function addOption($value, $label)
     {
         $this->options[$value] = $label;
@@ -92,6 +137,10 @@ class Select extends FormControl
         return $this;
     }
 
+    /**
+     * @param $value
+     * @return $this
+     */
     public function defaultValue($value)
     {
         if (isset($this->selected)) {
@@ -103,6 +152,9 @@ class Select extends FormControl
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function multiple()
     {
         $name = $this->attributes['name'];

@@ -2,6 +2,10 @@
 
 namespace AdamWathan\Form\Elements;
 
+/**
+ * Class TextArea
+ * @package AdamWathan\Form\Elements
+ */
 class TextArea extends FormControl
 {
     protected $attributes = [
@@ -12,6 +16,9 @@ class TextArea extends FormControl
 
     protected $value;
 
+    /**
+     * @return string
+     */
     public function render()
     {
         return implode([
@@ -21,6 +28,10 @@ class TextArea extends FormControl
         ]);
     }
 
+    /**
+     * @param $rows
+     * @return $this
+     */
     public function rows($rows)
     {
         $this->setAttribute('rows', $rows);
@@ -28,6 +39,10 @@ class TextArea extends FormControl
         return $this;
     }
 
+    /**
+     * @param $cols
+     * @return $this
+     */
     public function cols($cols)
     {
         $this->setAttribute('cols', $cols);
@@ -35,6 +50,10 @@ class TextArea extends FormControl
         return $this;
     }
 
+    /**
+     * @param $value
+     * @return $this
+     */
     public function value($value)
     {
         $this->value = $value;
@@ -42,6 +61,10 @@ class TextArea extends FormControl
         return $this;
     }
 
+    /**
+     * @param $placeholder
+     * @return $this
+     */
     public function placeholder($placeholder)
     {
         $this->setAttribute('placeholder', $placeholder);
@@ -49,6 +72,10 @@ class TextArea extends FormControl
         return $this;
     }
 
+    /**
+     * @param $value
+     * @return $this
+     */
     public function defaultValue($value)
     {
         if (! $this->hasValue()) {
@@ -58,6 +85,9 @@ class TextArea extends FormControl
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     protected function hasValue()
     {
         return isset($this->value);

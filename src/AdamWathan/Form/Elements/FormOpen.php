@@ -2,6 +2,10 @@
 
 namespace AdamWathan\Form\Elements;
 
+/**
+ * Class FormOpen
+ * @package AdamWathan\Form\Elements
+ */
 class FormOpen extends Element
 {
     protected $attributes = [
@@ -13,6 +17,9 @@ class FormOpen extends Element
 
     protected $hiddenMethod;
 
+    /**
+     * @return string
+     */
     public function render()
     {
         $tags = [sprintf('<form%s>', $this->renderAttributes())];
@@ -28,16 +35,25 @@ class FormOpen extends Element
         return implode($tags);
     }
 
+    /**
+     * @return bool
+     */
     protected function hasToken()
     {
         return isset($this->token);
     }
 
+    /**
+     * @return bool
+     */
     protected function hasHiddenMethod()
     {
         return isset($this->hiddenMethod);
     }
 
+    /**
+     * @return $this
+     */
     public function post()
     {
         $this->setMethod('POST');
@@ -45,6 +61,9 @@ class FormOpen extends Element
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function get()
     {
         $this->setMethod('GET');
@@ -52,21 +71,34 @@ class FormOpen extends Element
         return $this;
     }
 
+    /**
+     * @return FormOpen
+     */
     public function put()
     {
         return $this->setHiddenMethod('PUT');
     }
 
+    /**
+     * @return FormOpen
+     */
     public function patch()
     {
         return $this->setHiddenMethod('PATCH');
     }
 
+    /**
+     * @return FormOpen
+     */
     public function delete()
     {
         return $this->setHiddenMethod('DELETE');
     }
 
+    /**
+     * @param $token
+     * @return $this
+     */
     public function token($token)
     {
         $this->token = new Hidden('_token');
@@ -75,6 +107,10 @@ class FormOpen extends Element
         return $this;
     }
 
+    /**
+     * @param $method
+     * @return $this
+     */
     protected function setHiddenMethod($method)
     {
         $this->setMethod('POST');
@@ -84,6 +120,10 @@ class FormOpen extends Element
         return $this;
     }
 
+    /**
+     * @param $method
+     * @return $this
+     */
     public function setMethod($method)
     {
         $this->setAttribute('method', $method);
@@ -91,6 +131,10 @@ class FormOpen extends Element
         return $this;
     }
 
+    /**
+     * @param $action
+     * @return $this
+     */
     public function action($action)
     {
         $this->setAttribute('action', $action);
@@ -98,6 +142,10 @@ class FormOpen extends Element
         return $this;
     }
 
+    /**
+     * @param $type
+     * @return $this
+     */
     public function encodingType($type)
     {
         $this->setAttribute('enctype', $type);
@@ -105,6 +153,9 @@ class FormOpen extends Element
         return $this;
     }
 
+    /**
+     * @return FormOpen
+     */
     public function multipart()
     {
         return $this->encodingType('multipart/form-data');

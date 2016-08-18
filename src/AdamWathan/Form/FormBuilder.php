@@ -19,6 +19,10 @@ use AdamWathan\Form\Elements\TextArea;
 use AdamWathan\Form\ErrorStore\ErrorStoreInterface;
 use AdamWathan\Form\OldInput\OldInputInterface;
 
+/**
+ * Class FormBuilder
+ * @package AdamWathan\Form
+ */
 class FormBuilder
 {
     protected $oldInput;
@@ -29,21 +33,33 @@ class FormBuilder
 
     protected $boundData;
 
+    /**
+     * @param OldInputInterface $oldInputProvider
+     */
     public function setOldInputProvider(OldInputInterface $oldInputProvider)
     {
         $this->oldInput = $oldInputProvider;
     }
 
+    /**
+     * @param ErrorStoreInterface $errorStore
+     */
     public function setErrorStore(ErrorStoreInterface $errorStore)
     {
         $this->errorStore = $errorStore;
     }
 
+    /**
+     * @param $token
+     */
     public function setToken($token)
     {
         $this->csrfToken = $token;
     }
 
+    /**
+     * @return FormOpen
+     */
     public function open()
     {
         $open = new FormOpen;
@@ -55,11 +71,17 @@ class FormBuilder
         return $open;
     }
 
+    /**
+     * @return bool
+     */
     protected function hasToken()
     {
         return isset($this->csrfToken);
     }
 
+    /**
+     * @return string
+     */
     public function close()
     {
         $this->unbindData();
@@ -67,6 +89,10 @@ class FormBuilder
         return '</form>';
     }
 
+    /**
+     * @param $name
+     * @return Text
+     */
     public function text($name)
     {
         $text = new Text($name);
@@ -78,6 +104,10 @@ class FormBuilder
         return $text;
     }
 
+    /**
+     * @param $name
+     * @return Date
+     */
     public function date($name)
     {
         $date = new Date($name);
@@ -89,6 +119,10 @@ class FormBuilder
         return $date;
     }
 
+    /**
+     * @param $name
+     * @return Email
+     */
     public function email($name)
     {
         $email = new Email($name);
@@ -100,6 +134,10 @@ class FormBuilder
         return $email;
     }
 
+    /**
+     * @param $name
+     * @return Hidden
+     */
     public function hidden($name)
     {
         $hidden = new Hidden($name);
@@ -111,6 +149,10 @@ class FormBuilder
         return $hidden;
     }
 
+    /**
+     * @param $name
+     * @return TextArea
+     */
     public function textarea($name)
     {
         $textarea = new TextArea($name);
@@ -122,11 +164,20 @@ class FormBuilder
         return $textarea;
     }
 
+    /**
+     * @param $name
+     * @return Password
+     */
     public function password($name)
     {
         return new Password($name);
     }
 
+    /**
+     * @param $name
+     * @param int $value
+     * @return Checkbox
+     */
     public function checkbox($name, $value = 1)
     {
         $checkbox = new Checkbox($name, $value);
@@ -137,6 +188,11 @@ class FormBuilder
         return $checkbox;
     }
 
+    /**
+     * @param $name
+     * @param null $value
+     * @return RadioButton
+     */
     public function radio($name, $value = null)
     {
         $radio = new RadioButton($name, $value);
@@ -147,11 +203,20 @@ class FormBuilder
         return $radio;
     }
 
+    /**
+     * @param $value
+     * @param null $name
+     * @return Button
+     */
     public function button($value, $name = null)
     {
         return new Button($value, $name);
     }
 
+    /**
+     * @param string $value
+     * @return Button
+     */
     public function submit($value = 'Submit')
     {
         $submit = new Button($value);
@@ -160,6 +225,11 @@ class FormBuilder
         return $submit;
     }
 
+    /**
+     * @param $name
+     * @param array $options
+     * @return Select
+     */
     public function select($name, $options = [])
     {
         $select = new Select($name, $options);
@@ -170,16 +240,27 @@ class FormBuilder
         return $select;
     }
 
+    /**
+     * @param $label
+     * @return Label
+     */
     public function label($label)
     {
         return new Label($label);
     }
 
+    /**
+     * @param $name
+     * @return File
+     */
     public function file($name)
     {
         return new File($name);
     }
 
+    /**
+     * @return Hidden
+     */
     public function token()
     {
         $token = $this->hidden('_token');
@@ -191,6 +272,10 @@ class FormBuilder
         return $token;
     }
 
+    /**
+     * @param $name
+     * @return bool
+     */
     public function hasError($name)
     {
         if (! isset($this->errorStore)) {
@@ -200,6 +285,11 @@ class FormBuilder
         return $this->errorStore->hasError($name);
     }
 
+    /**
+     * @param $name
+     * @param null $format
+     * @return mixed|null|string
+     */
     public function getError($name, $format = null)
     {
         if (! isset($this->errorStore)) {
@@ -219,11 +309,18 @@ class FormBuilder
         return $message;
     }
 
+    /**
+     * @param $data
+     */
     public function bind($data)
     {
         $this->boundData = new BoundData($data);
     }
 
+    /**
+     * @param $name
+     * @return null|string
+     */
     public function getValueFor($name)
     {
         if ($this->hasOldInput()) {
@@ -237,6 +334,9 @@ class FormBuilder
         return null;
     }
 
+    /**
+     * @return bool
+     */
     protected function hasOldInput()
     {
         if (! isset($this->oldInput)) {
@@ -246,21 +346,37 @@ class FormBuilder
         return $this->oldInput->hasOldInput();
     }
 
+    /**
+     * @param $name
+     * @return string
+     */
     protected function getOldInput($name)
     {
         return $this->escape($this->oldInput->getOldInput($name));
     }
 
+    /**
+     * @return bool
+     */
     protected function hasBoundData()
     {
         return isset($this->boundData);
     }
 
+    /**
+     * @param $name
+     * @param $default
+     * @return string
+     */
     protected function getBoundValue($name, $default)
     {
         return $this->escape($this->boundData->get($name, $default));
     }
 
+    /**
+     * @param $value
+     * @return string
+     */
     protected function escape($value)
     {
         if (! is_string($value)) {
@@ -275,6 +391,10 @@ class FormBuilder
         $this->boundData = null;
     }
 
+    /**
+     * @param $name
+     * @return Select
+     */
     public function selectMonth($name)
     {
         $options = [

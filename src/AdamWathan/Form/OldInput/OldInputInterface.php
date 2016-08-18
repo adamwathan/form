@@ -2,9 +2,17 @@
 
 namespace AdamWathan\Form\OldInput;
 
+/**
+ * Interface OldInputInterface
+ * @package AdamWathan\Form\OldInput
+ */
 interface OldInputInterface
 {
     public function hasOldInput();
 
-    public function getOldInput($key);
+    /**
+	 * @param $key
+	 * @return mixed
+	 */
+	public function getOldInput($key);
 }
