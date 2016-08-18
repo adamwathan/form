@@ -10,7 +10,7 @@ abstract class Element
 {
     protected $attributes = [];
 
-	/**
+    /**
      * @param $attribute
      * @param null $value
      */
@@ -23,7 +23,7 @@ abstract class Element
         $this->attributes[$attribute] = $value;
     }
 
-	/**
+    /**
      * @param $attribute
      */
     protected function removeAttribute($attribute)
@@ -31,7 +31,7 @@ abstract class Element
         unset($this->attributes[$attribute]);
     }
 
-	/**
+    /**
      * @param $attribute
      * @return mixed
      */
@@ -40,7 +40,7 @@ abstract class Element
         return $this->attributes[$attribute];
     }
 
-	/**
+    /**
      * @param $attribute
      * @param null $value
      * @return $this
@@ -58,7 +58,7 @@ abstract class Element
         return $this;
     }
 
-	/**
+    /**
      * @param $attribute
      * @param $value
      * @return $this
@@ -70,7 +70,7 @@ abstract class Element
         return $this;
     }
 
-	/**
+    /**
      * @param $attribute
      * @return $this
      */
@@ -85,7 +85,7 @@ abstract class Element
         return $this;
     }
 
-	/**
+    /**
      * @param $class
      * @return $this
      */
@@ -100,7 +100,7 @@ abstract class Element
         return $this;
     }
 
-	/**
+    /**
      * @param $class
      * @return $this
      */
@@ -121,7 +121,7 @@ abstract class Element
         return $this;
     }
 
-	/**
+    /**
      * @param $id
      * @return $this
      */
@@ -132,7 +132,7 @@ abstract class Element
         return $this;
     }
 
-	/**
+    /**
      * @param $id
      */
     protected function setId($id)
@@ -147,7 +147,7 @@ abstract class Element
         return $this->render();
     }
 
-	/**
+    /**
      * @return string
      */
     protected function renderAttributes()
@@ -159,7 +159,7 @@ abstract class Element
         }, $attributes, $values));
     }
 
-	/**
+    /**
      * @param $array
      * @return array
      */
@@ -177,7 +177,7 @@ abstract class Element
         return [$keys, $values];
     }
 
-	/**
+    /**
      * @param $method
      * @param $params
      * @return $this

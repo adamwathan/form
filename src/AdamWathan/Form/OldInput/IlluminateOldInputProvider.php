@@ -12,7 +12,7 @@ class IlluminateOldInputProvider implements OldInputInterface
 {
     private $session;
 
-	/**
+    /**
      * IlluminateOldInputProvider constructor.
      * @param Session $session
      */
@@ -21,7 +21,7 @@ class IlluminateOldInputProvider implements OldInputInterface
         $this->session = $session;
     }
 
-	/**
+    /**
      * @return bool
      */
     public function hasOldInput()
@@ -29,7 +29,7 @@ class IlluminateOldInputProvider implements OldInputInterface
         return ($this->session->get('_old_input')) ? true : false ;
     }
 
-	/**
+    /**
      * @param $key
      * @return mixed
      */
@@ -38,7 +38,7 @@ class IlluminateOldInputProvider implements OldInputInterface
         return $this->session->getOldInput($this->transformKey($key));
     }
 
-	/**
+    /**
      * @param $key
      * @return mixed
      */

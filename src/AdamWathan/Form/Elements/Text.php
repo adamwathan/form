@@ -12,7 +12,7 @@ class Text extends Input
         'type' => 'text',
     ];
 
-	/**
+    /**
      * @param $placeholder
      * @return $this
      */
@@ -23,7 +23,7 @@ class Text extends Input
         return $this;
     }
 
-	/**
+    /**
      * @param $value
      * @return $this
      */
@@ -36,7 +36,7 @@ class Text extends Input
         return $this;
     }
 
-	/**
+    /**
      * @return bool
      */
     protected function hasValue()

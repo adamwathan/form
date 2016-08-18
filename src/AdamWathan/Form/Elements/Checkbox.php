@@ -16,7 +16,7 @@ class Checkbox extends Input
 
     protected $oldValue;
 
-	/**
+    /**
      * Checkbox constructor.
      * @param $name
      * @param int $value
@@ -28,7 +28,7 @@ class Checkbox extends Input
         $this->setValue($value);
     }
 
-	/**
+    /**
      * @param $oldValue
      */
     public function setOldValue($oldValue)
@@ -41,7 +41,7 @@ class Checkbox extends Input
         $this->oldValue = null;
     }
 
-	/**
+    /**
      * @return $this
      */
     public function defaultToChecked()
@@ -53,7 +53,7 @@ class Checkbox extends Input
         return $this;
     }
 
-	/**
+    /**
      * @return $this
      */
     public function defaultToUnchecked()
@@ -65,7 +65,7 @@ class Checkbox extends Input
         return $this;
     }
 
-	/**
+    /**
      * @param $state
      * @return $this
      */
@@ -76,7 +76,7 @@ class Checkbox extends Input
         return $this;
     }
 
-	/**
+    /**
      * @return $this
      */
     public function check()
@@ -87,7 +87,7 @@ class Checkbox extends Input
         return $this;
     }
 
-	/**
+    /**
      * @return $this
      */
     public function uncheck()
@@ -98,7 +98,7 @@ class Checkbox extends Input
         return $this;
     }
 
-	/**
+    /**
      * @param bool $checked
      */
     protected function setChecked($checked = true)
@@ -111,7 +111,7 @@ class Checkbox extends Input
         }
     }
 
-	/**
+    /**
      * @return Checkbox
      */
     protected function checkBinding()
@@ -127,7 +127,7 @@ class Checkbox extends Input
         }
     }
 
-	/**
+    /**
      * @return string
      */
     public function render()

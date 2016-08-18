@@ -12,7 +12,7 @@ class Select extends FormControl
 
     protected $selected;
 
-	/**
+    /**
      * Select constructor.
      * @param $name
      * @param array $options
@@ -23,7 +23,7 @@ class Select extends FormControl
         $this->setOptions($options);
     }
 
-	/**
+    /**
      * @param $option
      * @return $this
      */
@@ -34,7 +34,7 @@ class Select extends FormControl
         return $this;
     }
 
-	/**
+    /**
      * @param $options
      */
     protected function setOptions($options)
@@ -42,7 +42,7 @@ class Select extends FormControl
         $this->options = $options;
     }
 
-	/**
+    /**
      * @param $options
      * @return $this
      */
@@ -53,7 +53,7 @@ class Select extends FormControl
         return $this;
     }
 
-	/**
+    /**
      * @return string
      */
     public function render()
@@ -65,7 +65,7 @@ class Select extends FormControl
         ]);
     }
 
-	/**
+    /**
      * @return string
      */
     protected function renderOptions()
@@ -82,7 +82,7 @@ class Select extends FormControl
         return implode($tags);
     }
 
-	/**
+    /**
      * @param $label
      * @param $options
      * @return string
@@ -102,7 +102,7 @@ class Select extends FormControl
         ]);
     }
 
-	/**
+    /**
      * @param $value
      * @param $label
      * @return string
@@ -116,7 +116,7 @@ class Select extends FormControl
         ]);
     }
 
-	/**
+    /**
      * @param $value
      * @return bool
      */
@@ -125,7 +125,7 @@ class Select extends FormControl
         return in_array($value, (array) $this->selected);
     }
 
-	/**
+    /**
      * @param $value
      * @param $label
      * @return $this
@@ -137,7 +137,7 @@ class Select extends FormControl
         return $this;
     }
 
-	/**
+    /**
      * @param $value
      * @return $this
      */
@@ -152,7 +152,7 @@ class Select extends FormControl
         return $this;
     }
 
-	/**
+    /**
      * @return $this
      */
     public function multiple()

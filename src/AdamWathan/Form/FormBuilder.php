@@ -33,7 +33,7 @@ class FormBuilder
 
     protected $boundData;
 
-	/**
+    /**
      * @param OldInputInterface $oldInputProvider
      */
     public function setOldInputProvider(OldInputInterface $oldInputProvider)
@@ -41,7 +41,7 @@ class FormBuilder
         $this->oldInput = $oldInputProvider;
     }
 
-	/**
+    /**
      * @param ErrorStoreInterface $errorStore
      */
     public function setErrorStore(ErrorStoreInterface $errorStore)
@@ -49,7 +49,7 @@ class FormBuilder
         $this->errorStore = $errorStore;
     }
 
-	/**
+    /**
      * @param $token
      */
     public function setToken($token)
@@ -57,7 +57,7 @@ class FormBuilder
         $this->csrfToken = $token;
     }
 
-	/**
+    /**
      * @return FormOpen
      */
     public function open()
@@ -71,7 +71,7 @@ class FormBuilder
         return $open;
     }
 
-	/**
+    /**
      * @return bool
      */
     protected function hasToken()
@@ -79,7 +79,7 @@ class FormBuilder
         return isset($this->csrfToken);
     }
 
-	/**
+    /**
      * @return string
      */
     public function close()
@@ -89,7 +89,7 @@ class FormBuilder
         return '</form>';
     }
 
-	/**
+    /**
      * @param $name
      * @return Text
      */
@@ -104,7 +104,7 @@ class FormBuilder
         return $text;
     }
 
-	/**
+    /**
      * @param $name
      * @return Date
      */
@@ -119,7 +119,7 @@ class FormBuilder
         return $date;
     }
 
-	/**
+    /**
      * @param $name
      * @return Email
      */
@@ -134,7 +134,7 @@ class FormBuilder
         return $email;
     }
 
-	/**
+    /**
      * @param $name
      * @return Hidden
      */
@@ -149,7 +149,7 @@ class FormBuilder
         return $hidden;
     }
 
-	/**
+    /**
      * @param $name
      * @return TextArea
      */
@@ -164,7 +164,7 @@ class FormBuilder
         return $textarea;
     }
 
-	/**
+    /**
      * @param $name
      * @return Password
      */
@@ -173,7 +173,7 @@ class FormBuilder
         return new Password($name);
     }
 
-	/**
+    /**
      * @param $name
      * @param int $value
      * @return Checkbox
@@ -188,7 +188,7 @@ class FormBuilder
         return $checkbox;
     }
 
-	/**
+    /**
      * @param $name
      * @param null $value
      * @return RadioButton
@@ -203,7 +203,7 @@ class FormBuilder
         return $radio;
     }
 
-	/**
+    /**
      * @param $value
      * @param null $name
      * @return Button
@@ -213,7 +213,7 @@ class FormBuilder
         return new Button($value, $name);
     }
 
-	/**
+    /**
      * @param string $value
      * @return Button
      */
@@ -225,7 +225,7 @@ class FormBuilder
         return $submit;
     }
 
-	/**
+    /**
      * @param $name
      * @param array $options
      * @return Select
@@ -240,7 +240,7 @@ class FormBuilder
         return $select;
     }
 
-	/**
+    /**
      * @param $label
      * @return Label
      */
@@ -249,7 +249,7 @@ class FormBuilder
         return new Label($label);
     }
 
-	/**
+    /**
      * @param $name
      * @return File
      */
@@ -258,7 +258,7 @@ class FormBuilder
         return new File($name);
     }
 
-	/**
+    /**
      * @return Hidden
      */
     public function token()
@@ -272,7 +272,7 @@ class FormBuilder
         return $token;
     }
 
-	/**
+    /**
      * @param $name
      * @return bool
      */
@@ -285,7 +285,7 @@ class FormBuilder
         return $this->errorStore->hasError($name);
     }
 
-	/**
+    /**
      * @param $name
      * @param null $format
      * @return mixed|null|string
@@ -309,7 +309,7 @@ class FormBuilder
         return $message;
     }
 
-	/**
+    /**
      * @param $data
      */
     public function bind($data)
@@ -317,7 +317,7 @@ class FormBuilder
         $this->boundData = new BoundData($data);
     }
 
-	/**
+    /**
      * @param $name
      * @return null|string
      */
@@ -334,7 +334,7 @@ class FormBuilder
         return null;
     }
 
-	/**
+    /**
      * @return bool
      */
     protected function hasOldInput()
@@ -346,7 +346,7 @@ class FormBuilder
         return $this->oldInput->hasOldInput();
     }
 
-	/**
+    /**
      * @param $name
      * @return string
      */
@@ -355,7 +355,7 @@ class FormBuilder
         return $this->escape($this->oldInput->getOldInput($name));
     }
 
-	/**
+    /**
      * @return bool
      */
     protected function hasBoundData()
@@ -363,7 +363,7 @@ class FormBuilder
         return isset($this->boundData);
     }
 
-	/**
+    /**
      * @param $name
      * @param $default
      * @return string
@@ -373,7 +373,7 @@ class FormBuilder
         return $this->escape($this->boundData->get($name, $default));
     }
 
-	/**
+    /**
      * @param $value
      * @return string
      */
@@ -391,7 +391,7 @@ class FormBuilder
         $this->boundData = null;
     }
 
-	/**
+    /**
      * @param $name
      * @return Select
      */

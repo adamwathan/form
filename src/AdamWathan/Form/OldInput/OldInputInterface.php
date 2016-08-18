@@ -10,7 +10,7 @@ interface OldInputInterface
 {
     public function hasOldInput();
 
-	/**
+    /**
 	 * @param $key
 	 * @return mixed
 	 */

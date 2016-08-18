@@ -12,7 +12,7 @@ class RadioButton extends Checkbox
         'type' => 'radio',
     ];
 
-	/**
+    /**
 	 * RadioButton constructor.
 	 * @param $name
 	 * @param null $value

@@ -8,7 +8,7 @@ namespace AdamWathan\Form\Elements;
  */
 abstract class Input extends FormControl
 {
-	/**
+    /**
      * @return string
      */
     public function render()
@@ -16,7 +16,7 @@ abstract class Input extends FormControl
         return sprintf('<input%s>', $this->renderAttributes());
     }
 
-	/**
+    /**
      * @param $value
      * @return $this
      */
@@ -27,7 +27,7 @@ abstract class Input extends FormControl
         return $this;
     }
 
-	/**
+    /**
      * @param $value
      * @return $this
      */

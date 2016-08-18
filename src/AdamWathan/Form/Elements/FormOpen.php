@@ -17,7 +17,7 @@ class FormOpen extends Element
 
     protected $hiddenMethod;
 
-	/**
+    /**
      * @return string
      */
     public function render()
@@ -35,7 +35,7 @@ class FormOpen extends Element
         return implode($tags);
     }
 
-	/**
+    /**
      * @return bool
      */
     protected function hasToken()
@@ -43,7 +43,7 @@ class FormOpen extends Element
         return isset($this->token);
     }
 
-	/**
+    /**
      * @return bool
      */
     protected function hasHiddenMethod()
@@ -51,7 +51,7 @@ class FormOpen extends Element
         return isset($this->hiddenMethod);
     }
 
-	/**
+    /**
      * @return $this
      */
     public function post()
@@ -61,7 +61,7 @@ class FormOpen extends Element
         return $this;
     }
 
-	/**
+    /**
      * @return $this
      */
     public function get()
@@ -71,7 +71,7 @@ class FormOpen extends Element
         return $this;
     }
 
-	/**
+    /**
      * @return FormOpen
      */
     public function put()
@@ -79,7 +79,7 @@ class FormOpen extends Element
         return $this->setHiddenMethod('PUT');
     }
 
-	/**
+    /**
      * @return FormOpen
      */
     public function patch()
@@ -87,7 +87,7 @@ class FormOpen extends Element
         return $this->setHiddenMethod('PATCH');
     }
 
-	/**
+    /**
      * @return FormOpen
      */
     public function delete()
@@ -95,7 +95,7 @@ class FormOpen extends Element
         return $this->setHiddenMethod('DELETE');
     }
 
-	/**
+    /**
      * @param $token
      * @return $this
      */
@@ -107,7 +107,7 @@ class FormOpen extends Element
         return $this;
     }
 
-	/**
+    /**
      * @param $method
      * @return $this
      */
@@ -120,7 +120,7 @@ class FormOpen extends Element
         return $this;
     }
 
-	/**
+    /**
      * @param $method
      * @return $this
      */
@@ -131,7 +131,7 @@ class FormOpen extends Element
         return $this;
     }
 
-	/**
+    /**
      * @param $action
      * @return $this
      */
@@ -142,7 +142,7 @@ class FormOpen extends Element
         return $this;
     }
 
-	/**
+    /**
      * @param $type
      * @return $this
      */
@@ -153,7 +153,7 @@ class FormOpen extends Element
         return $this;
     }
 
-	/**
+    /**
      * @return FormOpen
      */
     public function multipart()

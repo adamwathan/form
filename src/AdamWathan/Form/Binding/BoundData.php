@@ -10,7 +10,7 @@ class BoundData
 {
     protected $data;
 
-	/**
+    /**
      * BoundData constructor.
      * @param $data
      */
@@ -19,7 +19,7 @@ class BoundData
         $this->data = $data;
     }
 
-	/**
+    /**
      * @param $name
      * @param null $default
      * @return mixed
@@ -29,7 +29,7 @@ class BoundData
         return $this->dotGet($this->transformKey($name), $default);
     }
 
-	/**
+    /**
      * @return mixed
      */
     public function data()
@@ -37,7 +37,7 @@ class BoundData
         return $this->data;
     }
 
-	/**
+    /**
      * @param $dotKey
      * @param $default
      * @return mixed
@@ -49,7 +49,7 @@ class BoundData
         return $this->dataGet($this->data, $keyParts, $default);
     }
 
-	/**
+    /**
      * @param $target
      * @param $keyParts
      * @param $default
@@ -72,7 +72,7 @@ class BoundData
         return $default;
     }
 
-	/**
+    /**
      * @param $target
      * @param $keyParts
      * @param $default
@@ -89,7 +89,7 @@ class BoundData
         return $this->dataGet($target[$key], $keyParts, $default);
     }
 
-	/**
+    /**
      * @param $target
      * @param $keyParts
      * @param $default
@@ -106,7 +106,7 @@ class BoundData
         return $this->dataGet($target->{$key}, $keyParts, $default);
     }
 
-	/**
+    /**
      * @param $key
      * @return mixed
      */

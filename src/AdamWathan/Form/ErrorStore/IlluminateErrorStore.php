@@ -12,7 +12,7 @@ class IlluminateErrorStore implements ErrorStoreInterface
 {
     private $session;
 
-	/**
+    /**
      * IlluminateErrorStore constructor.
      * @param Session $session
      */
@@ -21,7 +21,7 @@ class IlluminateErrorStore implements ErrorStoreInterface
         $this->session = $session;
     }
 
-	/**
+    /**
      * @param $key
      * @return bool
      */
@@ -36,7 +36,7 @@ class IlluminateErrorStore implements ErrorStoreInterface
         return $this->getErrors()->has($key);
     }
 
-	/**
+    /**
      * @param $key
      * @return null
      */
@@ -51,7 +51,7 @@ class IlluminateErrorStore implements ErrorStoreInterface
         return $this->getErrors()->first($key);
     }
 
-	/**
+    /**
      * @return mixed
      */
     protected function hasErrors()
@@ -59,7 +59,7 @@ class IlluminateErrorStore implements ErrorStoreInterface
         return $this->session->has('errors');
     }
 
-	/**
+    /**
      * @return null
      */
     protected function getErrors()
@@ -67,7 +67,7 @@ class IlluminateErrorStore implements ErrorStoreInterface
         return $this->hasErrors() ? $this->session->get('errors') : null;
     }
 
-	/**
+    /**
      * @param $key
      * @return mixed
      */

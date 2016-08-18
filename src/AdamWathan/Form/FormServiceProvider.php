@@ -47,7 +47,7 @@ class FormServiceProvider extends ServiceProvider
         });
     }
 
-	/**
+    /**
      * @return array
      */
     public function provides()

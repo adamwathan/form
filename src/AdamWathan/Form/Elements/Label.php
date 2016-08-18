@@ -14,7 +14,7 @@ class Label extends Element
 
     protected $label;
 
-	/**
+    /**
      * Label constructor.
      * @param $label
      */
@@ -23,7 +23,7 @@ class Label extends Element
         $this->label = $label;
     }
 
-	/**
+    /**
      * @return string
      */
     public function render()
@@ -45,7 +45,7 @@ class Label extends Element
         return implode($tags);
     }
 
-	/**
+    /**
      * @param $name
      * @return $this
      */
@@ -56,7 +56,7 @@ class Label extends Element
         return $this;
     }
 
-	/**
+    /**
      * @param Element $element
      * @return $this
      */
@@ -68,7 +68,7 @@ class Label extends Element
         return $this;
     }
 
-	/**
+    /**
      * @param Element $element
      * @return $this
      */
@@ -80,7 +80,7 @@ class Label extends Element
         return $this;
     }
 
-	/**
+    /**
      * @return string
      */
     protected function renderElement()
@@ -92,7 +92,7 @@ class Label extends Element
         return $this->element->render();
     }
 
-	/**
+    /**
      * @return mixed
      */
     public function getControl()

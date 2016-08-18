@@ -16,7 +16,7 @@ class TextArea extends FormControl
 
     protected $value;
 
-	/**
+    /**
      * @return string
      */
     public function render()
@@ -28,7 +28,7 @@ class TextArea extends FormControl
         ]);
     }
 
-	/**
+    /**
      * @param $rows
      * @return $this
      */
@@ -39,7 +39,7 @@ class TextArea extends FormControl
         return $this;
     }
 
-	/**
+    /**
      * @param $cols
      * @return $this
      */
@@ -50,7 +50,7 @@ class TextArea extends FormControl
         return $this;
     }
 
-	/**
+    /**
      * @param $value
      * @return $this
      */
@@ -61,7 +61,7 @@ class TextArea extends FormControl
         return $this;
     }
 
-	/**
+    /**
      * @param $placeholder
      * @return $this
      */
@@ -72,7 +72,7 @@ class TextArea extends FormControl
         return $this;
     }
 
-	/**
+    /**
      * @param $value
      * @return $this
      */
@@ -85,7 +85,7 @@ class TextArea extends FormControl
         return $this;
     }
 
-	/**
+    /**
      * @return bool
      */
     protected function hasValue()

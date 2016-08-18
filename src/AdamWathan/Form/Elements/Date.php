@@ -12,7 +12,7 @@ class Date extends Text
         'type' => 'date',
     ];
 
-	/**
+    /**
 	 * @param $value
 	 * @return $this
 	 */

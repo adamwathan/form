@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
  */
 class Form extends Facade
 {
-	/**
+    /**
 	 * @return string
 	 */
 	protected static function getFacadeAccessor()

@@ -14,7 +14,7 @@ class Button extends FormControl
 
     protected $value;
 
-	/**
+    /**
 	 * Button constructor.
 	 * @param string $value
 	 * @param null $name
@@ -26,7 +26,7 @@ class Button extends FormControl
         $this->value($value);
     }
 
-	/**
+    /**
      * @return string
      */
     public function render()
@@ -34,7 +34,7 @@ class Button extends FormControl
         return sprintf('<button%s>%s</button>', $this->renderAttributes(), $this->value);
     }
 
-	/**
+    /**
      * @param $value
      */
     public function value($value)
