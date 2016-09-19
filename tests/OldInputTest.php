@@ -142,6 +142,19 @@ class OldInputTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testRenderDateTimeLocalWithOldInput()
+    {
+        $oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+        $oldInput->shouldReceive('hasOldInput')->andReturn(true);
+        $oldInput->shouldReceive('getOldInput')->with('date_and_time_of_birth')->andReturn('1985-05-06T16:39');
+
+        $this->form->setOldInputProvider($oldInput);
+
+        $expected = '<input type="datetime-local" name="date_and_time_of_birth" value="1985-05-06T16:39">';
+        $result = (string) $this->form->dateTimeLocal('date_and_time_of_birth');
+        $this->assertEquals($expected, $result);
+    }
+
     public function testRenderEmailWithOldInput()
     {
         $oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');

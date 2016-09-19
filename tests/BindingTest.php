@@ -59,6 +59,16 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testBindDateTimeLocal()
+    {
+        $object = $this->getStubObject();
+        $this->form->bind($object);
+
+        $expected = '<input type="datetime-local" name="date_and_time_of_birth" value="1985-05-06T16:39">';
+        $result = (string) $this->form->dateTimeLocal('date_and_time_of_birth');
+        $this->assertEquals($expected, $result);
+    }
+
     public function testBindSelect()
     {
         $object = $this->getStubObject();
@@ -433,6 +443,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $obj->first_name = 'John';
         $obj->last_name = 'Doe';
         $obj->date_of_birth = new \DateTime('1985-05-06');
+        $obj->date_and_time_of_birth = new \DateTime('1985-05-06 16:39');
         $obj->gender = 'male';
         $obj->terms = 'agree';
         $obj->color = 'green';
