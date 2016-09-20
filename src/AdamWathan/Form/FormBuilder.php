@@ -6,6 +6,7 @@ use AdamWathan\Form\Binding\BoundData;
 use AdamWathan\Form\Elements\Button;
 use AdamWathan\Form\Elements\Checkbox;
 use AdamWathan\Form\Elements\Date;
+use AdamWathan\Form\Elements\DateTimeLocal;
 use AdamWathan\Form\Elements\Email;
 use AdamWathan\Form\Elements\File;
 use AdamWathan\Form\Elements\FormOpen;
@@ -81,6 +82,17 @@ class FormBuilder
     public function date($name)
     {
         $date = new Date($name);
+
+        if (!is_null($value = $this->getValueFor($name))) {
+            $date->value($value);
+        }
+
+        return $date;
+    }
+
+    public function dateTimeLocal($name)
+    {
+        $date = new DateTimeLocal($name);
 
         if (!is_null($value = $this->getValueFor($name))) {
             $date->value($value);
