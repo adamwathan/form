@@ -244,6 +244,11 @@ class FormBuilder
         return $hiddenNamespace;
     }
 
+    public function getCurrentNamespace()
+    {
+        return $this->namespace;
+    }
+
     public function bind($data)
     {
         $this->boundData = new BoundData($data);

@@ -47,7 +47,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->form->close();
 
         $expected = null;
-        $result = $this->form->getNamespace();
+        $result = $this->form->getCurrentNamespace();
         $this->assertEquals($expected, $result);
     }
 
