@@ -66,6 +66,7 @@ class FormBuilder
     public function close()
     {
         $this->unbindData();
+        $this->resetNamespace();
 
         return '</form>';
     }
@@ -297,6 +298,11 @@ class FormBuilder
     protected function unbindData()
     {
         $this->boundData = null;
+    }
+
+    protected function resetNamespace()
+    {
+        $this->namespace = null;
     }
 
     public function selectMonth($name)
