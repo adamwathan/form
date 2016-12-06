@@ -256,7 +256,7 @@ class FormBuilder
 
     public function getValueFor($name)
     {
-        if ($this->hasOldInput()) {
+        if ($this->hasOldInput() && $this->hasMatchingOldNamespace()) {
             return $this->getOldInput($name);
         }
 
@@ -289,6 +289,15 @@ class FormBuilder
     protected function getBoundValue($name, $default)
     {
         return $this->escape($this->boundData->get($name, $default));
+    }
+
+    protected function hasMatchingOldNamespace()
+    {
+        if (! $this->getCurrentNamespace()) {
+            return true;
+        }
+
+        return $this->getOldInput('_namespace') === $this->getCurrentNamespace();
     }
 
     protected function escape($value)
