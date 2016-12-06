@@ -238,8 +238,8 @@ class FormBuilder
 
     public function getValueFor($name)
     {
-        if ($oldInput = $this->getOldInput($name)) {
-            return $oldInput;
+        if ($this->hasOldInput() && $this->getOldInput($name)) {
+            return $this->getOldInput($name);
         }
 
         if ($this->hasBoundData()) {
