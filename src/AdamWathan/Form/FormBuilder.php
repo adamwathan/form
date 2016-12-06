@@ -225,8 +225,8 @@ class FormBuilder
 
     public function getValueFor($name)
     {
-        if ($this->hasOldInput()) {
-            return $this->getOldInput($name);
+        if ($oldInput = $this->getOldInput($name)) {
+            return $oldInput;
         }
 
         if ($this->hasModelValue($name)) {
