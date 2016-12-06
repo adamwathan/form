@@ -40,6 +40,17 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testFormCloseResetsNamespace()
+    {
+        $this->form->open();
+        $this->form->namespace('tycho');
+        $this->form->close();
+
+        $expected = null;
+        $result = $this->form->getNamespace();
+        $this->assertEquals($expected, $result);
+    }
+
     public function testTextBox()
     {
         $expected = '<input type="text" name="email">';
