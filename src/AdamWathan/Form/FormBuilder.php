@@ -234,16 +234,6 @@ class FormBuilder
         return $message;
     }
 
-    public function namespace($namespace)
-    {
-        $this->namespace = $namespace;
-
-        $hiddenNamespace = new Hidden('_namespace');
-        $hiddenNamespace->value($namespace);
-
-        return $hiddenNamespace;
-    }
-
     public function getCurrentNamespace()
     {
         return $this->namespace;
@@ -289,6 +279,16 @@ class FormBuilder
     protected function getBoundValue($name, $default)
     {
         return $this->escape($this->boundData->get($name, $default));
+    }
+
+    protected function setNamespace($namespace)
+    {
+        $this->namespace = $namespace;
+
+        $hiddenNamespace = new Hidden('_namespace');
+        $hiddenNamespace->value($namespace);
+
+        return $hiddenNamespace;
     }
 
     protected function hasMatchingOldNamespace()
@@ -337,5 +337,14 @@ class FormBuilder
         ];
 
         return $this->select($name, $options);
+    }
+
+    public function __call($method, $parameters)
+    {
+        if ($method == 'namespace') {
+            return $this->setNamespace($parameters[0]);
+        }
+
+        return call_user_func_array([$this, $method], $parameters);
     }
 }
