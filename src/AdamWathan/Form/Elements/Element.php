@@ -105,9 +105,25 @@ abstract class Element
 
     protected function renderAttributes()
     {
+        list($attributes, $values) = $this->splitKeysAndValues($this->attributes);
+
         return implode(array_map(function ($attribute, $value) {
             return sprintf(' %s="%s"', $attribute, $value);
-        }, array_keys($this->attributes), $this->attributes));
+        }, $attributes, $values));
+    }
+
+    protected function splitKeysAndValues($array)
+    {
+        // Disgusting crap because people might have passed a collection
+        $keys = [];
+        $values = [];
+
+        foreach ($array as $key => $value) {
+            $keys[] = $key;
+            $values[] = $value;
+        }
+
+        return [$keys, $values];
     }
 
     public function __call($method, $params)

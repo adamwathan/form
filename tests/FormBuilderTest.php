@@ -253,6 +253,17 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testDateTimeLocal()
+    {
+        $expected = '<input type="datetime-local" name="date_and_time_of_birth">';
+        $result = (string) $this->form->dateTimeLocal('date_and_time_of_birth');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="datetime-local" name="start_date_and_time">';
+        $result = (string) $this->form->dateTimeLocal('start_date_and_time');
+        $this->assertEquals($expected, $result);
+    }
+
     public function testEmail()
     {
         $expected = '<input type="email" name="email">';

@@ -59,6 +59,16 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testBindDateTimeLocal()
+    {
+        $object = $this->getStubObject();
+        $this->form->bind($object);
+
+        $expected = '<input type="datetime-local" name="date_and_time_of_birth" value="1985-05-06T16:39">';
+        $result = (string) $this->form->dateTimeLocal('date_and_time_of_birth');
+        $this->assertEquals($expected, $result);
+    }
+
     public function testBindSelect()
     {
         $object = $this->getStubObject();
@@ -136,22 +146,142 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = new MagicGetter;
         $this->form->bind($object);
 
-        $expected = '<input type="text" name="not_set" value="foo">';
-        $result = (string) $this->form->text('not_set');
+        $expected = '<input type="text" name="not_magic" value="foo">';
+        $result = (string) $this->form->text('not_magic');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="magic" value="bar">';
+        $result = (string) $this->form->text('magic');
         $this->assertEquals($expected, $result);
     }
 
     public function testBindArray()
     {
-        $model = ['first_name' => 'John'];
-        $this->form->bind($model);
+        $array = ['first_name' => 'John'];
+        $this->form->bind($array);
 
         $expected = '<input type="text" name="first_name" value="John">';
         $result = (string) $this->form->text('first_name');
         $this->assertEquals($expected, $result);
     }
 
-    public function testCloseUnbindsModel()
+    public function testBindArrayWithMissingKey()
+    {
+        $array = ['first_name' => 'John'];
+        $this->form->bind($array);
+
+        $expected = '<input type="text" name="last_name">';
+        $result = (string) $this->form->text('last_name');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBindNestedArray()
+    {
+        $array = [
+            'address' => [
+                'city' => 'Roswell',
+                'tree' => [
+                    'has' => [
+                        'nested' => 'Bird'
+                    ]
+                ],
+            ],
+        ];
+        $this->form->bind($array);
+
+        $expected = '<input type="text" name="address[city]" value="Roswell">';
+        $result = (string) $this->form->text('address[city]');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="address[tree][has][nested]" value="Bird">';
+        $result = (string) $this->form->text('address[tree][has][nested]');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBindNestedArrayWithMissingKey()
+    {
+        $array = [
+            'address' => [
+                'tree' => [
+                    'nested' => 'Bird'
+                ],
+            ],
+        ];
+
+        $this->form->bind($array);
+
+        $expected = '<input type="text" name="address[notSet]">';
+        $result = (string) $this->form->text('address[notSet]');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBindArrayWithZeroAsKey()
+    {
+        $array = [
+            'hotdog' => [
+                0 => 'Tube',
+                1 => 'Steak',
+            ],
+        ];
+
+        $this->form->bind($array);
+
+        $expected = '<input type="text" name="hotdog[0]" value="Tube">';
+        $result = (string) $this->form->text('hotdog[0]');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="hotdog[1]" value="Steak">';
+        $result = (string) $this->form->text('hotdog[1]');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBindNestedObject()
+    {
+        $object = json_decode(json_encode([
+            'address' => [
+                'city' => 'Roswell',
+                'tree' => [
+                    'has' => [
+                        'nested' => 'Bird'
+                    ]
+                ],
+            ],
+        ]));
+        $this->form->bind($object);
+
+        $expected = '<input type="text" name="address[city]" value="Roswell">';
+        $result = (string) $this->form->text('address[city]');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="address[tree][has][nested]" value="Bird">';
+        $result = (string) $this->form->text('address[tree][has][nested]');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBindNestedMixed()
+    {
+        $object = [
+            'address' => [
+                'city' => 'Roswell',
+                'tree' => json_decode(json_encode([
+                    'has' => [
+                        'nested' => 'Bird'
+                    ]
+                ])),
+            ],
+        ];
+        $this->form->bind($object);
+
+        $expected = '<input type="text" name="address[city]" value="Roswell">';
+        $result = (string) $this->form->text('address[city]');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="address[tree][has][nested]" value="Bird">';
+        $result = (string) $this->form->text('address[tree][has][nested]');
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testCloseUnbindsData()
     {
         $object = $this->getStubObject();
         $this->form->bind($object);
@@ -162,7 +292,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testAgainstXSSAttacksInBoundModels()
+    public function testAgainstXSSAttacksInBoundData()
     {
         $object = $this->getStubObject();
         $object->first_name = '" onmouseover="alert(\'xss\')';
@@ -185,13 +315,32 @@ class BindingTest extends PHPUnit_Framework_TestCase
 
     public function testBindingOnCheckboxTakesPrecedenceOverDefaultToChecked()
     {
-        $object = $this->getStubObject();
+        $object = (object) ['published' => 1];
         $this->form->bind($object);
 
         $expected  = '<input type="checkbox" name="published[]" value="1" checked="checked">';
-        $expected .= '<input type="checkbox" name="published[]" value="0">';
         $result  = (string) $this->form->checkbox('published[]', 1);
-        $result .= (string) $this->form->checkbox('published[]', 0)->defaultToChecked();
+        $this->assertEquals($expected, $result);
+
+        $object = (object) ['published' => 0];
+        $this->form->bind($object);
+
+        $expected = '<input type="checkbox" name="published[]" value="1">';
+        $result = (string) $this->form->checkbox('published[]', 1)->defaultToChecked();
+        $this->assertEquals($expected, $result);
+
+        $object = (object) ['published' => true];
+        $this->form->bind($object);
+
+        $expected = '<input type="checkbox" name="published[]" value="1" checked="checked">';
+        $result = (string) $this->form->checkbox('published[]', 1);
+        $this->assertEquals($expected, $result);
+
+        $object = (object) ['published' => false];
+        $this->form->bind($object);
+
+        $expected = '<input type="checkbox" name="published[]" value="1">';
+        $result = (string) $this->form->checkbox('published[]', 1)->defaultToChecked();
         $this->assertEquals($expected, $result);
     }
 
@@ -294,12 +443,14 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $obj->first_name = 'John';
         $obj->last_name = 'Doe';
         $obj->date_of_birth = new \DateTime('1985-05-06');
+        $obj->date_and_time_of_birth = new \DateTime('1985-05-06 16:39');
         $obj->gender = 'male';
         $obj->terms = 'agree';
         $obj->color = 'green';
         $obj->number = '0';
         $obj->favourite_foods = ['fish', 'chips'];
         $obj->published = '1';
+        $obj->private = false;
 
         return $obj;
     }
@@ -307,8 +458,10 @@ class BindingTest extends PHPUnit_Framework_TestCase
 
 class MagicGetter
 {
+    public $not_magic = 'foo';
+
     public function __get($key)
     {
-        return 'foo';
+        return 'bar';
     }
 }

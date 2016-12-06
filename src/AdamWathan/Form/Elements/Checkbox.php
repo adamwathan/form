@@ -8,9 +8,9 @@ class Checkbox extends Input
         'type' => 'checkbox',
     ];
 
-    private $checked;
+    protected $checked;
 
-    private $oldValue;
+    protected $oldValue;
 
     public function __construct($name, $value = 1)
     {
