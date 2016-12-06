@@ -13,8 +13,6 @@ class FormOpen extends Element
 
     protected $hiddenMethod;
 
-    protected $hiddenNamespace;
-
     public function render()
     {
         $tags = [sprintf('<form%s>', $this->renderAttributes())];
@@ -25,10 +23,6 @@ class FormOpen extends Element
 
         if ($this->hasHiddenMethod()) {
             $tags[] = $this->hiddenMethod->render();
-        }
-
-        if ($this->hasHiddenNamespace()) {
-            $tags[] = $this->hiddenNamespace->render();
         }
 
         return implode($tags);
@@ -42,11 +36,6 @@ class FormOpen extends Element
     protected function hasHiddenMethod()
     {
         return isset($this->hiddenMethod);
-    }
-
-    protected function hasHiddenNamespace()
-    {
-        return isset($this->hiddenNamespace);
     }
 
     public function post()
@@ -119,18 +108,5 @@ class FormOpen extends Element
     public function multipart()
     {
         return $this->encodingType('multipart/form-data');
-    }
-
-    public function namespace($namespace)
-    {
-        return $this->setHiddenNamespace($namespace);
-    }
-
-    protected function setHiddenNamespace($namespace)
-    {
-        $this->hiddenNamespace = new Hidden('_namespace');
-        $this->hiddenNamespace->value($namespace);
-
-        return $this;
     }
 }

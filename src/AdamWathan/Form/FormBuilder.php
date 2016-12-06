@@ -30,6 +30,8 @@ class FormBuilder
 
     protected $boundData;
 
+    protected $namespace;
+
     public function setOldInputProvider(OldInputInterface $oldInputProvider)
     {
         $this->oldInput = $oldInputProvider;
@@ -229,6 +231,16 @@ class FormBuilder
         }
 
         return $message;
+    }
+
+    public function namespace($namespace)
+    {
+        $this->namespace = $namespace;
+
+        $hiddenNamespace = new Hidden('_namespace');
+        $hiddenNamespace->value($namespace);
+
+        return $hiddenNamespace;
     }
 
     public function bind($data)
