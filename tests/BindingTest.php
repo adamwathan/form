@@ -406,13 +406,18 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = $this->getStubObject();
 
         $expected = '<input type="text" name="first_name" value="Jesse">';
-        $this->form->namespace('profile');
         $this->form->bind($object);
         $result = (string) $this->form->text('first_name');
         $this->assertEquals($expected, $result);
 
         $expected = '<input type="text" name="first_name" value="John">';
         $this->form->namespace('user');
+        $this->form->bind($object);
+        $result = (string) $this->form->text('first_name');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="first_name" value="Jesse">';
+        $this->form->namespace('profile');
         $this->form->bind($object);
         $result = (string) $this->form->text('first_name');
         $this->assertEquals($expected, $result);
