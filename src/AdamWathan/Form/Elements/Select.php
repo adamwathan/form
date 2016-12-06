@@ -4,9 +4,9 @@ namespace AdamWathan\Form\Elements;
 
 class Select extends FormControl
 {
-    private $options;
+    protected $options;
 
-    private $selected;
+    protected $selected;
 
     public function __construct($name, $options = [])
     {
@@ -44,21 +44,25 @@ class Select extends FormControl
 
     protected function renderOptions()
     {
+        list($values, $labels) = $this->splitKeysAndValues($this->options);
+
         $tags = array_map(function ($value, $label) {
             if (is_array($label)) {
                 return $this->renderOptGroup($value, $label);
             }
             return $this->renderOption($value, $label);
-        }, array_keys($this->options), $this->options);
+        }, $values, $labels);
 
         return implode($tags);
     }
 
     protected function renderOptGroup($label, $options)
     {
+        list($values, $labels) = $this->splitKeysAndValues($options);
+
         $options = array_map(function ($value, $label) {
             return $this->renderOption($value, $label);
-        }, array_keys($options), $options);
+        }, $values, $labels);
 
         return implode([
             sprintf('<optgroup label="%s">', $label),
