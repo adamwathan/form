@@ -26,6 +26,13 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testFormNamespace()
+    {
+        $expected = '<input type="hidden" name="_namespace" value="tycho">';
+        $result = (string) $this->form->namespace('tycho');
+        $this->assertEquals($expected, $result);
+    }
+
     public function testCanCloseForm()
     {
         $expected = '</form>';
