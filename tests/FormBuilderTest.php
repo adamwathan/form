@@ -26,10 +26,10 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testFormNamespace()
+    public function testFormOpenWithNamespace()
     {
-        $expected = '<input type="hidden" name="_namespace" value="tycho">';
-        $result = (string) $this->form->namespace('tycho');
+        $expected = '<form method="POST" action=""><input type="hidden" name="_namespace" value="tycho">';
+        $result = (string) $this->form->name('tycho')->open();
         $this->assertEquals($expected, $result);
     }
 
@@ -42,8 +42,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 
     public function testFormCloseResetsNamespace()
     {
-        $this->form->open();
-        $this->form->namespace('tycho');
+        $this->form->name('tycho')->open();
         $this->form->close();
 
         $expected = null;
