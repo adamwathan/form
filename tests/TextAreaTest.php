@@ -143,4 +143,31 @@ class TextAreaTest extends PHPUnit_Framework_TestCase
         $result = $text->render();
         $this->assertEquals($expected, $result);
     }
+
+    public function testCanConditionallyAddAttributesThroughMagicMethods()
+    {
+        $text = new TextArea('loldogz');
+        $text = $text->disabledIf(false);
+        $expected = '<textarea name="loldogz" rows="10" cols="50"></textarea>';
+        $result = $text->render();
+        $this->assertEquals($expected, $result);
+
+        $text = new TextArea('lolcatz');
+        $text = $text->disabledIf(true);
+        $expected = '<textarea name="lolcatz" rows="10" cols="50" disabled="disabled"></textarea>';
+        $result = $text->render();
+        $this->assertEquals($expected, $result);
+
+        $text = new TextArea('gluteous');
+        $text = $text->maxlengthIf(false, '5');
+        $expected = '<textarea name="gluteous" rows="10" cols="50"></textarea>';
+        $result = $text->render();
+        $this->assertEquals($expected, $result);
+
+        $text = new TextArea('maximus');
+        $text = $text->maxlengthIf(true, '5');
+        $expected = '<textarea name="maximus" rows="10" cols="50" maxlength="5"></textarea>';
+        $result = $text->render();
+        $this->assertEquals($expected, $result);
+    }
 }
