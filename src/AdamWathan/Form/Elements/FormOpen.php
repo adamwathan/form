@@ -13,6 +13,15 @@ class FormOpen extends Element
 
     protected $hiddenMethod;
 
+    protected $hiddenNamespace;
+
+    public function __construct($namespace = null)
+    {
+        if ($namespace) {
+            $this->setHiddenNamespace($namespace);
+        }
+    }
+
     public function render()
     {
         $tags = [sprintf('<form%s>', $this->renderAttributes())];
@@ -23,6 +32,10 @@ class FormOpen extends Element
 
         if ($this->hasHiddenMethod()) {
             $tags[] = $this->hiddenMethod->render();
+        }
+
+        if ($this->hasHiddenNamespace()) {
+            $tags[] = $this->hiddenNamespace->render();
         }
 
         return implode($tags);
@@ -36,6 +49,11 @@ class FormOpen extends Element
     protected function hasHiddenMethod()
     {
         return isset($this->hiddenMethod);
+    }
+
+    protected function hasHiddenNamespace()
+    {
+        return isset($this->hiddenNamespace);
     }
 
     public function post()
@@ -80,6 +98,14 @@ class FormOpen extends Element
         $this->setMethod('POST');
         $this->hiddenMethod = new Hidden('_method');
         $this->hiddenMethod->value($method);
+
+        return $this;
+    }
+
+    protected function setHiddenNamespace($namespace)
+    {
+        $this->hiddenNamespace = new Hidden('_namespace');
+        $this->hiddenNamespace->value($namespace);
 
         return $this;
     }

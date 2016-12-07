@@ -47,9 +47,16 @@ class FormBuilder
         $this->csrfToken = $token;
     }
 
+    public function name($namespace)
+    {
+        $this->namespace = $namespace;
+
+        return $this;
+    }
+
     public function open()
     {
-        $open = new FormOpen;
+        $open = new FormOpen($this->namespace);
 
         if ($this->hasToken()) {
             $open->token($this->csrfToken);
@@ -281,16 +288,6 @@ class FormBuilder
         return $this->escape($this->boundData->get($name, $default));
     }
 
-    protected function setNamespace($namespace)
-    {
-        $this->namespace = $namespace;
-
-        $hiddenNamespace = new Hidden('_namespace');
-        $hiddenNamespace->value($namespace);
-
-        return $hiddenNamespace;
-    }
-
     protected function hasMatchingOldNamespace()
     {
         if (! $this->getCurrentNamespace()) {
@@ -337,14 +334,5 @@ class FormBuilder
         ];
 
         return $this->select($name, $options);
-    }
-
-    public function __call($method, $parameters)
-    {
-        if ($method == 'namespace') {
-            return $this->setNamespace($parameters[0]);
-        }
-
-        return call_user_func_array([$this, $method], $parameters);
     }
 }
