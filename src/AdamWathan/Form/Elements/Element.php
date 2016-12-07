@@ -126,8 +126,24 @@ abstract class Element
         return [$keys, $values];
     }
 
+    protected function conditionalMethodCall($method, $params)
+    {
+        $condition = array_shift($params);
+        $method = substr($method, 0, -2);
+
+        if ($condition) {
+            return call_user_func_array([$this, $method], $params);
+        }
+
+        return $this;
+    }
+
     public function __call($method, $params)
     {
+        if (substr($method, -2) === 'If') {
+            return $this->conditionalMethodCall($method, $params);
+        }
+
         $params = count($params) ? $params : [$method];
         $params = array_merge([$method], $params);
         call_user_func_array([$this, 'attribute'], $params);
