@@ -64,6 +64,10 @@ class BoundData
             return $default;
         }
 
+        if (method_exists($target, 'getFormValue')) {
+            return $this->data->getFormValue($key);
+        }
+
         return $this->dataGet($target->{$key}, $keyParts, $default);
     }
 
