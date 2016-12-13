@@ -60,12 +60,12 @@ class BoundData
     {
         $key = array_shift($keyParts);
 
-        if (! (property_exists($target, $key) || method_exists($target, '__get') || method_exists($target, 'getFormValue'))) {
+        if (! (property_exists($target, $key) || method_exists($target, '__get'))) {
             return $default;
         }
 
         if (method_exists($target, 'getFormValue')) {
-            return $this->data->getFormValue($key);
+            return $this->dataGet($this->data->getFormValue($key), $keyParts, $default);
         }
 
         return $this->dataGet($target->{$key}, $keyParts, $default);
