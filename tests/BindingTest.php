@@ -440,7 +440,7 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = new FormGetter;
         $this->form->bind($object);
 
-        $expected = '<input type="text" name="form" value="Form Model Acessor">';
+        $expected = '<input type="text" name="form" value="Form Model Accessor">';
         $result = (string) $this->form->text('form');
         $this->assertEquals($expected, $result);
     }
@@ -475,9 +475,9 @@ class MagicGetter
         return 'bar';
     }
 }
+
 class FormGetter
 {
-
     public function __get($key)
     {
         return 'Standard Model Accessor';
@@ -485,6 +485,6 @@ class FormGetter
 
     public function getFormValue($key)
     {
-        return 'Form Model Acessor';
+        return 'Form Model Accessor';
     }
 }
