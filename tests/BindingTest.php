@@ -2,7 +2,6 @@
 
 use AdamWathan\Form\FormBuilder;
 use AdamWathan\Form\Binding\FormAccessible;
-use Illuminate\Database\Eloquent\Model;
 
 class BindingTest extends PHPUnit_Framework_TestCase
 {
@@ -478,7 +477,7 @@ class MagicGetter
     }
 }
 
-class FormGetter extends Model
+class FormGetter
 {
     use FormAccessible;
 
@@ -494,5 +493,17 @@ class FormGetter extends Model
     public function formTestAttribute($key)
     {
         return 'Form Model Accessor';
+    }
+
+    protected function getAttributeFromArray($key)
+    {
+        if (array_key_exists($key, $this->attributes)) {
+            return $this->attributes[$key];
+        }
+    }
+
+    public function getDates()
+    {
+        return ['created_at', 'updated_at'];
     }
 }
