@@ -1,6 +1,8 @@
 <?php
 
 use AdamWathan\Form\FormBuilder;
+use AdamWathan\Form\Binding\FormAccessible;
+use Illuminate\Database\Eloquent\Model;
 
 class BindingTest extends PHPUnit_Framework_TestCase
 {
@@ -440,8 +442,8 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $object = new FormGetter;
         $this->form->bind($object);
 
-        $expected = '<input type="text" name="form" value="Form Model Accessor">';
-        $result = (string) $this->form->text('form');
+        $expected = '<input type="text" name="test" value="Form Model Accessor">';
+        $result = (string) $this->form->text('test');
         $this->assertEquals($expected, $result);
     }
 
@@ -476,14 +478,20 @@ class MagicGetter
     }
 }
 
-class FormGetter
+class FormGetter extends Model
 {
+    use FormAccessible;
+
+    protected $attributes = [
+        'test' => 'testValue'
+    ];
+
     public function __get($key)
     {
         return 'Standard Model Accessor';
     }
 
-    public function getFormValue($key)
+    public function formTestAttribute($key)
     {
         return 'Form Model Accessor';
     }
