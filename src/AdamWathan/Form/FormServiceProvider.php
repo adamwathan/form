@@ -19,21 +19,21 @@ class FormServiceProvider extends ServiceProvider
 
     protected function registerErrorStore()
     {
-        $this->app['adamwathan.form.errorstore'] = $this->app->share(function ($app) {
+        $this->app->singleton('adamwathan.form.errorstore', function ($app) {
             return new IlluminateErrorStore($app['session.store']);
         });
     }
 
     protected function registerOldInput()
     {
-        $this->app['adamwathan.form.oldinput'] = $this->app->share(function ($app) {
+        $this->app->singleton('adamwathan.form.oldinput', function ($app) {
             return new IlluminateOldInputProvider($app['session.store']);
         });
     }
 
     protected function registerFormBuilder()
     {
-        $this->app['adamwathan.form'] = $this->app->share(function ($app) {
+        $this->app->singleton('adamwathan.form', function ($app) {
             $formBuilder = new FormBuilder;
             $formBuilder->setErrorStore($app['adamwathan.form.errorstore']);
             $formBuilder->setOldInputProvider($app['adamwathan.form.oldinput']);
