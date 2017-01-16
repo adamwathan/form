@@ -25,6 +25,15 @@ trait InputContractTest
         $this->assertRegExp($this->elementRegExp('required="required"'), $result, $message);
     }
 
+    public function testConditionalRequired()
+    {
+        $text = $this->newTestSubjectInstance('email');
+        $result = $text->required(false)->render();
+
+        $message = "required attribute shouldnt be set";
+        $this->assertRegExp($this->elementRegExp('required="required"'), $result, $message);
+    }
+
     public function testAutofocus()
     {
         $text = $this->newTestSubjectInstance('');
@@ -77,12 +86,30 @@ trait InputContractTest
         $this->assertRegExp($this->elementRegExp('disabled="disabled"'), $result, $message);
     }
 
+    public function testConditionalDisable()
+    {
+        $text = $this->newTestSubjectInstance('email');
+        $result = $text->required(false)->render();
+
+        $message = "disabled attribute shouldnt be set";
+        $this->assertRegExp($this->elementRegExp('disabled="disabled"'), $result, $message);
+    }
+
     public function testReadyOnly()
     {
         $text = $this->newTestSubjectInstance('email');
         $result = $text->readonly()->render();
 
         $message = 'readonly attribute should be set';
+        $this->assertRegExp($this->elementRegExp('readonly="readonly"'), $result, $message);
+    }
+
+    public function testConditionalReadyOnly()
+    {
+        $text = $this->newTestSubjectInstance('email');
+        $result = $text->required(false)->render();
+
+        $message = "readonly attribute shouldnt be set";
         $this->assertRegExp($this->elementRegExp('readonly="readonly"'), $result, $message);
     }
 
