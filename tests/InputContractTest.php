@@ -25,6 +25,16 @@ trait InputContractTest
         $this->assertRegExp($this->elementRegExp('required="required"'), $result, $message);
     }
 
+    public function testHtmlableInterface()
+    {
+        $text = $this->newTestSubjectInstance('email');
+
+        $expected = $text->render();
+        $result = $text->toHtml();
+        $message = 'Casting input element to HTML should return the rendered element';
+        $this->assertEquals($expected, $result, $message);
+    }
+
     public function testAutofocus()
     {
         $text = $this->newTestSubjectInstance('');

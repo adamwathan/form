@@ -10,6 +10,7 @@ use AdamWathan\Form\Elements\DateTimeLocal;
 use AdamWathan\Form\Elements\Email;
 use AdamWathan\Form\Elements\File;
 use AdamWathan\Form\Elements\FormOpen;
+use AdamWathan\Form\Elements\FormClose;
 use AdamWathan\Form\Elements\Hidden;
 use AdamWathan\Form\Elements\Label;
 use AdamWathan\Form\Elements\Password;
@@ -61,11 +62,14 @@ class FormBuilder
         return isset($this->csrfToken);
     }
 
+    /**
+     * @return FormClose
+     */
     public function close()
     {
         $this->unbindData();
 
-        return '</form>';
+        return new FormClose;
     }
 
     public function text($name)
