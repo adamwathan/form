@@ -31,7 +31,7 @@ trait InputContractTest
         $result = $text->required(false)->render();
 
         $message = "required attribute shouldnt be set";
-        $this->assertRegExp($this->elementRegExp('required="required"'), $result, $message);
+        $this->assertNotRegExp($this->elementRegExp('required="required"'), $result, $message);
     }
 
     public function testAutofocus()
@@ -92,7 +92,7 @@ trait InputContractTest
         $result = $text->required(false)->render();
 
         $message = "disabled attribute shouldnt be set";
-        $this->assertRegExp($this->elementRegExp('disabled="disabled"'), $result, $message);
+        $this->assertNotRegExp($this->elementRegExp('disabled="disabled"'), $result, $message);
     }
 
     public function testReadyOnly()
@@ -110,7 +110,7 @@ trait InputContractTest
         $result = $text->required(false)->render();
 
         $message = "readonly attribute shouldnt be set";
-        $this->assertRegExp($this->elementRegExp('readonly="readonly"'), $result, $message);
+        $this->assertNotRegExp($this->elementRegExp('readonly="readonly"'), $result, $message);
     }
 
     public function testEnableDisabled()
