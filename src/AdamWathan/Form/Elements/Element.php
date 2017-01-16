@@ -126,6 +126,15 @@ abstract class Element
         return [$keys, $values];
     }
 
+    protected function setBooleanAttribute($attribute, $value)
+    {
+        if ($value) {
+            $this->setAttribute($attribute, $attribute);
+        } else {
+            $this->removeAttribute($attribute);
+        }
+    }
+
     public function __call($method, $params)
     {
         $params = count($params) ? $params : [$method];

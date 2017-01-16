@@ -14,10 +14,10 @@ abstract class FormControl extends Element
         $this->setAttribute('name', $name);
     }
 
-    public function required()
+    public function required($conditional = true)
     {
-        $this->setAttribute('required', 'required');
-
+        $this->setBooleanAttribute('required', $conditional);
+        
         return $this;
     }
 
@@ -28,17 +28,17 @@ abstract class FormControl extends Element
         return $this;
     }
 
-    public function disable()
+    public function disable($conditional = true)
     {
-        $this->setAttribute('disabled', 'disabled');
-
+        $this->setBooleanAttribute('disabled', $conditional);
+        
         return $this;
     }
 
-    public function readonly()
+    public function readonly($conditional = true)
     {
-        $this->setAttribute('readonly', 'readonly');
-
+        $this->setBooleanAttribute('readonly', $conditional);
+        
         return $this;
     }
 
