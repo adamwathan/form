@@ -16,10 +16,8 @@ abstract class FormControl extends Element
 
     public function required($conditional = true)
     {
-        if ($conditional) {
-            $this->setAttribute('required', 'required');
-        }
-
+        $this->setBooleanAttribute('required', $conditional);
+        
         return $this;
     }
 
@@ -32,28 +30,22 @@ abstract class FormControl extends Element
 
     public function disable($conditional = true)
     {
-        if ($conditional) {
-            $this->setAttribute('disabled', 'disabled');
-        }
-
+        $this->setBooleanAttribute('disabled', $conditional);
+        
         return $this;
     }
 
     public function readonly($conditional = true)
     {
-        if ($conditional) {
-            $this->setAttribute('readonly', 'readonly');
-        }
-
+        $this->setBooleanAttribute('readonly', $conditional);
+        
         return $this;
     }
 
-    public function enable($conditional = true)
+    public function enable()
     {
-        if ($conditional) {
-            $this->removeAttribute('disabled');
-            $this->removeAttribute('readonly');
-        }
+        $this->removeAttribute('disabled');
+        $this->removeAttribute('readonly');
 
         return $this;
     }
