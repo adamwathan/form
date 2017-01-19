@@ -17,7 +17,7 @@ abstract class FormControl extends Element
     public function required($conditional = true)
     {
         $this->setBooleanAttribute('required', $conditional);
-        
+
         return $this;
     }
 
@@ -31,14 +31,14 @@ abstract class FormControl extends Element
     public function disable($conditional = true)
     {
         $this->setBooleanAttribute('disabled', $conditional);
-        
+
         return $this;
     }
 
     public function readonly($conditional = true)
     {
         $this->setBooleanAttribute('readonly', $conditional);
-        
+
         return $this;
     }
 
