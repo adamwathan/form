@@ -241,6 +241,9 @@ $options = [
 // <button type="submit">Sign Up</button>
 <?= $builder->submit('Sign Up'); ?>
 
+// <button type="reset">Reset Form</button>
+<?= $builder->reset('Reset Form'); ?>
+
 // <button type="submit" class="js-submit">Sign Up</button>
 <?= $builder->submit('Sign Up')->addClass('js-submit'); ?>
 ```
