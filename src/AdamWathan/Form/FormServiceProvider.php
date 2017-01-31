@@ -37,7 +37,7 @@ class FormServiceProvider extends ServiceProvider
             $formBuilder = new FormBuilder;
             $formBuilder->setErrorStore($app['adamwathan.form.errorstore']);
             $formBuilder->setOldInputProvider($app['adamwathan.form.oldinput']);
-            $formBuilder->setToken($app['session.store']->getToken());
+            $formBuilder->setToken($app['session.store']->token());
 
             return $formBuilder;
         });
