@@ -268,7 +268,7 @@ class FormBuilder
 
     protected function getOldInput($name)
     {
-        return $this->escape($this->oldInput->getOldInput($name));
+        return $this->oldInput->getOldInput($name);
     }
 
     protected function hasBoundData()
@@ -278,16 +278,7 @@ class FormBuilder
 
     protected function getBoundValue($name, $default)
     {
-        return $this->escape($this->boundData->get($name, $default));
-    }
-
-    protected function escape($value)
-    {
-        if (! is_string($value)) {
-            return $value;
-        }
-
-        return htmlentities($value, ENT_QUOTES, 'UTF-8');
+        return $this->boundData->get($name, $default);
     }
 
     protected function unbindData()
