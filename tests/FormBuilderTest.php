@@ -334,4 +334,11 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
         $result = $this->form->radio('fm-transmission')->getAttribute('type');
         $this->assertEquals($expected, $result);
     }
+
+    public function testAgainstXSSAttacksInAttributes()
+    {
+        $expected = '<input type="text" name="meme" lol="catz&quot;&gt;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;">';
+        $result = $this->form->text('meme')->lol('catz"><script>alert("xss")</script>');
+        $this->assertEquals($expected, $result);
+    }
 }

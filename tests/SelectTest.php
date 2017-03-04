@@ -263,4 +263,13 @@ class SelectTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $result);
     }
+
+    public function testAgainstXSSAttacksInSelectOptions()
+    {
+        $select = new Select('animals', ['0"><script>alert("xss")</script>' => '<script>alert("xss")</script>']);
+        $expected = '<select name="animals"><option value="0&quot;&gt;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;">&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</option></select>';
+        $result = $select->render();
+
+        $this->assertEquals($expected, $result);
+    }
 }
