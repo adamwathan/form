@@ -108,7 +108,7 @@ abstract class Element
         list($attributes, $values) = $this->splitKeysAndValues($this->attributes);
 
         return implode(array_map(function ($attribute, $value) {
-            return sprintf(' %s="%s"', $attribute, $value);
+            return sprintf(' %s="%s"', $attribute, $this->escape($value));
         }, $attributes, $values));
     }
 
@@ -133,6 +133,11 @@ abstract class Element
         } else {
             $this->removeAttribute($attribute);
         }
+    }
+
+    protected function escape($value)
+    {
+        return htmlentities($value, ENT_QUOTES, 'UTF-8');
     }
 
     public function __call($method, $params)

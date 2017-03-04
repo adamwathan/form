@@ -37,7 +37,7 @@ class LabelTest extends PHPUnit_Framework_TestCase
         $result = $label->forId('email')->render();
 
         $this->assertEquals($expected, $result);
-        
+
         $label = new Label('Password');
 
         $expected = '<label for="pass">Password</label>';
@@ -74,5 +74,13 @@ class LabelTest extends PHPUnit_Framework_TestCase
         $label = new Label('Email');
         $result = $label->after($element)->getControl();
         $this->assertEquals($element, $result);
+    }
+
+    public function testAgainstXssAttacksInLabel()
+    {
+        $label = new Label('<script>alert("xss")</script>');
+        $expected = '<label>&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</label>';
+        $result = $label->render();
+        $this->assertEquals($expected, $result);
     }
 }

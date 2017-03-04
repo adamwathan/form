@@ -73,10 +73,10 @@ class Select extends FormControl
 
     protected function renderOption($value, $label)
     {
-        return implode([
-            sprintf('<option value="%s"%s>', $value, $this->isSelected($value) ? ' selected' : ''),
-            $label,
-            '</option>',
+        return vsprintf('<option value="%s"%s>%s</option>', [
+            $this->escape($value),
+            $this->isSelected($value) ? ' selected' : '',
+            $this->escape($label),
         ]);
     }
 
