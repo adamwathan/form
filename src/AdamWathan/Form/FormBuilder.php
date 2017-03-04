@@ -30,6 +30,8 @@ class FormBuilder
 
     protected $boundData;
 
+    protected $namespace;
+
     public function setOldInputProvider(OldInputInterface $oldInputProvider)
     {
         $this->oldInput = $oldInputProvider;
@@ -45,9 +47,16 @@ class FormBuilder
         $this->csrfToken = $token;
     }
 
+    public function name($namespace)
+    {
+        $this->namespace = $namespace;
+
+        return $this;
+    }
+
     public function open()
     {
-        $open = new FormOpen;
+        $open = new FormOpen($this->namespace);
 
         if ($this->hasToken()) {
             $open->token($this->csrfToken);
@@ -64,6 +73,7 @@ class FormBuilder
     public function close()
     {
         $this->unbindData();
+        $this->resetNamespace();
 
         return '</form>';
     }
@@ -239,6 +249,11 @@ class FormBuilder
         return $message;
     }
 
+    public function getCurrentNamespace()
+    {
+        return $this->namespace;
+    }
+
     public function bind($data)
     {
         $this->boundData = new BoundData($data);
@@ -246,7 +261,7 @@ class FormBuilder
 
     public function getValueFor($name)
     {
-        if ($this->hasOldInput()) {
+        if ($this->hasOldInput() && $this->hasMatchingOldNamespace()) {
             return $this->getOldInput($name);
         }
 
@@ -281,6 +296,15 @@ class FormBuilder
         return $this->escape($this->boundData->get($name, $default));
     }
 
+    protected function hasMatchingOldNamespace()
+    {
+        if (! $this->getCurrentNamespace()) {
+            return true;
+        }
+
+        return $this->getOldInput('_namespace') === $this->getCurrentNamespace();
+    }
+
     protected function escape($value)
     {
         if (! is_string($value)) {
@@ -293,6 +317,11 @@ class FormBuilder
     protected function unbindData()
     {
         $this->boundData = null;
+    }
+
+    protected function resetNamespace()
+    {
+        $this->namespace = null;
     }
 
     public function selectMonth($name)

@@ -395,6 +395,34 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testNamespacedOldInputTakesPrecedenceOverBinding()
+    {
+        $oldInput = Mockery::mock('AdamWathan\Form\OldInput\OldInputInterface');
+        $oldInput->shouldReceive('hasOldInput')->andReturn(true);
+        $oldInput->shouldReceive('getOldInput')->with('_namespace')->andReturn('profile');
+        $oldInput->shouldReceive('getOldInput')->with('first_name')->andReturn('Jesse');
+        $this->form->setOldInputProvider($oldInput);
+
+        $object = $this->getStubObject();
+
+        $expected = '<input type="text" name="first_name" value="Jesse">';
+        $this->form->bind($object);
+        $result = (string) $this->form->text('first_name');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="first_name" value="John">';
+        $this->form->name('user')->open();
+        $this->form->bind($object);
+        $result = (string) $this->form->text('first_name');
+        $this->assertEquals($expected, $result);
+
+        $expected = '<input type="text" name="first_name" value="Jesse">';
+        $this->form->name('profile')->open();
+        $this->form->bind($object);
+        $result = (string) $this->form->text('first_name');
+        $this->assertEquals($expected, $result);
+    }
+
     public function testExplicitUncheckOnCheckboxTakesPrecedenceOverBinding()
     {
         $object = $this->getStubObject();
