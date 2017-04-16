@@ -64,7 +64,7 @@ class BoundData
             return $default;
         }
 
-        return $this->dataGet($target->{$key}, $keyParts, $default);
+        return $this->dataGet($target[$key], $keyParts, $default);
     }
 
     protected function transformKey($key)
