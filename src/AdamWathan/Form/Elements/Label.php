@@ -20,13 +20,13 @@ class Label extends Element
         $tags = [sprintf('<label%s>', $this->renderAttributes())];
 
         if ($this->labelBefore) {
-            $tags[] = $this->escape($this->label);
+            $tags[] = $this->label;
         }
 
         $tags[] = $this->renderElement();
 
         if (! $this->labelBefore) {
-            $tags[] = $this->escape($this->label);
+            $tags[] = $this->label;
         }
 
         $tags[] = '</label>';

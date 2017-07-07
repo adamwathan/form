@@ -75,12 +75,4 @@ class LabelTest extends PHPUnit_Framework_TestCase
         $result = $label->after($element)->getControl();
         $this->assertEquals($element, $result);
     }
-
-    public function testAgainstXssAttacksInLabel()
-    {
-        $label = new Label('<script>alert("xss")</script>');
-        $expected = '<label>&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</label>';
-        $result = $label->render();
-        $this->assertEquals($expected, $result);
-    }
 }
