@@ -16,4 +16,16 @@ class DateTimeLocal extends Text
 
         return parent::value($value);
     }
+
+    public function defaultValue($value)
+    {
+        if (! $this->hasValue()) {
+            if ($value instanceof \DateTime) {
+                $value = $value->format('Y-m-d\TH:i');
+            }
+            $this->setValue($value);
+        }
+
+        return $this;
+    }
 }

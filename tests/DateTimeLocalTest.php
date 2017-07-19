@@ -24,4 +24,13 @@ class DateTimeLocalTest extends PHPUnit_Framework_TestCase
         $expected = '<input type="datetime-local" name="dob" value="1988-04-12T10:33">';
         $this->assertSame($expected, $dateTimeLocal->render());
     }
+
+    public function testDateTimeDefaultValuesAreBoundAsFormattedStrings()
+    {
+        $dateTimeLocal = new DateTimeLocal('dob');
+        $dateTimeLocal->defaultValue(new DateTime('12-04-1988 10:33'));
+
+        $expected = '<input type="datetime-local" name="dob" value="1988-04-12T10:33">';
+        $this->assertSame($expected, $dateTimeLocal->render());
+    }
 }

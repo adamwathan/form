@@ -15,4 +15,22 @@ class DateTest extends PHPUnit_Framework_TestCase
     {
         return 'date';
     }
+
+    public function testDateTimeValuesAreBoundAsFormattedStrings()
+    {
+        $date = new Date('dob');
+        $date->defaultValue(new DateTime('12-04-1988 10:33'));
+
+        $expected = '<input type="date" name="dob" value="1988-04-12">';
+        $this->assertSame($expected, $date->render());
+    }
+
+    public function testDateTimeDefaultValuesAreBoundAsFormattedStrings()
+    {
+        $date = new Date('dob');
+        $date->defaultValue(new DateTime('12-04-1988 10:33'));
+
+        $expected = '<input type="date" name="dob" value="1988-04-12">';
+        $this->assertSame($expected, $date->render());
+    }
 }
