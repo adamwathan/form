@@ -1,6 +1,7 @@
 <?php
 
 use AdamWathan\Form\FormBuilder;
+use AdamWathan\Form\Binding\FormAccessible;
 
 class BindingTest extends PHPUnit_Framework_TestCase
 {
@@ -435,6 +436,16 @@ class BindingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    public function testBindFormProperty()
+    {
+        $object = new FormGetter;
+        $this->form->bind($object);
+
+        $expected = '<input type="text" name="test" value="Form Model Accessor">';
+        $result = (string) $this->form->text('test');
+        $this->assertEquals($expected, $result);
+    }
+
     private function getStubObject()
     {
         $obj = new stdClass;
@@ -463,5 +474,36 @@ class MagicGetter
     public function __get($key)
     {
         return 'bar';
+    }
+}
+
+class FormGetter
+{
+    use FormAccessible;
+
+    protected $attributes = [
+        'test' => 'testValue'
+    ];
+
+    public function __get($key)
+    {
+        return 'Standard Model Accessor';
+    }
+
+    public function formTestAttribute($key)
+    {
+        return 'Form Model Accessor';
+    }
+
+    protected function getAttributeFromArray($key)
+    {
+        if (array_key_exists($key, $this->attributes)) {
+            return $this->attributes[$key];
+        }
+    }
+
+    public function getDates()
+    {
+        return ['created_at', 'updated_at'];
     }
 }
