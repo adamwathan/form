@@ -35,12 +35,12 @@ class IlluminateErrorStore implements ErrorStoreInterface
         return $this->getErrors()->first($key);
     }
 
-    protected function hasErrors()
+    public function hasErrors()
     {
         return $this->session->has('errors');
     }
 
-    protected function getErrors()
+    public function getErrors()
     {
         return $this->hasErrors() ? $this->session->get('errors') : null;
     }

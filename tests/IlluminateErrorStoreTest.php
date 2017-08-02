@@ -15,4 +15,17 @@ class IlluminateErrorStoreTest extends PHPUnit_Framework_TestCase
         $errorStore = new IlluminateErrorStore($session);
         $this->assertTrue($errorStore->hasError('foo[bar]'));
     }
+
+    public function test_it_returns_all_errors()
+    {
+        $errors = new MessageBag(['foo.bar' => 'Some error']);
+        $session = Mockery::mock('Illuminate\Session\Store');
+        $session->shouldReceive('has')->with('errors')->andReturn(true);
+        $session->shouldReceive('get')->with('errors')->andReturn($errors);
+
+        $errorStore = new IlluminateErrorStore($session);
+        $this->assertTrue($errorStore->hasErrors());
+        $this->assertEquals($errorStore->getErrors(), $errors);
+    }
+
 }
