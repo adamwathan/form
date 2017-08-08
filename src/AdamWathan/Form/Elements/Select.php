@@ -8,6 +8,8 @@ class Select extends FormControl
 
     protected $selected;
 
+    protected $optAttributes = [];
+
     public function __construct($name, $options = [])
     {
         $this->setName($name);
@@ -73,9 +75,10 @@ class Select extends FormControl
 
     protected function renderOption($value, $label)
     {
-        return vsprintf('<option value="%s"%s>%s</option>', [
+        return vsprintf('<option value="%s"%s%s>%s</option>', [
             $this->escape($value),
             $this->isSelected($value) ? ' selected' : '',
+            $this->renderOptAttributes($value),
             $this->escape($label),
         ]);
     }
@@ -114,5 +117,51 @@ class Select extends FormControl
         $this->setAttribute('multiple', 'multiple');
 
         return $this;
+    }
+
+    public function setOptAttributes($optAttributes = [])
+    {
+        $this->optAttributes = $optAttributes;
+        return $this;
+    }
+
+    public function addOptAttribute($optValue, $name, $value)
+    {
+        $this->optAttributes[$optValue][$name] = $value;
+        return $this;
+    }
+
+    public function removeOptAttribute($optValue, $name = null)
+    {
+        if ($name === null) {
+            unset($this->optAttributes[$optValue]);
+        } else {
+            unset($this->optAttributes[$optValue][$name]);
+        }
+        return $this;
+    }
+
+    public function getOptAttribute($optValue, $name)
+    {
+        if (isset($this->optAttributes[$optValue][$name])) {
+            return $this->optAttributes[$optValue][$name];
+        }
+        return null;
+    }
+
+    protected function renderOptAttributes($optValue)
+    {
+        if (empty($this->optAttributes[$optValue])) {
+            return '';
+        }
+
+        list($attributes, $values) = $this->splitKeysAndValues($this->optAttributes[$optValue]);
+
+        return implode(array_map(function ($attribute, $value) {
+            if (is_bool($value)) {
+                return $value ? " {$attribute}" : '';
+            }
+            return sprintf(' %s="%s"', $attribute, $this->escape($value));
+        }, $attributes, $values));
     }
 }
