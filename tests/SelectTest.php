@@ -272,4 +272,89 @@ class SelectTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $result);
     }
+
+    public function testSetOptAttributes()
+    {
+        $select = new Select('color', ['red' => 'Red', 'blue' => 'Blue']);
+        $select->setOptAttributes([
+            'red' => [
+                'data-attribute' => 'some value',
+                'label' => 'This is Red',
+                'disabled' => true,
+            ],
+        ]);
+        $expected = '<select name="color"><option value="red" data-attribute="some value" label="This is Red" disabled>Red</option><option value="blue">Blue</option></select>';
+        $result = $select->render();
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testAddOptAttribute()
+    {
+        $select = new Select('color', ['red' => 'Red', 'blue' => 'Blue']);
+        $select->setOptAttributes([
+            'red' => [
+                'data-attribute' => 'some value',
+                'label' => 'This is Red',
+                'disabled' => true,
+            ],
+        ]);
+        $select->addOptAttribute('blue', 'label', 'This is Blue');
+        $expected = '<select name="color"><option value="red" data-attribute="some value" label="This is Red" disabled>Red</option><option value="blue" label="This is Blue">Blue</option></select>';
+        $result = $select->render();
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testRemoveOptAttributes()
+    {
+        $select = new Select('color', ['red' => 'Red', 'blue' => 'Blue']);
+        $select->setOptAttributes([
+            'red' => [
+                'data-attribute' => 'some value',
+                'label' => 'This is Red',
+                'disabled' => true,
+            ],
+        ]);
+        $select->removeOptAttribute('red', 'disabled');
+        $expected = '<select name="color"><option value="red" data-attribute="some value" label="This is Red">Red</option><option value="blue">Blue</option></select>';
+        $result = $select->render();
+        $this->assertEquals($expected, $result);
+
+        $select->removeOptAttribute('red');
+        $expected = '<select name="color"><option value="red">Red</option><option value="blue">Blue</option></select>';
+        $result = $select->render();
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testGetOptAttribute()
+    {
+        $select = new Select('color', ['red' => 'Red', 'blue' => 'Blue']);
+        $select->setOptAttributes([
+            'red' => [
+                'data-attribute' => 'some value',
+                'label' => 'This is Red',
+                'disabled' => true,
+            ],
+        ]);
+        $this->assertEquals('some value', $select->getOptAttribute('red', 'data-attribute'));
+        $this->assertEquals(null, $select->getOptAttribute('blue', 'disabled'));
+        $this->assertEquals(null, $select->getOptAttribute('red', 'data-invalid-attribute'));
+    }
+
+    public function testBoolTypeOptAttribute()
+    {
+        $select = new Select('color', ['red' => 'Red', 'blue' => 'Blue']);
+        $select->setOptAttributes([
+            'red' => ['disabled' => true],
+        ]);
+        $expected = '<select name="color"><option value="red" disabled>Red</option><option value="blue">Blue</option></select>';
+        $result = $select->render();
+        $this->assertEquals($expected, $result);
+
+        $select->setOptAttributes([
+            'red' => ['disabled' => false],
+        ]);
+        $expected = '<select name="color"><option value="red">Red</option><option value="blue">Blue</option></select>';
+        $result = $select->render();
+        $this->assertEquals($expected, $result);
+    }
 }
