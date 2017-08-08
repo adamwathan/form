@@ -272,4 +272,17 @@ class SelectTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $result);
     }
+
+    public function testPrompt()
+    {
+        $select = new Select('color', ['red' => 'Red', 'blue' => 'Blue']);
+        $select->prompt();
+        $expected = '<select name="color"><option value=""></option><option value="red">Red</option><option value="blue">Blue</option></select>';
+        $this->assertEquals($expected, $select->render());
+
+        $select = new Select('color', ['red' => 'Red', 'blue' => 'Blue']);
+        $select->prompt('Nothing selected', -1);
+        $expected = '<select name="color"><option value="-1">Nothing selected</option><option value="red">Red</option><option value="blue">Blue</option></select>';
+        $this->assertEquals($expected, $select->render());
+    }
 }
