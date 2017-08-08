@@ -115,4 +115,10 @@ class Select extends FormControl
 
         return $this;
     }
+
+    public function prompt($label = '', $value = '')
+    {
+        $this->options = [$value => $label] + $this->options;
+        return $this;
+    }
 }
