@@ -47,7 +47,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase
 	public function testNumberBox()
 	{
 		$expected = '<input type="number" name="age">';
-		$result = (string)$this->form->text('age');
+		$result = (string)$this->form->number('age');
 		$this->assertEquals($expected, $result);
 	}
 
